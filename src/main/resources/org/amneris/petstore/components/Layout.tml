@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+
+	<head>
+		<title>${title}</title>
+		<t:if test="heading">
+			<meta name="heading" content="${heading}" />
+		</t:if>
+		<t:if test="menu">
+			<meta name="menu" content="${menu}" />
+		</t:if>
+
+	</head>
+
+	<body id="${bodyId}">
+
+	<div id="page">
+		<div id="header" class="clearfix">
+			<h1 style="padding: 5px;">Tynamo!</h1>
+		</div>
+		<div id="content" class="clearfix">
+			<div id="main">
+				<div id="main_box">
+					<t:body />
+				</div>
+			</div>
+
+			<div id="sub">
+				<h2>${message:menu}</h2>
+				<t:delegate to="subMenuBlock" />
+			</div>
+
+			<div id="navcolumn">
+				<h5>Tynamo</h5>
+				<t:tynamo.ListPageLinkList/>
+			</div>
+
+			<div id="nav">
+				<div class="wrapper">
+					<h2 class="accessibility">${message:navigationMenu}</h2>
+					<ul id="primary-nav" class="menuList">
+						<li class="selected">
+							<t:pagelink page="Index">${message:org.tynamo.i18n.home}</t:pagelink>
+						</li>
+						<t:delegate to="navBlock" />
+				  </ul>
+				  <ul class="locales">
+						<li>
+
+						</li>
+						<li>
+
+						</li>
+						<li>
+
+						</li>
+						<li class="pad">&nbsp;</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div id="footer" class="clearfix">
+			<div id="divider">
+				<div></div>
+			</div>
+		<span class="left">Powered by Tynamo</span>
+		<span class="right" style="margin-right: 10px;">
+			© 2009 <a href="http://tynamo.org/">Tynamo.org</a>
+		</span>
+
+		</div>
+	</div>
+	</body>
+
+<t:block id="subMenuBlock"/>
+<t:block id="navBlock"/>
+
+</html>

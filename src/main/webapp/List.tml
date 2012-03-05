@@ -1,0 +1,22 @@
+<t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+		<p:subMenuBlock>
+		<ul id="local">
+			<t:if test="classDescriptor.allowSave">
+				<li>
+					<t:pagelink class="newlink" page="Add" context="classDescriptor.type">${newlinkMessage}</t:pagelink>
+				</li>
+			</t:if>
+		</ul>
+	</p:subMenuBlock>
+
+	<h1>${title}</h1>
+
+	<t:grid t:id="grid" source="instances" row="bean" inPlace="true" add="__id__" reorder="__id__" model="beanModel">
+		<p:__id__header>
+		</p:__id__header>
+		<p:__id__cell>
+			<t:pagelink t:page="Show" context="editPageContext">${modelId}</t:pagelink>
+		</p:__id__cell>
+	</t:grid>
+
+</t:layout>
