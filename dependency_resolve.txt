@@ -1,0 +1,90 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for org.amneris:petstore:war:0.1.0-SNAPSHOT
+[WARNING] 'build.plugins.plugin.version' for org.mortbay.jetty:maven-jetty-plugin is missing. @ line 44, column 12
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-compiler-plugin is missing. @ line 33, column 12
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-surefire-plugin is missing. @ line 82, column 12
+[WARNING] 'build.plugins.plugin.version' for org.apache.maven.plugins:maven-war-plugin is missing. @ line 74, column 12
+[WARNING] 'reporting.plugins.plugin.version' for org.apache.maven.plugins:maven-surefire-report-plugin is missing. @ line 156, column 12
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building petstore - My Tynamo project 0.1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.1:resolve (default-cli) @ petstore ---
+[INFO] 
+[INFO] The following files have been resolved:
+[INFO]    antlr:antlr:jar:2.7.6:compile
+[INFO]    c3p0:c3p0:jar:0.9.1:compile
+[INFO]    com.h2database:h2:jar:1.2.125:compile
+[INFO]    com.sdicons.jsontools:jsontools-core:jar:1.5:compile
+[INFO]    commons-beanutils:commons-beanutils:jar:1.7.0:compile
+[INFO]    commons-beanutils:commons-beanutils-core:jar:1.7.0:compile
+[INFO]    commons-codec:commons-codec:jar:1.3:compile
+[INFO]    commons-collections:commons-collections:jar:3.2.1:compile
+[INFO]    commons-configuration:commons-configuration:jar:1.5:compile
+[INFO]    commons-digester:commons-digester:jar:1.8:compile
+[INFO]    commons-fileupload:commons-fileupload:jar:1.2:compile
+[INFO]    commons-httpclient:commons-httpclient:jar:3.1:compile
+[INFO]    commons-io:commons-io:jar:1.3:compile
+[INFO]    commons-lang:commons-lang:jar:2.2:compile
+[INFO]    commons-logging:commons-logging:jar:1.1.1:compile
+[INFO]    dom4j:dom4j:jar:1.6.1:compile
+[INFO]    geronimo-spec:geronimo-spec-jta:jar:1.0-M1:compile
+[INFO]    javassist:javassist:jar:3.9.0.GA:compile
+[INFO]    javax.transaction:jta:jar:1.1:compile
+[INFO]    junit:junit:jar:3.8.1:compile
+[INFO]    log4j:log4j:jar:1.2.14:compile
+[INFO]    net.sourceforge.cssparser:cssparser:jar:0.9.5:compile
+[INFO]    net.sourceforge.htmlunit:htmlunit:jar:2.5:compile
+[INFO]    net.sourceforge.htmlunit:htmlunit-core-js:jar:2.5:compile
+[INFO]    net.sourceforge.nekohtml:nekohtml:jar:1.9.12:compile
+[INFO]    ognl:ognl:jar:2.7.3:compile
+[INFO]    org.antlr:antlr-runtime:jar:3.1.1:compile
+[INFO]    org.apache.tapestry:tapestry-core:jar:5.1.0.5:compile
+[INFO]    org.apache.tapestry:tapestry-hibernate:jar:5.1.0.5:compile
+[INFO]    org.apache.tapestry:tapestry-hibernate-core:jar:5.1.0.5:compile
+[INFO]    org.apache.tapestry:tapestry-ioc:jar:5.1.0.5:compile
+[INFO]    org.apache.tapestry:tapestry-upload:jar:5.1.0.5:compile
+[INFO]    org.apache.tapestry:tapestry5-annotations:jar:5.1.0.5:compile
+[INFO]    org.chenillekit:chenillekit-core:jar:1.2.0:compile
+[INFO]    org.chenillekit:chenillekit-google:jar:1.2.0:compile
+[INFO]    org.chenillekit:chenillekit-image:jar:1.2.0:compile
+[INFO]    org.chenillekit:chenillekit-tapestry:jar:1.2.0:compile
+[INFO]    org.codehaus.woodstox:stax2-api:jar:3.0.1:compile
+[INFO]    org.codehaus.woodstox:woodstox-core-asl:jar:4.0.3:compile
+[INFO]    org.hibernate:ejb3-persistence:jar:1.0.2.GA:compile
+[INFO]    org.hibernate:hibernate-annotations:jar:3.4.0.GA:compile
+[INFO]    org.hibernate:hibernate-c3p0:jar:3.3.1.GA:compile
+[INFO]    org.hibernate:hibernate-commons-annotations:jar:3.1.0.GA:compile
+[INFO]    org.hibernate:hibernate-core:jar:3.3.0.SP1:compile
+[INFO]    org.hibernate:hibernate-validator:jar:3.1.0.GA:compile
+[INFO]    org.mortbay.jetty:jetty:jar:6.1.21:compile
+[INFO]    org.mortbay.jetty:jetty-util:jar:6.1.21:compile
+[INFO]    org.mortbay.jetty:servlet-api:jar:2.5-20081211:compile
+[INFO]    org.slf4j:slf4j-api:jar:1.5.2:compile
+[INFO]    org.slf4j:slf4j-log4j12:jar:1.5.2:compile
+[INFO]    org.testng:testng:jar:jdk15:5.9:compile
+[INFO]    org.tynamo:tapestry-model-core:jar:0.0.1:compile
+[INFO]    org.tynamo:tapestry-model-hibernate:jar:0.0.1:compile
+[INFO]    org.tynamo:tapestry-model-test:jar:0.0.1:compile
+[INFO]    org.tynamo:tapestry-model-web:war:0.0.1:compile
+[INFO]    org.w3c.css:sac:jar:1.3:compile
+[INFO]    stax:stax-api:jar:1.0.1:compile
+[INFO]    xalan:serializer:jar:2.7.1:compile
+[INFO]    xalan:xalan:jar:2.7.1:compile
+[INFO]    xerces:xercesImpl:jar:2.8.1:compile
+[INFO]    xml-apis:xml-apis:jar:1.0.b2:compile
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.917s
+[INFO] Finished at: Sun Mar 11 16:38:59 CET 2012
+[INFO] Final Memory: 6M/81M
+[INFO] ------------------------------------------------------------------------
