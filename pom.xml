@@ -9,21 +9,21 @@
 	<name>petstore - My Tynamo project</name>
 	<url>http://tynamo.org/</url>
 
-<!--  -->
-
 	<properties>
 		<tynamo-version>0.3.0-SNAPSHOT</tynamo-version>
 		<tapestry.app-package>org.amneris.petstore</tapestry.app-package>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-<!--
 	<scm>
-		<connection></connection>    <!- read-only ->
-		<url></url>
-		<developerConnection></developerConnection> <!- write-read ->
+		<connection>scm:git:git://github.com/ascandroli/petstore.git</connection> <!-- Read-Only access -->
+		<url>https://github.com/ascandroli/petstore</url>
+		<developerConnection>scm:git:git@github.com:ascandroli/petstore.git</developerConnection> <!-- Read+Write access -->
 	</scm>
--->
+
+	<prerequisites>
+		<maven>3.0.3</maven>
+	</prerequisites>
 
 	<build>
 		<finalName>petstore</finalName>
