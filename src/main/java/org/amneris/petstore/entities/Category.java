@@ -3,8 +3,7 @@ package org.amneris.petstore.entities;
 import java.util.Date;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
-import org.hibernate.validator.NotNull;
-import org.tynamo.descriptor.annotation.PropertyDescriptor;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +20,6 @@ public class Category
 	@Id
 	@NonVisual
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@PropertyDescriptor(index = 0)
 	private Long id_category;
 
 	@Column(unique=false,nullable=false)

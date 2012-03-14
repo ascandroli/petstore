@@ -3,8 +3,7 @@ package org.amneris.petstore.entities;
 import java.util.Date;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
-import org.hibernate.validator.NotNull;
-import org.tynamo.descriptor.annotation.PropertyDescriptor;
+import javax.validation.constraints.NotNull;
 
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -23,17 +22,16 @@ public class Product
 	@Id
 	@NonVisual
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@PropertyDescriptor(index = 0)
 	private Long id_product;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_category")
 	private Category category;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_manufacturer")
 	private Manufacturer manufacturer;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="id_supplier")
 	private Supplier supplier;
@@ -41,7 +39,7 @@ public class Product
 	private int quantity;
 	private Long price;
 	private Long reduction_price;
-	
+
 	@NotNull(message = "name can't be null")
 	private String name;
 	private String description;
@@ -60,7 +58,7 @@ public class Product
 	public void setId_product(Long id_product) {
 		this.id_product = id_product;
 	}
-	
+
 	public Category getCategory() {
 		return category;
 	}
@@ -120,7 +118,7 @@ public class Product
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
