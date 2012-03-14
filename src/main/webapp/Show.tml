@@ -1,32 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
-		<p:subMenuBlock>
-		<ul>
-			<ul id="local">
-				<li>
-					<t:pagelink class="editlink" t:page="Edit" context="editPageContext">${editlinkMessage}</t:pagelink>
-				</li>
-				<li>
-					
-				</li>
-				<t:if test="allowRemove">
-					<li>
-						<t:actionlink class="deletelink" t:id="delete">${message:org.tynamo.i18n.remove}</t:actionlink>
-					</li>
-				</t:if>
-			</ul>
-		</ul>
-	</p:subMenuBlock>
-	<p:navBlock>
-		<a style="font-weight:bolder;margin-left:10px" t:id="link" page="List" context="classDescriptor.type">${listAllLinkMessage}</a>
-	</p:navBlock>
 
-	<h1>${title}</h1>
+	<div class="contextual">
+		<t:security.hasRole role="admin">
+			<t:pagelink class="icon icon-edit" t:page="Edit" context="editPageContext">${editlinkMessage}</t:pagelink>
+			<t:if test="deleteAllowed">
+				<t:eventlink class="deletelink" t:id="delete" onclick="return confirm('Are you sure ?');">${message:org.tynamo.i18n.remove}</t:eventlink>
+			</t:if>
 
-	<br/>
+		</t:security.hasRole>
+	</div>
 
+	<h2>${title}</h2>
 
-	<t:beandisplay object="bean" model="beanModel" lean="true"/>
+	<t:alerts/>
+
+	<t:beandisplay object="bean" lean="true" t:mixins="tynamo/BeanModelAdvisor"/>
+
+	<p:sidebar>
+		<h3>Menu</h3>
+		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List" context="beanType">${listAllLinkMessage}</a>
+	</p:sidebar>
+
 
 </t:layout>

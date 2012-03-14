@@ -1,0 +1,10 @@
+<!-- Need this to be able to redeploy on Windoze -->
+<Context path="/${project.build.finalName}"
+		 docBase="${project.build.directory}/${project.build.finalName}"
+		 debug="99"
+		 reloadable="true"
+		 autoDeploy="true"
+		 antiJARLocking="true"
+		 antiResourceLocking="true">
+
+</Context>

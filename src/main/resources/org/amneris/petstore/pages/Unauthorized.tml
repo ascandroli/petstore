@@ -1,0 +1,8 @@
+<t:layout title="literal:Malcom!" bodyId="signin" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+	<body style="text-align:center;">
+		<h1>${message:unauthorized}</h1>
+		<div class="jsecMessage">
+			${message:defaultMessage}
+		</div>
+	</body>
+</t:layout>

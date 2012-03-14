@@ -1,7 +1,7 @@
-<html t:type="layout" title="literal:Contact org.amneris"
+<html t:type="layout" title="literal:Contact petstore"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
       xmlns:p="tapestry:parameter">
 
-    <p>Contact org.amneris ...</p>
+	<p>Contact petstore ...</p>
 
 </html>

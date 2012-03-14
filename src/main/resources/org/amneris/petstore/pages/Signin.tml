@@ -1,0 +1,53 @@
+<t:layout title="literal:Malcom!" bodyId="signin" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+	<p:tabs>
+       
+	</p:tabs>
+		
+		<!--<t:if test="message">
+			<div class="flash error">
+				${message}
+			</div>
+		</t:if>-->
+		
+		<div id="login-form">
+
+		<div id="main-logo">
+		</div>
+		<t:form t:id="jsecLoginForm" clientValidation="false">
+			<table>
+				<tr>
+					<td>
+						<t:if test="hasLoginMessage()">
+							<div id="errorMessages">${loginMessage}</div>
+						</t:if>
+					</td>
+				</tr>
+				<tr>
+    				<td><t:label for="jsecLogin">${message:username}</t:label>
+    				<t:textfield t:id="jsecLogin" validate="required" size="40" tabindex="1" /></td>
+				</tr>
+				<tr>
+    				<td><t:label for="jsecPassword">${message:password} <a href="#">${message:forgot.password}</a></t:label>
+    				<t:passwordfield t:id="jsecPassword" validate="required" size="40" tabindex="2" />
+    					<div>
+        					<t:checkbox t:id="jsecRememberMe" tabindex="3" /> 
+							<t:label for="jsecRememberMe" class="inline-label">${message:remember.me}</t:label>
+        				</div>
+    				</td>
+				</tr>
+				<tr>
+    				<td>
+        				<input type="submit" name="login" class="button" value="${message:login}" tabindex="4" />
+    				</td>
+				</tr>
+			</table>
+
+			<script type="text/javascript">
+				//<![CDATA[
+				Form.Element.focus('jsecLogin');
+				//]]>
+			</script>
+		</t:form>
+		</div>
+
+</t:layout>

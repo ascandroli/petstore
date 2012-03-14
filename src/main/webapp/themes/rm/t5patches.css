@@ -1,0 +1,70 @@
+/* patches for Internet Explorer */
+
+* html div#main {
+	height: 350px;
+}
+
+* html .table {
+	width: 99% !important;
+}
+
+* html form ul {
+	width: 99% !important;
+}
+
+* html ul.locales {
+	margin-top: -3px !important;
+}
+
+* html div#content {
+	min-width: 770px !important;
+}
+
+form div.t-beaneditor-row label {
+	font-weight: bold;
+	margin-right: 5px;
+	font-family: inherit !important;
+}
+
+dl.t-beandisplay {
+	text-align: left !important;
+	background: #FFFFDD none repeat scroll 0 0;
+	border: 1px solid #D7D7D7;
+	font-family: inherit !important; /* jumping over t-beandisply.font-family and inheriting value from body, #wrapper  */
+	display: block;
+	padding-top: 10px;
+	padding-bottom: 25px;
+}
+
+dl.t-beandisplay dt, dl.t-beandisplay dd {
+	display: block;
+	/*	float: left;
+ */
+	margin-top: 15px;
+}
+
+dl.t-beandisplay dt {
+	text-align: left;
+	font-weight: bold;
+	margin-left: 15px;
+}
+
+div.t-error, span.error, li.error, div.message {
+	background-color: #ffffcc;
+	border: 1px solid #EEAA00;
+	color: #333;
+	font-family: Arial, Helvetica, sans-serif;
+	margin: 10px auto;
+	text-align: left;
+	vertical-align: bottom;
+	padding: 10px;
+}
+
+div.t-error ul {
+   background-color: #ffffcc;
+}
+
+/* use a different color for the errors */
+div.t-error, div.error, span.error, li.error {
+    border: 2px solid red;
+}

@@ -1,0 +1,35 @@
+<t:layout title="message:error-title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+          xmlns:p="tapestry:parameter">
+	<p:tabs>
+
+	</p:tabs>
+
+	<div class="contextual">
+		<t:pageLink page="Home">${message:back-index}</t:pageLink>
+	</div>
+
+	<h2>${message:error-title}</h2>
+
+	<t:if test="rootException">
+		<div class="error-message">
+			${rootException.localizedMessage}
+			<br/>
+			<a href="#" onclick="Effect.toggle('trace', 'appear');return false;">
+				${message:more-info-label}
+			</a>
+		</div>
+
+		<div id="trace" style="display: none;">
+			<t:exceptiondisplay exception="rootException"/>
+		</div>
+	</t:if>
+
+	<div>
+		<form action="POST" name="feedbakform">
+		</form>
+	</div>
+
+	<div style="margin: 35px 0;">
+		<t:pageLink page="Home"><span style="font-size: 18px;">←</span> ${message:back-index}</t:pageLink>
+	</div>
+</t:layout>

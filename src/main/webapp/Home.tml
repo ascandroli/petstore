@@ -1,0 +1,6 @@
+<t:layout title="literal:Tynamo!" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+          xmlns:p="tapestry:parameter">
+
+	<t:tynamo.ListPageLinkList listPageName="List"/>
+
+</t:layout>

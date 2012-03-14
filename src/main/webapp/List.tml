@@ -1,22 +1,33 @@
 <t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
-		<p:subMenuBlock>
-		<ul id="local">
-			<t:if test="classDescriptor.allowSave">
-				<li>
-					<t:pagelink class="newlink" page="Add" context="classDescriptor.type">${newlinkMessage}</t:pagelink>
-				</li>
-			</t:if>
-		</ul>
-	</p:subMenuBlock>
 
-	<h1>${title}</h1>
+	<div class="contextual">
+		<t:pagelink class="icon icon-add" page="Add" context="beanType">${newlinkMessage}</t:pagelink>
+	</div>
 
-	<t:grid t:id="grid" source="instances" row="bean" inPlace="true" add="__id__" reorder="__id__" model="beanModel">
+	<h2>${title}</h2>
+	<br/>
+
+
+	<t:grid t:id="grid" source="source" row="bean" inPlace="true" add="__id__" reorder="__id__" t:mixins="tynamo/BeanModelAdvisor"
+	        class="m-data-grid">
 		<p:__id__header>
 		</p:__id__header>
 		<p:__id__cell>
-			<t:pagelink t:page="Show" context="editPageContext">${modelId}</t:pagelink>
+			<t:pagelink t:page="Show" context="showPageContext"><t:tynamo.identifier object="bean"/></t:pagelink>
 		</p:__id__cell>
+		<p:empty>
+			<p>
+				There are no XX to display; you can <t:pagelink page="Add" context="beanType">add some</t:pagelink>.
+			</p>
+		</p:empty>
 	</t:grid>
+
+	<p:sidebar>
+		<h3>Menu</h3>
+		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
+		   context="beanType">All</a>
+		<br/>
+		<h3>Other Options...</h3>
+	</p:sidebar>
 
 </t:layout>

@@ -1,79 +1,66 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
 
-	<head>
-		<title>${title}</title>
-		<t:if test="heading">
-			<meta name="heading" content="${heading}" />
-		</t:if>
-		<t:if test="menu">
-			<meta name="menu" content="${menu}" />
-		</t:if>
+<head>
+    <title>Your Project</title>
+    <t:if test="heading">
+        <meta name="heading" content="${heading}"/>
+    </t:if>
+    <t:if test="menu">
+        <meta name="menu" content="${menu}"/>
+    </t:if>
+    <t:if test="headBound">
+        <t:delegate to="head"/>
+    </t:if>
 
-	</head>
+</head>
 
-	<body id="${bodyId}">
+<body id="${bodyId}">
 
-	<div id="page">
-		<div id="header" class="clearfix">
-			<h1 style="padding: 5px;">Tynamo!</h1>
-		</div>
-		<div id="content" class="clearfix">
-			<div id="main">
-				<div id="main_box">
-					<t:body />
-				</div>
-			</div>
+<div id="wrapper">
+    <div id="top-menu">
+        <div style="text-align:right;"><t:security.loginlink /></div>
+    </div>
 
-			<div id="sub">
-				<h2>${message:menu}</h2>
-				<t:delegate to="subMenuBlock" />
-			</div>
+    <div id="header">
 
-			<div id="navcolumn">
-				<h5>Tynamo</h5>
-				<t:tynamo.ListPageLinkList/>
-			</div>
+        <h1>Welcome!</h1>
 
-			<div id="nav">
-				<div class="wrapper">
-					<h2 class="accessibility">${message:navigationMenu}</h2>
-					<ul id="primary-nav" class="menuList">
-						<li class="selected">
-							<t:pagelink page="Index">${message:org.tynamo.i18n.home}</t:pagelink>
-						</li>
-						<t:delegate to="navBlock" />
-				  </ul>
-				  <ul class="locales">
-						<li>
+        <div id="quick-search">
+        </div>
 
-						</li>
-						<li>
+        <div id="main-menu">
+            <t:if test="tabsBound">
+                <t:delegate to="tabs"/>
+                <p:else>
+                    <li>
+                        <t:mainmenu/>
+                    </li>
+                </p:else>
+            </t:if>
+        </div>
+    </div>
 
-						</li>
-						<li>
+    <div class="${mainCssClass}" id="main">
+        <div id="sidebar">
+            <t:if test="sidebarBound">
+                <t:delegate to="sidebar"/>
+            </t:if>
+        </div>
 
-						</li>
-						<li class="pad">&nbsp;</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+        <div id="content">
+            <t:body/>
+        </div>
 
-		<div id="footer" class="clearfix">
-			<div id="divider">
-				<div></div>
-			</div>
-		<span class="left">Powered by Tynamo</span>
-		<span class="right" style="margin-right: 10px;">
-			© 2009 <a href="http://tynamo.org/">Tynamo.org</a>
-		</span>
+    </div>
 
-		</div>
-	</div>
-	</body>
+    <div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
 
-<t:block id="subMenuBlock"/>
-<t:block id="navBlock"/>
+    <div id="footer">
+        Powered by Tynamo. Developed by Amneris
+    </div>
+</div>
+</body>
 
 </html>

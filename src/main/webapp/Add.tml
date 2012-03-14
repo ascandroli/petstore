@@ -1,34 +1,36 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
-		<p:subMenuBlock>
-		<ul>
-			<ul id="local">
-			</ul>
-		</ul>
-	</p:subMenuBlock>
-	<p:navBlock>
-		<a style="font-weight:bolder;margin-left:10px" t:id="link" page="List" context="classDescriptor.type">${listAllLinkMessage}</a>
-	</p:navBlock>
 
-	<t:tynamo.flash t:id="flash" />
 
-	<h1>${title}</h1>
+	<h2>${title}</h2>
 
 	<br/>
 
-	<form t:id="form" clientValidation="true">
+	<t:alerts/>
+
+	<t:form clientValidation="true" validate="bean">
 		<t:errors/>
 
-		<div class="t-beaneditor">
-			<t:beaneditor object="bean" model="beanModel"/>
+		<div class="box">
+			<t:beaneditor object="mb:bean" t:mixins="tynamo/BeanModelAdvisor" beanmodeladvisor.key="add"/>
+
 			<br/>
+
 			<div class="t-beaneditor-row">
-				<t:submit t:id="save" id="save" t:event="apply" class="button" value="${message:org.tynamo.i18n.apply}"/>
-				<t:submit t:id="saveAndReturnButton" id="saveAndReturnButton" class="button" value="${message:org.tynamo.i18n.applyAndReturn}"/>
+				<t:submit event="continue" class="button" value="${message:org.tynamo.i18n.apply}"/>
+				<t:submit event="return" class="button" value="${message:org.tynamo.i18n.applyAndReturn}"/>
 				&nbsp; or &nbsp;
-				<t:actionlink class="button" style="color:red; font-weight:bold;" t:id="cancel">${message:org.tynamo.i18n.cancel}</t:actionlink>
+				<t:eventlink class="button" style="color:red; font-weight:bold;" t:id="cancel">
+					${message:org.tynamo.i18n.cancel}
+				</t:eventlink>
 			</div>
 		</div>
-	</form>
+	</t:form>
+
+	<p:sidebar>
+		<h3>Menu</h3>
+		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List" context="beanType">${listAllLinkMessage}</a>
+	</p:sidebar>
 
 </t:layout>

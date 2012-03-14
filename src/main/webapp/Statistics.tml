@@ -1,0 +1,57 @@
+<t:layout title="literal:Hibernate Statistics" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+
+	<h2>Hibernate Statistics</h2>
+	<ul>
+		<li>
+			<a href="#EntitiesStatistics">
+				Entities Statistics
+			</a>
+		</li>
+		<li>
+			<a href="#CollectionStatistics">
+				Collection Statistics
+			</a>
+		</li>
+		<li>
+			<a href="#QueriesStatistics">Queries Statistics</a>
+		</li>
+		<li>
+			<a href="#SecondLevelCacheStatistics">
+				Second Level Cache Statistics
+			</a>
+		</li>
+	</ul>
+
+	<h2>Session Factory Statistics</h2>
+	<t:beandisplay object="statistics" />
+
+	<a name="EntitiesStatistics" />
+	<h2>Entities Statistics</h2>
+	<t:loop source="statistics.entityNames"
+		value="currentEntityName">
+		<h3>${D}{currentEntityName}</h3>
+		<t:beandisplay object="entityStatistics" />
+	</t:loop>
+
+	<a name="CollectionStatistics" />
+	<h2>Collection Statistics</h2>
+	<t:loop source="statistics.collectionRoleNames"
+		value="currentCollectionRoleName">
+		<h3>${D}{currentCollectionRoleName}</h3>
+		<t:beandisplay object="collectionStatistics" />
+	</t:loop>
+
+	<a name="QueriesStatistics" />
+	<h2>Queries Statistics</h2>
+	<t:loop source="statistics.queries" value="currentQuery">
+		<t:beandisplay object="queryStatistics" />
+	</t:loop>
+
+	<a name="SecondLevelCacheStatistics" />
+	<h2>Second Level Cache Statistics</h2>
+	<t:loop source="statistics.secondLevelCacheRegionNames"
+		value="currentSecondLevelCacheRegionName">
+		<t:beandisplay object="secondLevelCacheStatistics" />
+	</t:loop>
+
+</t:layout>

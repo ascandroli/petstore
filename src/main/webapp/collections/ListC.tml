@@ -1,0 +1,24 @@
+<t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
+		<p:subMenuBlock>
+		<ul id="local">
+			<li>
+				<t:pagelink class="newlink" page="collections/AddC" context="addElementPageContext">${newlinkMessage}</t:pagelink>
+			</li>
+		</ul>
+	</p:subMenuBlock>
+	<p:navBlock>
+		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="Show" context="parentShowPageContext">${parentBean}</a>
+	</p:navBlock>
+
+
+	<h1>${title}</h1>
+
+	<t:grid t:id="grid" source="source" row="bean" inPlace="true" add="__id__" reorder="__id__" t:mixins="tynamo/BeanModelAdvisor">
+	<p:__id__header>
+		</p:__id__header>
+		<p:__id__cell>
+			<t:pagelink t:page="Show" context="showPageContext"><t:tynamo.identifier object="bean"/></t:pagelink>
+		</p:__id__cell>
+	</t:grid>
+
+</t:layout>

@@ -1,23 +1,30 @@
 package org.amneris.petstore.entities;
 
-import org.hibernate.validator.NotNull;
-import org.tynamo.descriptor.annotation.PropertyDescriptor;
+import org.tynamo.descriptor.annotation.beaneditor.BeanModel;
+import org.tynamo.descriptor.annotation.beaneditor.BeanModels;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@XmlRootElement(name = "mydomainobject")
+@BeanModels({
+		@BeanModel(reorder = "id") // == @ReorderProperties("id")
+})
 public class MyDomainObject
 {
 	private Long id;
 
 	private String name;
 
+	private boolean checked;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@PropertyDescriptor(index = 0)
 	public Long getId()
 	{
 		return id;
@@ -37,6 +44,16 @@ public class MyDomainObject
 	public void setName(String name)
 	{
 		this.name = name;
+	}
+
+	public boolean isChecked()
+	{
+		return checked;
+	}
+
+	public void setChecked(boolean checked)
+	{
+		this.checked = checked;
 	}
 
 	public boolean equals(Object o)
