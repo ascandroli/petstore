@@ -162,12 +162,6 @@
 		</dependency>
 
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.17</version>
-		</dependency>
-
-		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-resteasy</artifactId>
 			<version>0.3.0</version>
@@ -204,6 +198,18 @@
 			<version>1.2.125</version>
 		</dependency>
 
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>3.6.0.Final</version>
+		</dependency>
+
 		<!-- Provided by the servlet container, but sometimes referenced in the application code. -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -214,10 +220,10 @@
 
 		<!-- Provide dependency to the Tapestry javadoc taglet which replaces the Maven component report -->
 		<dependency>
-		    <groupId>org.apache.tapestry</groupId>
-		    <artifactId>tapestry-javadoc</artifactId>
-		    <version>5.3.1</version>
-		    <scope>provided</scope>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-javadoc</artifactId>
+			<version>5.3.1</version>
+			<scope>provided</scope>
 		</dependency>
 
 	</dependencies>
