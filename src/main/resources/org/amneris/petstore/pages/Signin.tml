@@ -1,4 +1,4 @@
-<t:layout title="literal:Malcom!" bodyId="signin" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+<t:layout title="literal:signin" bodyId="signin" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
 	<p:tabs>
        
 	</p:tabs>
