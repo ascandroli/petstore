@@ -5,4 +5,4 @@
 
 ## resources
 
- - mailing list (in spanish): [http://groups.google.com/group/tynamo-petstore]
+ - mailing list (in spanish): [https://groups.google.com/d/forum/tynamo-petstore]
