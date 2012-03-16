@@ -29,7 +29,7 @@
 	<h2>Entities Statistics</h2>
 	<t:loop source="statistics.entityNames"
 		value="currentEntityName">
-		<h3>${D}{currentEntityName}</h3>
+		<h3>${currentEntityName}</h3>
 		<t:beandisplay object="entityStatistics" />
 	</t:loop>
 
@@ -37,7 +37,7 @@
 	<h2>Collection Statistics</h2>
 	<t:loop source="statistics.collectionRoleNames"
 		value="currentCollectionRoleName">
-		<h3>${D}{currentCollectionRoleName}</h3>
+		<h3>${currentCollectionRoleName}</h3>
 		<t:beandisplay object="collectionStatistics" />
 	</t:loop>
 
