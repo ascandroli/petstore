@@ -238,9 +238,9 @@
 	<repositories>
 		<!-- Don't use snapshots unless absolutely necessary -->
 		<repository>
-			<id>codehaus-ci</id>
-			<name>Official snapshot repository available from Codehaus' Bamboo server</name>
-			<url>http://ci.repository.codehaus.org</url>
+			<id>codehaus-nexus-snapshots</id>
+			<name>Codehaus Nexus Snapshots</name>
+			<url>https://nexus.codehaus.org/content/groups/snapshots-group/</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
