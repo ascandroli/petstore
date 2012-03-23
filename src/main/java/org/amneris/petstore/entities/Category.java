@@ -3,6 +3,9 @@ package org.amneris.petstore.entities;
 import java.util.Date;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
+import org.hibernate.annotations.NaturalId;
+import org.tynamo.descriptor.annotation.PropertyDescriptor;
+
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.Column;
@@ -14,82 +17,41 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="CATEGORIES",uniqueConstraints = @UniqueConstraint(columnNames={"name"}))
+@Table(name="categories")
 public class Category
 {
 	@Id
 	@NonVisual
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id_category;
+	private Long id;
 
-	@Column(unique=false,nullable=false)
+	@NaturalId
 	@NotNull(message = "name can't be null")
 	private String name;
+
 	private String description;
-	private String link_rewrite;
-	private String meta_title;
-	private String meta_keywords;
-	private String meta_description;
+
+	@Column(name ="link_rewrite")
+	private String linkRewrite;
+
+	@Column(name = "meta_title")
+	private String metaTitle;
+
+	@Column(name = "meta_keywords")
+	private String metaKeywords;
+
+	@Column(name = "meta_description")
+	private String metaDescription;
+
 	private boolean active;
-	private Date date_add;
-	private Date date_update;
 
-	
-	public Long getId_category() {
-		return id_category;
-	}
+	@Column(name = "created_on")
+	@PropertyDescriptor(readOnly = true)
+	private Date createdOn = new Date();
 
-	public void setId_category(Long id_category) {
-		this.id_category = id_category;
-	}
+	@Column(name = "updated_on")
+	private Date updatedOn = new Date();
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getName() {
-		return name;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getLink_rewrite() {
-		return link_rewrite;
-	}
-
-	public void setLink_rewrite(String link_rewrite) {
-		this.link_rewrite = link_rewrite;
-	}
-
-	public String getMeta_title() {
-		return meta_title;
-	}
-
-	public void setMeta_title(String meta_title) {
-		this.meta_title = meta_title;
-	}
-
-	public String getMeta_keywords() {
-		return meta_keywords;
-	}
-
-	public void setMeta_keywords(String meta_keywords) {
-		this.meta_keywords = meta_keywords;
-	}
-
-	public String getMeta_description() {
-		return meta_description;
-	}
-
-	public void setMeta_description(String meta_description) {
-		this.meta_description = meta_description;
-	}
 
 	public boolean isActive() {
 		return active;
@@ -99,36 +61,93 @@ public class Category
 		this.active = active;
 	}
 
-	public Date getDate_add() {
-		return date_add;
+	public Long getId() {
+		return id;
 	}
 
-	public void setDate_add(Date date_add) {
-		this.date_add = date_add;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public Date getDate_update() {
-		return date_update;
+	public String getName() {
+		return name;
 	}
 
-	public void setDate_update(Date date_update) {
-		this.date_update = date_update;
+	public void setName(String name) {
+		this.name = name;
 	}
 
+	public String getDescription() {
+		return description;
+	}
 
-	public boolean equals(Object o)
-	{
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getLinkRewrite() {
+		return linkRewrite;
+	}
+
+	public void setLinkRewrite(String linkRewrite) {
+		this.linkRewrite = linkRewrite;
+	}
+
+	public String getMetaTitle() {
+		return metaTitle;
+	}
+
+	public void setMetaTitle(String metaTitle) {
+		this.metaTitle = metaTitle;
+	}
+
+	public String getMetaKeywords() {
+		return metaKeywords;
+	}
+
+	public void setMetaKeywords(String metaKeywords) {
+		this.metaKeywords = metaKeywords;
+	}
+
+	public String getMetaDescription() {
+		return metaDescription;
+	}
+
+	public void setMetaDescription(String metaDescription) {
+		this.metaDescription = metaDescription;
+	}
+
+	public Date getCreatedOn() {
+		return createdOn;
+	}
+
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
+	}
+
+	public Date getUpdatedOn() {
+		return updatedOn;
+	}
+
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
+	}
+
+	@Override
+	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (!(o instanceof Category)) return false;
 
-		Category that = (Category) o;
+		Category category = (Category) o;
 
-		return getId_category() != null ? getId_category().equals(that.getId_category()) : that.getId_category() == null;
+		if (getId() != null ? !getId().equals(category.getId()) : category.getId() != null) return false;
+
+		return true;
 	}
 
-	public int hashCode()
-	{
-		return (getId_category() != null ? getId_category().hashCode() : 0);
+	@Override
+	public int hashCode() {
+		return getId() != null ? getId().hashCode() : 0;
 	}
 
 	public String toString()

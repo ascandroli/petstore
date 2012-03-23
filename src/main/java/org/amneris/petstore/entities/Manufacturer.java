@@ -3,6 +3,9 @@ package org.amneris.petstore.entities;
 import java.util.Date;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
+import org.hibernate.annotations.NaturalId;
+import org.tynamo.descriptor.annotation.PropertyDescriptor;
+
 import javax.validation.constraints.NotNull;
 
 import javax.persistence.Column;
@@ -14,81 +17,85 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="MANUFACTURERS",uniqueConstraints = @UniqueConstraint(columnNames={"name"}))
+@Table(name="manufacturers")
 public class Manufacturer
 {
 	@Id
 	@NonVisual
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id_manufacturer;
+	private Long id;
 
-	@Column(unique=false,nullable=false)
+	@NaturalId
 	@NotNull(message = "name can't be null")
 	private String name;
-	private String description;
-	private String link_rewrite;
-	private String meta_title;
-	private String meta_keywords;
-	private String meta_description;
+
+	@Column(name ="link_rewrite")
+	private String linkRewrite;
+
+	@Column(name = "meta_title")
+	private String metaTitle;
+
+	@Column(name = "meta_keywords")
+	private String metaKeywords;
+
+	@Column(name = "meta_description")
+	private String metaDescription;
+
 	private boolean active;
-	private Date date_add;
-	private Date date_update;
 
-	
-	public Long getId_manufacturer() {
-		return id_manufacturer;
+	@Column(name = "created_on")
+	@PropertyDescriptor(readOnly = true)
+	private Date createdOn = new Date();
+
+	@Column(name = "updated_on")
+	private Date updatedOn = new Date();
+
+	public Long getId() {
+		return id;
 	}
 
-	public void setId_manufacturer(Long id_manufacturer) {
-		this.id_manufacturer = id_manufacturer;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getName() {
+		return name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getName() {
-		return name;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
+	public String getLinkRewrite() {
+		return linkRewrite;
 	}
 
-	public String getLink_rewrite() {
-		return link_rewrite;
+	public void setLinkRewrite(String linkRewrite) {
+		this.linkRewrite = linkRewrite;
 	}
 
-	public void setLink_rewrite(String link_rewrite) {
-		this.link_rewrite = link_rewrite;
+	public String getMetaTitle() {
+		return metaTitle;
 	}
 
-	public String getMeta_title() {
-		return meta_title;
+	public void setMetaTitle(String metaTitle) {
+		this.metaTitle = metaTitle;
 	}
 
-	public void setMeta_title(String meta_title) {
-		this.meta_title = meta_title;
+	public String getMetaKeywords() {
+		return metaKeywords;
 	}
 
-	public String getMeta_keywords() {
-		return meta_keywords;
+	public void setMetaKeywords(String metaKeywords) {
+		this.metaKeywords = metaKeywords;
 	}
 
-	public void setMeta_keywords(String meta_keywords) {
-		this.meta_keywords = meta_keywords;
+	public String getMetaDescription() {
+		return metaDescription;
 	}
 
-	public String getMeta_description() {
-		return meta_description;
-	}
-
-	public void setMeta_description(String meta_description) {
-		this.meta_description = meta_description;
+	public void setMetaDescription(String metaDescription) {
+		this.metaDescription = metaDescription;
 	}
 
 	public boolean isActive() {
@@ -99,40 +106,41 @@ public class Manufacturer
 		this.active = active;
 	}
 
-	public Date getDate_add() {
-		return date_add;
+	public Date getCreatedOn() {
+		return createdOn;
 	}
 
-	public void setDate_add(Date date_add) {
-		this.date_add = date_add;
+	public void setCreatedOn(Date createdOn) {
+		this.createdOn = createdOn;
 	}
 
-	public Date getDate_update() {
-		return date_update;
+	public Date getUpdatedOn() {
+		return updatedOn;
 	}
 
-	public void setDate_update(Date date_update) {
-		this.date_update = date_update;
+	public void setUpdatedOn(Date updatedOn) {
+		this.updatedOn = updatedOn;
 	}
 
-
-	public boolean equals(Object o)
-	{
+	@Override
+	public boolean equals(Object o) {
 		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
+		if (!(o instanceof Manufacturer)) return false;
 
 		Manufacturer that = (Manufacturer) o;
 
-		return getId_manufacturer() != null ? getId_manufacturer().equals(that.getId_manufacturer()) : that.getId_manufacturer() == null;
+		if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+
+		return true;
 	}
 
-	public int hashCode()
-	{
-		return (getId_manufacturer() != null ? getId_manufacturer().hashCode() : 0);
+	@Override
+	public int hashCode() {
+		return getId() != null ? getId().hashCode() : 0;
 	}
 
-	public String toString()
-	{
+	@Override
+	public String toString() {
 		return getName();
 	}
 }

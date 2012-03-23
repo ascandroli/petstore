@@ -3,28 +3,27 @@ package org.amneris.petstore.entities;
 import org.tynamo.descriptor.annotation.beaneditor.BeanModel;
 import org.tynamo.descriptor.annotation.beaneditor.BeanModels;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@Table(name="mydomainobjects")
 @XmlRootElement(name = "mydomainobject")
 @BeanModels({
 		@BeanModel(reorder = "id") // == @ReorderProperties("id")
 })
 public class MyDomainObject
 {
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
+	@NotNull(message = "name can't be null")
 	private String name;
 
 	private boolean checked;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getId()
 	{
 		return id;
@@ -35,7 +34,6 @@ public class MyDomainObject
 		this.id = id;
 	}
 
-	@NotNull(message = "name can't be null")
 	public String getName()
 	{
 		return name;
