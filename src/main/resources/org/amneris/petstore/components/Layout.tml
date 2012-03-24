@@ -3,7 +3,7 @@
 <html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
 
 <head>
-    <title>Your Project</title>
+    <title>${title}</title>
     <t:if test="heading">
         <meta name="heading" content="${heading}"/>
     </t:if>
