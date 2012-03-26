@@ -1,5 +1,9 @@
 /* USAGE: mysql -u root -p < create_databases.sql */
 
+DROP DATABASE IF EXISTS petstore;
+DROP DATABASE IF EXISTS petstore_dev;
+DROP DATABASE IF EXISTS petstore_tests;
+
 CREATE DATABASE petstore CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE DATABASE petstore_dev CHARACTER SET utf8 COLLATE utf8_general_ci;
 CREATE DATABASE petstore_tests CHARACTER SET utf8 COLLATE utf8_general_ci;
