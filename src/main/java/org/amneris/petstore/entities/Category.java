@@ -133,16 +133,14 @@ public class Category
 		this.updatedOn = updatedOn;
 	}
 
-	@Override
-	public boolean equals(Object o) {
+	public boolean equals(Object o)
+	{
 		if (this == o) return true;
-		if (!(o instanceof Category)) return false;
+		if (o == null || getClass() != o.getClass()) return false;
 
-		Category category = (Category) o;
+		Category that = (Category) o;
 
-		if (getId() != null ? !getId().equals(category.getId()) : category.getId() != null) return false;
-
-		return true;
+		return getId() != null ? getId().equals(that.getId()) : that.getId() == null;
 	}
 
 	@Override
