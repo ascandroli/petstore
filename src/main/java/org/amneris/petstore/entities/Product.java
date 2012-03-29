@@ -20,7 +20,7 @@ public class Product
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="category_id")
-	private CategoryTest category;
+	private Category category;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="manufacturer_id")
@@ -72,11 +72,11 @@ public class Product
 		this.id = id;
 	}
 
-	public CategoryTest getCategory() {
+	public Category getCategory() {
 		return category;
 	}
 
-	public void setCategory(CategoryTest category) {
+	public void setCategory(Category category) {
 		this.category = category;
 	}
 
