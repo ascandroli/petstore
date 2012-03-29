@@ -21,15 +21,16 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-
 /**
  * Class for Product tests.
  * <p/>
  * This represents best practice for Hibernate integration tests.
  * <p/>
- * It executes each test method in its own transaction, which is automatically rolled back by default.
+ * It executes each test method in its own transaction, which is automatically
+ * rolled back by default.
  * <p/>
- * related info: http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
+ * related info:
+ * http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
  */
 public class ProductTest {
 
@@ -56,7 +57,9 @@ public class ProductTest {
 
 	@AfterMethod
 	public void afterEachTest() {
-		if (transaction != null) if (transaction.isActive()) transaction.rollback();
+		if (transaction != null)
+			if (transaction.isActive())
+				transaction.rollback();
 	}
 
 	@Test
@@ -78,13 +81,13 @@ public class ProductTest {
 			fail();
 		} catch (ConstraintViolationException e) {
 			assertTrue(e.getConstraintViolations().size() == 1);
-			ConstraintViolation c = (ConstraintViolation) e.getConstraintViolations().toArray()[0];
+			ConstraintViolation c = (ConstraintViolation) e
+					.getConstraintViolations().toArray()[0];
 			assertEquals("name can't be null", c.getMessage());
 		} catch (Exception e) {
 			fail();
 		}
 	}
-
 
 	@Test
 	public void retrieve() {
@@ -142,15 +145,13 @@ public class ProductTest {
 		Serializable id = product.getId();
 
 		session.delete(product);
-		
+
 		Product returnedProduct = null;
 		returnedProduct = (Product) session.get(Product.class, id);
 
-/*
-		try {
-		} catch (HibernateObjectRetrievalFailureException e) {
-		}
-*/
+		/*
+		 * try { } catch (HibernateObjectRetrievalFailureException e) { }
+		 */
 
 		assertNull(returnedProduct);
 	}
@@ -167,7 +168,8 @@ public class ProductTest {
 
 		session.save(secondProduct);
 
-		List<Product> objectList = (List<Product>) session.createCriteria(Product.class).list();
+		List<Product> objectList = (List<Product>) session.createCriteria(
+				Product.class).list();
 
 		assertFalse(objectList.isEmpty());
 		int i = objectList.indexOf(firstProduct);
@@ -200,7 +202,8 @@ public class ProductTest {
 		criteria.add(Restrictions.like("name", "first", MatchMode.ANYWHERE));
 
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		List<Product> objectList = (List<Product>) criteria.getExecutableCriteria(session).list();
+		List<Product> objectList = (List<Product>) criteria
+				.getExecutableCriteria(session).list();
 
 		assertFalse(objectList.isEmpty());
 		int i = objectList.indexOf(firstProduct);

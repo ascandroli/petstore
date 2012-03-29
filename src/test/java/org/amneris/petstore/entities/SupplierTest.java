@@ -21,15 +21,16 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-
 /**
  * Class for Supplier tests.
  * <p/>
  * This represents best practice for Hibernate integration tests.
  * <p/>
- * It executes each test method in its own transaction, which is automatically rolled back by default.
+ * It executes each test method in its own transaction, which is automatically
+ * rolled back by default.
  * <p/>
- * related info: http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
+ * related info:
+ * http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
  */
 public class SupplierTest {
 
@@ -53,7 +54,9 @@ public class SupplierTest {
 
 	@AfterMethod
 	public void afterEachTest() {
-		if (transaction != null) if (transaction.isActive()) transaction.rollback();
+		if (transaction != null)
+			if (transaction.isActive())
+				transaction.rollback();
 	}
 
 	@Test
@@ -75,13 +78,13 @@ public class SupplierTest {
 			fail();
 		} catch (ConstraintViolationException e) {
 			assertTrue(e.getConstraintViolations().size() == 1);
-			ConstraintViolation c = (ConstraintViolation) e.getConstraintViolations().toArray()[0];
+			ConstraintViolation c = (ConstraintViolation) e
+					.getConstraintViolations().toArray()[0];
 			assertEquals("name can't be null", c.getMessage());
 		} catch (Exception e) {
 			fail();
 		}
 	}
-
 
 	@Test
 	public void retrieve() {
@@ -94,7 +97,8 @@ public class SupplierTest {
 		assertNotNull(supplier.getId());
 
 		Supplier returnedSupplier;
-		returnedSupplier = (Supplier) session.get(Supplier.class, supplier.getId());
+		returnedSupplier = (Supplier) session.get(Supplier.class,
+				supplier.getId());
 
 		assertEquals(supplier, returnedSupplier);
 		assertEquals(supplier.getName(), returnedSupplier.getName());
@@ -112,7 +116,8 @@ public class SupplierTest {
 		assertNotNull(supplier.getId());
 
 		Supplier returnedSupplier;
-		returnedSupplier = (Supplier) session.get(Supplier.class, supplier.getId());
+		returnedSupplier = (Supplier) session.get(Supplier.class,
+				supplier.getId());
 
 		assertEquals(supplier, returnedSupplier);
 		assertEquals(supplier.getName(), returnedSupplier.getName());
@@ -139,15 +144,13 @@ public class SupplierTest {
 		Serializable id = supplier.getId();
 
 		session.delete(supplier);
-		
+
 		Supplier returnedSupplier = null;
 		returnedSupplier = (Supplier) session.get(Supplier.class, id);
 
-/*
-		try {
-		} catch (HibernateObjectRetrievalFailureException e) {
-		}
-*/
+		/*
+		 * try { } catch (HibernateObjectRetrievalFailureException e) { }
+		 */
 
 		assertNull(returnedSupplier);
 	}
@@ -164,7 +167,8 @@ public class SupplierTest {
 
 		session.save(secondSupplier);
 
-		List<Supplier> objectList = (List<Supplier>) session.createCriteria(Supplier.class).list();
+		List<Supplier> objectList = (List<Supplier>) session.createCriteria(
+				Supplier.class).list();
 
 		assertFalse(objectList.isEmpty());
 		int i = objectList.indexOf(firstSupplier);
@@ -197,7 +201,8 @@ public class SupplierTest {
 		criteria.add(Restrictions.like("name", "first", MatchMode.ANYWHERE));
 
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		List<Supplier> objectList = (List<Supplier>) criteria.getExecutableCriteria(session).list();
+		List<Supplier> objectList = (List<Supplier>) criteria
+				.getExecutableCriteria(session).list();
 
 		assertFalse(objectList.isEmpty());
 		int i = objectList.indexOf(firstSupplier);

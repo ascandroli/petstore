@@ -21,15 +21,16 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-
 /**
  * Class for Manufacturer tests.
  * <p/>
  * This represents best practice for Hibernate integration tests.
  * <p/>
- * It executes each test method in its own transaction, which is automatically rolled back by default.
+ * It executes each test method in its own transaction, which is automatically
+ * rolled back by default.
  * <p/>
- * related info: http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
+ * related info:
+ * http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
  */
 public class ManufacturerTest {
 
@@ -53,7 +54,9 @@ public class ManufacturerTest {
 
 	@AfterMethod
 	public void afterEachTest() {
-		if (transaction != null) if (transaction.isActive()) transaction.rollback();
+		if (transaction != null)
+			if (transaction.isActive())
+				transaction.rollback();
 	}
 
 	@Test
@@ -75,13 +78,13 @@ public class ManufacturerTest {
 			fail();
 		} catch (ConstraintViolationException e) {
 			assertTrue(e.getConstraintViolations().size() == 1);
-			ConstraintViolation c = (ConstraintViolation) e.getConstraintViolations().toArray()[0];
+			ConstraintViolation c = (ConstraintViolation) e
+					.getConstraintViolations().toArray()[0];
 			assertEquals("name can't be null", c.getMessage());
 		} catch (Exception e) {
 			fail();
 		}
 	}
-
 
 	@Test
 	public void retrieve() {
@@ -94,7 +97,8 @@ public class ManufacturerTest {
 		assertNotNull(manufacturer.getId());
 
 		Manufacturer returnedManufacturer;
-		returnedManufacturer = (Manufacturer) session.get(Manufacturer.class, manufacturer.getId());
+		returnedManufacturer = (Manufacturer) session.get(Manufacturer.class,
+				manufacturer.getId());
 
 		assertEquals(manufacturer, returnedManufacturer);
 		assertEquals(manufacturer.getName(), returnedManufacturer.getName());
@@ -112,7 +116,8 @@ public class ManufacturerTest {
 		assertNotNull(manufacturer.getId());
 
 		Manufacturer returnedManufacturer;
-		returnedManufacturer = (Manufacturer) session.get(Manufacturer.class, manufacturer.getId());
+		returnedManufacturer = (Manufacturer) session.get(Manufacturer.class,
+				manufacturer.getId());
 
 		assertEquals(manufacturer, returnedManufacturer);
 		assertEquals(manufacturer.getName(), returnedManufacturer.getName());
@@ -139,15 +144,14 @@ public class ManufacturerTest {
 		Serializable id = manufacturer.getId();
 
 		session.delete(manufacturer);
-		
-		Manufacturer returnedManufacturer = null;
-		returnedManufacturer = (Manufacturer) session.get(Manufacturer.class, id);
 
-/*
-		try {
-		} catch (HibernateObjectRetrievalFailureException e) {
-		}
-*/
+		Manufacturer returnedManufacturer = null;
+		returnedManufacturer = (Manufacturer) session.get(Manufacturer.class,
+				id);
+
+		/*
+		 * try { } catch (HibernateObjectRetrievalFailureException e) { }
+		 */
 
 		assertNull(returnedManufacturer);
 	}
@@ -164,7 +168,8 @@ public class ManufacturerTest {
 
 		session.save(secondManufacturer);
 
-		List<Manufacturer> objectList = (List<Manufacturer>) session.createCriteria(Manufacturer.class).list();
+		List<Manufacturer> objectList = (List<Manufacturer>) session
+				.createCriteria(Manufacturer.class).list();
 
 		assertFalse(objectList.isEmpty());
 		int i = objectList.indexOf(firstManufacturer);
@@ -193,11 +198,13 @@ public class ManufacturerTest {
 
 		session.save(secondManufacturer);
 
-		DetachedCriteria criteria = DetachedCriteria.forClass(Manufacturer.class);
+		DetachedCriteria criteria = DetachedCriteria
+				.forClass(Manufacturer.class);
 		criteria.add(Restrictions.like("name", "first", MatchMode.ANYWHERE));
 
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		List<Manufacturer> objectList = (List<Manufacturer>) criteria.getExecutableCriteria(session).list();
+		List<Manufacturer> objectList = (List<Manufacturer>) criteria
+				.getExecutableCriteria(session).list();
 
 		assertFalse(objectList.isEmpty());
 		int i = objectList.indexOf(firstManufacturer);

@@ -21,15 +21,16 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-
 /**
  * Class for Category tests.
  * <p/>
  * This represents best practice for Hibernate integration tests.
  * <p/>
- * It executes each test method in its own transaction, which is automatically rolled back by default.
+ * It executes each test method in its own transaction, which is automatically
+ * rolled back by default.
  * <p/>
- * related info: http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
+ * related info:
+ * http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
  */
 public class CategoryTest {
 
@@ -53,7 +54,9 @@ public class CategoryTest {
 
 	@AfterMethod
 	public void afterEachTest() {
-		if (transaction != null) if (transaction.isActive()) transaction.rollback();
+		if (transaction != null)
+			if (transaction.isActive())
+				transaction.rollback();
 	}
 
 	@Test
@@ -75,13 +78,13 @@ public class CategoryTest {
 			fail();
 		} catch (ConstraintViolationException e) {
 			assertTrue(e.getConstraintViolations().size() == 1);
-			ConstraintViolation c = (ConstraintViolation) e.getConstraintViolations().toArray()[0];
+			ConstraintViolation c = (ConstraintViolation) e
+					.getConstraintViolations().toArray()[0];
 			assertEquals("name can't be null", c.getMessage());
 		} catch (Exception e) {
 			fail();
 		}
 	}
-
 
 	@Test
 	public void retrieve() {
@@ -94,7 +97,8 @@ public class CategoryTest {
 		assertNotNull(category.getId());
 
 		Category returnedCategory;
-		returnedCategory = (Category) session.get(Category.class, category.getId());
+		returnedCategory = (Category) session.get(Category.class,
+				category.getId());
 
 		assertEquals(category, returnedCategory);
 		assertEquals(category.getName(), returnedCategory.getName());
@@ -112,7 +116,8 @@ public class CategoryTest {
 		assertNotNull(category.getId());
 
 		Category returnedCategory;
-		returnedCategory = (Category) session.get(Category.class, category.getId());
+		returnedCategory = (Category) session.get(Category.class,
+				category.getId());
 
 		assertEquals(category, returnedCategory);
 		assertEquals(category.getName(), returnedCategory.getName());
@@ -139,15 +144,13 @@ public class CategoryTest {
 		Serializable id = category.getId();
 
 		session.delete(category);
-		
+
 		Category returnedCategory = null;
 		returnedCategory = (Category) session.get(Category.class, id);
 
-/*
-		try {
-		} catch (HibernateObjectRetrievalFailureException e) {
-		}
-*/
+		/*
+		 * try { } catch (HibernateObjectRetrievalFailureException e) { }
+		 */
 
 		assertNull(returnedCategory);
 	}
@@ -164,7 +167,8 @@ public class CategoryTest {
 
 		session.save(secondCategory);
 
-		List<Category> objectList = (List<Category>) session.createCriteria(Category.class).list();
+		List<Category> objectList = (List<Category>) session.createCriteria(
+				Category.class).list();
 
 		assertFalse(objectList.isEmpty());
 		int i = objectList.indexOf(firstCategory);
@@ -197,7 +201,8 @@ public class CategoryTest {
 		criteria.add(Restrictions.like("name", "first", MatchMode.ANYWHERE));
 
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		List<Category> objectList = (List<Category>) criteria.getExecutableCriteria(session).list();
+		List<Category> objectList = (List<Category>) criteria
+				.getExecutableCriteria(session).list();
 
 		assertFalse(objectList.isEmpty());
 		int i = objectList.indexOf(firstCategory);

@@ -21,15 +21,16 @@ import java.util.List;
 
 import static org.testng.Assert.*;
 
-
 /**
  * Class for MyDomainObject tests.
  * <p/>
  * This represents best practice for Hibernate integration tests.
  * <p/>
- * It executes each test method in its own transaction, which is automatically rolled back by default.
+ * It executes each test method in its own transaction, which is automatically
+ * rolled back by default.
  * <p/>
- * related info: http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
+ * related info:
+ * http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
  */
 public class MyDomainObjectTest {
 
@@ -53,7 +54,9 @@ public class MyDomainObjectTest {
 
 	@AfterMethod
 	public void afterEachTest() {
-		if (transaction != null) if (transaction.isActive()) transaction.rollback();
+		if (transaction != null)
+			if (transaction.isActive())
+				transaction.rollback();
 	}
 
 	@Test
@@ -75,13 +78,13 @@ public class MyDomainObjectTest {
 			fail();
 		} catch (ConstraintViolationException e) {
 			assertTrue(e.getConstraintViolations().size() == 1);
-			ConstraintViolation c = (ConstraintViolation) e.getConstraintViolations().toArray()[0];
+			ConstraintViolation c = (ConstraintViolation) e
+					.getConstraintViolations().toArray()[0];
 			assertEquals("name can't be null", c.getMessage());
 		} catch (Exception e) {
 			fail();
 		}
 	}
-
 
 	@Test
 	public void retrieve() {
@@ -94,7 +97,8 @@ public class MyDomainObjectTest {
 		assertNotNull(myDomainObject.getId());
 
 		MyDomainObject myReturnedDomainObject;
-		myReturnedDomainObject = (MyDomainObject) session.get(MyDomainObject.class, myDomainObject.getId());
+		myReturnedDomainObject = (MyDomainObject) session.get(
+				MyDomainObject.class, myDomainObject.getId());
 
 		assertEquals(myDomainObject, myReturnedDomainObject);
 		assertEquals(myDomainObject.getName(), myReturnedDomainObject.getName());
@@ -113,7 +117,8 @@ public class MyDomainObjectTest {
 
 		MyDomainObject myReturnedDomainObject;
 
-		myReturnedDomainObject = (MyDomainObject) session.get(MyDomainObject.class, myDomainObject.getId());
+		myReturnedDomainObject = (MyDomainObject) session.get(
+				MyDomainObject.class, myDomainObject.getId());
 
 		assertEquals(myDomainObject, myReturnedDomainObject);
 		assertEquals(myDomainObject.getName(), myReturnedDomainObject.getName());
@@ -141,13 +146,12 @@ public class MyDomainObjectTest {
 
 		session.delete(myDomainObject);
 		MyDomainObject myReturnedDomainObject = null;
-		myReturnedDomainObject = (MyDomainObject) session.get(MyDomainObject.class, id);
+		myReturnedDomainObject = (MyDomainObject) session.get(
+				MyDomainObject.class, id);
 
-/*
-		try {
-		} catch (HibernateObjectRetrievalFailureException e) {
-		}
-*/
+		/*
+		 * try { } catch (HibernateObjectRetrievalFailureException e) { }
+		 */
 
 		assertNull(myReturnedDomainObject);
 	}
@@ -164,7 +168,8 @@ public class MyDomainObjectTest {
 
 		session.save(secondDomainObject);
 
-		List<MyDomainObject> objectList = (List<MyDomainObject>) session.createCriteria(MyDomainObject.class).list();
+		List<MyDomainObject> objectList = (List<MyDomainObject>) session
+				.createCriteria(MyDomainObject.class).list();
 
 		assertFalse(objectList.isEmpty());
 		int i = objectList.indexOf(firstDomainObject);
@@ -179,7 +184,8 @@ public class MyDomainObjectTest {
 		myReturnedDomainObject = objectList.get(i);
 
 		assertEquals(firstDomainObject, myReturnedDomainObject);
-		assertEquals(firstDomainObject.getName(), myReturnedDomainObject.getName());
+		assertEquals(firstDomainObject.getName(),
+				myReturnedDomainObject.getName());
 	}
 
 	@Test
@@ -194,11 +200,13 @@ public class MyDomainObjectTest {
 
 		session.save(secondDomainObject);
 
-		DetachedCriteria criteria = DetachedCriteria.forClass(MyDomainObject.class);
+		DetachedCriteria criteria = DetachedCriteria
+				.forClass(MyDomainObject.class);
 		criteria.add(Restrictions.like("name", "first", MatchMode.ANYWHERE));
 
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		List<MyDomainObject> objectList = (List<MyDomainObject>) criteria.getExecutableCriteria(session).list();
+		List<MyDomainObject> objectList = (List<MyDomainObject>) criteria
+				.getExecutableCriteria(session).list();
 
 		assertFalse(objectList.isEmpty());
 		int i = objectList.indexOf(firstDomainObject);
@@ -212,6 +220,7 @@ public class MyDomainObjectTest {
 		myReturnedDomainObject = objectList.get(i);
 
 		assertEquals(firstDomainObject, myReturnedDomainObject);
-		assertEquals(firstDomainObject.getName(), myReturnedDomainObject.getName());
+		assertEquals(firstDomainObject.getName(),
+				myReturnedDomainObject.getName());
 	}
 }
