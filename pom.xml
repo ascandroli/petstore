@@ -4,7 +4,7 @@
 	<groupId>org.amneris</groupId>
 	<artifactId>petstore</artifactId>
 	<packaging>war</packaging>
-	<version>0.1.0</version>
+	<version>0.1.1-SNAPSHOT</version>
 	<name>petstore - My Tynamo project</name>
 	<url>http://tynamo.org/</url>
 
