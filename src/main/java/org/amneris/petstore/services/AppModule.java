@@ -1,11 +1,15 @@
 package org.amneris.petstore.services;
 
+import org.amneris.petstore.api.MyDomainObjectResource;
 import org.apache.shiro.realm.Realm;
 import org.apache.tapestry5.hibernate.HibernateSymbols;
+import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
 import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.MethodAdviceReceiver;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
+import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.services.BeanBlockContribution;
 import org.apache.tapestry5.services.BeanBlockSource;
 import org.apache.tapestry5.services.DisplayBlockContribution;
@@ -32,7 +36,7 @@ public class AppModule
 		// Use service builder methods (example below) when the implementation
 		// is provided inline, or requires more initialization than simply
 		// invoking the constructor.
-
+		binder.bind(MyDomainObjectResource.class);
 	}
 
 	public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration)
@@ -103,6 +107,21 @@ public class AppModule
 	public static void addCustomBlocks(Configuration<BeanBlockContribution> configuration)
 	{
 		configuration.add(new DisplayBlockContribution("boolean", "blocks/DisplayBlocks", "check"));
+	}
+
+	/**
+	 * Contributions to the RESTeasy main Application, insert all your RESTeasy singletons services here.
+	 */
+	@Contribute(javax.ws.rs.core.Application.class)
+	public static void configureRestResources(Configuration<Object> singletons, MyDomainObjectResource myDomainObjectResource)
+	{
+		singletons.add(myDomainObjectResource);
+	}
+
+	@Match("*Resource")
+	public static void adviseTransactions(HibernateTransactionAdvisor advisor, MethodAdviceReceiver receiver)
+	{
+		advisor.addTransactionCommitAdvice(receiver);
 	}
 
 	private static void loadApplicationDefaultsFromProperties(String properties, MappedConfiguration<String, String> contributions)
