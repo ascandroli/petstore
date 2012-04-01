@@ -27,7 +27,7 @@ public class MyDomainObjectResourceImpl implements MyDomainObjectResource
 	public Response post(MyDomainObject domainObject)
 	{
 		persistenceService.save(domainObject);
-		return Response.ok().build();
+		return Response.status(Response.Status.CREATED).entity(domainObject).build();
 	}
 
 	@Override

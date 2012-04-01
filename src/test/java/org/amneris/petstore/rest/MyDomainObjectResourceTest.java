@@ -31,13 +31,13 @@ public class MyDomainObjectResourceTest extends AbstractContainerTest
 
 		ClientResponse response = (ClientResponse) resource.post(dummy);
 
-		Assert.assertEquals(response.getStatus(), Response.Status.OK.getStatusCode());
+		Assert.assertEquals(response.getStatus(), Response.Status.CREATED.getStatusCode());
+		dummy = (MyDomainObject) response.getEntity(MyDomainObject.class);
+
 		response.releaseConnection();
 
-		MyDomainObject actual = resource.getDomainObject(1l);
+		MyDomainObject actual = resource.getDomainObject(dummy.getId());
 
 		Assert.assertEquals(actual.getName(), dummy.getName());
-
 	}
-
 }
