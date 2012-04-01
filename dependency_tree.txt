@@ -9,28 +9,22 @@
 [INFO] +- org.tynamo:tapestry-model-hibernate:jar:0.3.0-SNAPSHOT:compile
 [INFO] |  +- org.tynamo:tapestry-model-core:jar:0.3.0-SNAPSHOT:compile
 [INFO] |  |  +- org.tynamo:tapestry-model-annotations:jar:0.3.0-SNAPSHOT:compile
-[INFO] |  |  +- org.apache.tapestry:tapestry-upload:jar:5.3.1:compile
+[INFO] |  |  +- org.apache.tapestry:tapestry-upload:jar:5.3.2:compile
 [INFO] |  |  |  +- commons-io:commons-io:jar:2.0.1:compile
 [INFO] |  |  |  \- commons-fileupload:commons-fileupload:jar:1.2.2:compile
 [INFO] |  |  +- commons-beanutils:commons-beanutils:jar:1.8.3:compile
 [INFO] |  |  |  \- commons-logging:commons-logging:jar:1.1.1:compile
 [INFO] |  |  +- commons-lang:commons-lang:jar:2.6:compile
 [INFO] |  |  \- commons-collections:commons-collections:jar:3.2.1:compile
-[INFO] |  +- org.apache.tapestry:tapestry-hibernate:jar:5.3.1:compile
-[INFO] |  |  \- org.apache.tapestry:tapestry-hibernate-core:jar:5.3.1:compile
-[INFO] |  |     +- org.hibernate.javax.persistence:hibernate-jpa-2.0-api:jar:1.0.0.Final:compile
-[INFO] |  |     +- org.hibernate:hibernate-core:jar:3.6.0.Final:compile
-[INFO] |  |     |  +- antlr:antlr:jar:2.7.6:compile
-[INFO] |  |     |  +- dom4j:dom4j:jar:1.6.1:compile
-[INFO] |  |     |  \- javax.transaction:jta:jar:1.1:compile
-[INFO] |  |     +- geronimo-spec:geronimo-spec-jta:jar:1.0-M1:runtime
-[INFO] |  |     \- org.hibernate:hibernate-commons-annotations:jar:3.2.0.Final:compile
+[INFO] |  +- org.apache.tapestry:tapestry-hibernate:jar:5.3.2:compile
+[INFO] |  |  \- org.apache.tapestry:tapestry-hibernate-core:jar:5.3.2:compile
+[INFO] |  |     \- geronimo-spec:geronimo-spec-jta:jar:1.0-M1:runtime
 [INFO] |  +- org.hibernate:hibernate-validator:jar:4.0.2.GA:compile
 [INFO] |  |  +- javax.validation:validation-api:jar:1.0.0.GA:compile
 [INFO] |  |  +- javax.xml.bind:jaxb-api:jar:2.1:compile
 [INFO] |  |  |  \- javax.xml.stream:stax-api:jar:1.0-2:compile
 [INFO] |  |  \- com.sun.xml.bind:jaxb-impl:jar:2.1.3:compile
-[INFO] |  \- org.apache.tapestry:tapestry-beanvalidator:jar:5.3.1:compile
+[INFO] |  \- org.apache.tapestry:tapestry-beanvalidator:jar:5.3.2:compile
 [INFO] +- org.tynamo:tapestry-model-test:jar:0.3.0-SNAPSHOT:test
 [INFO] |  +- org.eclipse.jetty:jetty-webapp:jar:7.0.0.v20091005:test
 [INFO] |  |  +- org.eclipse.jetty:jetty-xml:jar:7.0.0.v20091005:test
@@ -53,7 +47,6 @@
 [INFO] |     +- net.sourceforge.nekohtml:nekohtml:jar:1.9.15:test
 [INFO] |     \- net.sourceforge.cssparser:cssparser:jar:0.9.5:test
 [INFO] |        \- org.w3c.css:sac:jar:1.3:test
-[INFO] +- mysql:mysql-connector-java:jar:5.1.17:compile
 [INFO] +- org.tynamo:tapestry-resteasy:jar:0.3.0:compile
 [INFO] |  +- org.apache.tapestry:tapestry-core:jar:5.3.1:compile
 [INFO] |  |  +- org.antlr:antlr-runtime:jar:3.3:compile
@@ -71,30 +64,42 @@
 [INFO] |  |  \- net.jcip:jcip-annotations:jar:1.0:compile
 [INFO] |  \- org.jboss.resteasy:resteasy-jaxb-provider:jar:2.3.0.GA:compile
 [INFO] |     \- com.sun.xml.stream:sjsxp:jar:1.0.1:compile
-[INFO] +- org.jboss.resteasy:resteasy-jettison-provider:jar:2.3.0.GA:compile
-[INFO] |  \- org.codehaus.jettison:jettison:jar:1.2:compile
-[INFO] +- org.tynamo:tapestry-security:jar:0.4.2:compile
+[INFO] +- org.jboss.resteasy:resteasy-jackson-provider:jar:2.3.0.GA:compile
+[INFO] |  +- org.codehaus.jackson:jackson-core-asl:jar:1.8.5:compile
+[INFO] |  +- org.codehaus.jackson:jackson-mapper-asl:jar:1.8.5:compile
+[INFO] |  +- org.codehaus.jackson:jackson-jaxrs:jar:1.8.5:compile
+[INFO] |  \- org.codehaus.jackson:jackson-xc:jar:1.8.5:compile
+[INFO] +- org.tynamo:tapestry-security:jar:0.4.4:compile
 [INFO] |  +- org.apache.shiro:shiro-web:jar:1.2.0:compile
 [INFO] |  |  \- org.apache.shiro:shiro-core:jar:1.2.0:compile
-[INFO] |  +- org.apache.tapestry:tapestry-ioc:jar:5.3.1:compile
-[INFO] |  |  +- org.slf4j:slf4j-api:jar:1.6.1:compile
+[INFO] |  +- org.apache.tapestry:tapestry-ioc:jar:5.3.2:compile
+[INFO] |  |  +- org.apache.tapestry:plastic:jar:5.3.2:compile
 [INFO] |  |  +- org.slf4j:slf4j-log4j12:jar:1.6.1:compile
 [INFO] |  |  +- javax.inject:javax.inject:jar:1:compile
-[INFO] |  |  +- org.apache.tapestry:tapestry5-annotations:jar:5.3.1:compile
-[INFO] |  |  +- org.apache.tapestry:tapestry-func:jar:5.3.1:compile
+[INFO] |  |  +- org.apache.tapestry:tapestry5-annotations:jar:5.3.2:compile
+[INFO] |  |  +- org.apache.tapestry:tapestry-func:jar:5.3.2:compile
 [INFO] |  |  +- log4j:log4j:jar:1.2.14:compile
-[INFO] |  |  +- org.apache.tapestry:plastic:jar:5.3.1:compile
 [INFO] |  |  \- javassist:javassist:jar:3.12.1.GA:compile
 [INFO] |  \- org.tynamo:tynamo-common:jar:0.0.1:compile
 [INFO] +- org.tynamo:tapestry-routing:jar:0.0.2:compile
-[INFO] +- org.tynamo:tapestry-exceptionpage:jar:0.1.1:compile
+[INFO] +- org.tynamo:tapestry-exceptionpage:jar:0.1.2:compile
 [INFO] +- com.h2database:h2:jar:1.2.125:compile
+[INFO] +- mysql:mysql-connector-java:jar:5.1.17:compile
+[INFO] +- org.hibernate:hibernate-c3p0:jar:3.6.0.Final:compile
+[INFO] |  +- org.hibernate:hibernate-core:jar:3.6.0.Final:compile
+[INFO] |  |  +- antlr:antlr:jar:2.7.6:compile
+[INFO] |  |  +- dom4j:dom4j:jar:1.6.1:compile
+[INFO] |  |  +- org.hibernate:hibernate-commons-annotations:jar:3.2.0.Final:compile
+[INFO] |  |  +- org.hibernate.javax.persistence:hibernate-jpa-2.0-api:jar:1.0.0.Final:compile
+[INFO] |  |  \- javax.transaction:jta:jar:1.1:compile
+[INFO] |  +- c3p0:c3p0:jar:0.9.1:compile
+[INFO] |  \- org.slf4j:slf4j-api:jar:1.6.1:compile
 [INFO] +- javax.servlet:servlet-api:jar:2.5:provided
-[INFO] \- org.apache.tapestry:tapestry-javadoc:jar:5.3.1:provided
+[INFO] \- org.apache.tapestry:tapestry-javadoc:jar:5.3.2:provided
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 2.677s
-[INFO] Finished at: Wed Mar 14 10:11:28 CET 2012
+[INFO] Total time: 2.798s
+[INFO] Finished at: Sun Apr 01 12:45:31 CEST 2012
 [INFO] Final Memory: 8M/81M
 [INFO] ------------------------------------------------------------------------
