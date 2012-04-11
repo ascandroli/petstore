@@ -4,9 +4,9 @@
 	<groupId>org.amneris</groupId>
 	<artifactId>petstore</artifactId>
 	<packaging>war</packaging>
-	<version>0.1.1-SNAPSHOT</version>
-	<name>petstore - My Tynamo project</name>
-	<url>http://tynamo.org/</url>
+	<version>0.2.0-SNAPSHOT</version>
+	<name>Tynamo Pet Store</name>
+	<url>https://github.com/ascandroli/petstore</url>
 
 	<properties>
 		<tynamo-version>0.3.0-SNAPSHOT</tynamo-version>
@@ -26,6 +26,17 @@
 
 	<build>
 		<finalName>petstore</finalName>
+
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>src/main/filtered-resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -46,21 +57,14 @@
 				<configuration>
 					<systemProperties>
 						<systemProperty>
-							<name>tapestry.compress-whitespace</name>
-							<value>false</value>
-						</systemProperty>
-						<systemProperty>
-							<name>tapestry.production-mode</name>
-							<value>false</value>
-						</systemProperty>
-						<systemProperty>
 							<name>javax.xml.stream.XMLInputFactory</name>
 							<value>com.ctc.wstx.stax.WstxInputFactory</value>
 						</systemProperty>
+						<systemProperty>
+							<name>tapestry.execution-mode</name>
+							<value>development</value>
+						</systemProperty>
 					</systemProperties>
-<!--
-					<systemPropertiesFile>target/classes/jetty.system.properties</systemPropertiesFile>
--->
 					<webAppConfig>
 						<contextPath>/${project.build.finalName}</contextPath>
 					</webAppConfig>
@@ -78,7 +82,14 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
-					<archiveClasses>true</archiveClasses>
+					<archive>
+						<manifest>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+						</manifest>
+						<manifestEntries>
+							<Implementation-Build>${buildNumber}</Implementation-Build>
+						</manifestEntries>
+					</archive>
 				</configuration>
 			</plugin>
 
@@ -98,21 +109,56 @@
 			</plugin>
 
 			<!-- Provides build number and timestamp -->
-<!--
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.0-beta-4</version>
+				<version>1.0</version>
 				<executions>
 					<execution>
-						<phase>process-resources</phase>
+						<phase>generate-resources</phase>
 						<goals>
 							<goal>create</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
--->
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>hibernate3-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<componentProperties>
+						<configurationfile>target/classes/hibernate.dev.cfg.xml</configurationfile>
+						<export>false</export>
+						<outputfilename>${project.version}.ddl.sql</outputfilename>
+
+						<scan-classes>true</scan-classes>
+						<scan-test-classes>false</scan-test-classes>
+
+						<drop>true</drop>
+						<create>true</create>
+
+						<!-- when this is true then failing drops cause a   -->
+						<!-- build failure. this would happen when the      -->
+						<!-- database is empty or if adding a new table.    -->
+						<!-- normally true for postgres, false for hsql.    -->
+						<!-- when adding new tables, etc. just run          -->
+						<!-- mvn hibernate3:hbm2ddl twice to get past the   -->
+						<!-- missing table errors.                          -->
+						<haltonerror>${hbmtool.haltOnError}</haltonerror>
+					</componentProperties>
+				</configuration>
+
+				<dependencies>
+					<dependency>
+						<groupId>mysql</groupId>
+						<artifactId>mysql-connector-java</artifactId>
+						<version>5.1.17</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
 		</plugins>
 	</build>
 
@@ -287,113 +333,6 @@
 	</repositories>
 
 	<profiles>
-		<profile>
-			<id>commons</id>
-			<build>
-
-				<resources>
-					<resource>
-						<directory>src/main/resources</directory>
-					</resource>
-					<resource>
-						<directory>src/profiles/commons/resources</directory>
-						<filtering>true</filtering>
-					</resource>
-					<resource>
-						<directory>src/profiles/${deploy.profile}/resources</directory>
-						<filtering>true</filtering>
-					</resource>
-				</resources>
-
-				<plugins>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-war-plugin</artifactId>
-						<version>2.1.1</version>
-						<configuration>
-							<archive>
-							<manifest>
-									<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-								</manifest>
-								<manifestEntries>
-									<Implementation-Build>${buildNumber}</Implementation-Build>
-								</manifestEntries>
-							</archive>
-							<webResources>
-								<!-- cuidado con el orden, el orden de los factores afecta al resultado final -->
-								<!-- a diferencia del "resources" los webResources se procesand e abajo a arriba -->
-								<resource>
-									<directory>src/profiles/${deploy.profile}/webapp</directory>
-									<filtering>true</filtering>
-								</resource>
-								<resource>
-									<directory>src/profiles/commons/webapp</directory>
-									<filtering>true</filtering>
-								</resource>
-							</webResources>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-
-			<properties>
-				<hibernate.show_sql>true</hibernate.show_sql>
-				<hibernate.format_sql>true</hibernate.format_sql>
-			</properties>
-
-		</profile>
-
-
-		<profile>
-			<id>dev.local</id>
-
-			<properties>
-				<deploy.profile>development</deploy.profile>
-
-				<!--  Google-API Key for localhost -->
-				<!--
-					<ck.google.key>ABQIAAAABaUqD8Xx-kA5BiG_UZLiBhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTtdAZsgth3rHsqJVoqWZyBNQnQPw</ck.google.key>
-				-->
-
-				<!-- Local database properties -->
-				<hibernate.connection.url.host>localhost</hibernate.connection.url.host>
-				<hibernate.connection.url.databasename>petstore_dev</hibernate.connection.url.databasename>
-				<hibernate.connection.username>petstore_admin</hibernate.connection.username>
-				<hibernate.connection.password>petstore_4dm1n</hibernate.connection.password>
-				<hibernate.show_sql>true</hibernate.show_sql>
-				<hibernate.format_sql>true</hibernate.format_sql>
-
-				<tapestry.production-mode>false</tapestry.production-mode>
-				<tapestry.compress-whitespace>false</tapestry.compress-whitespace>
-
-			</properties>
-		</profile>
-
-
-		<profile>
-			<id>[YOURDOMAIN].com</id>
-
-			<properties>
-				<deploy.profile>production</deploy.profile>
-
-				<!--  Google-API Key for [YOURDOMAIN].com -->
-<!--
-				<ck.google.key>ABQIAAAABaUqD8Xx-kA5BiG_UZLiBhTfbvvK_7wN5rmfk0_m2BYm7INm6RRxMZysq26CjEdwhqU68TWKr9xczA</ck.google.key>
--->
-
-				<!-- Local database properties -->
-				<hibernate.connection.url.host>localhost</hibernate.connection.url.host>
-				<hibernate.connection.url.databasename>petstore</hibernate.connection.url.databasename>
-				<hibernate.connection.username>petstore_admin</hibernate.connection.username>
-				<hibernate.connection.password>petstore_4dm1n</hibernate.connection.password>
-				<hibernate.show_sql>false</hibernate.show_sql>
-				<hibernate.format_sql>false</hibernate.format_sql>
-
-				<tapestry.production-mode>true</tapestry.production-mode>
-				<tapestry.compress-whitespace>true</tapestry.compress-whitespace>
-			</properties>
-		</profile>
-
 	</profiles>
 
 </project>

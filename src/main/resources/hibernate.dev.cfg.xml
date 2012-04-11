@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+		"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- for more Database configuration options check: http://tynamo.org/Sample+database+configurations -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property
+				name="hibernate.connection.url">jdbc:mysql://localhost/petstore_dev?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
+		<property name="hibernate.connection.username">petstore_admin</property>
+		<property name="hibernate.connection.password">petstore_4dm1n</property>
+		<property name="hbm2ddl.auto">update</property> <!-- BE VERY CAREFUL HERE -->
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+
+		<!--
+			C3P0 configuration.
+
+			http://www.mchange.com/projects/c3p0/index.html#hibernate-specific
+			http://www.mchange.com/projects/c3p0/index.html#configuration_properties
+		-->
+		<property name="hibernate.c3p0.min_size">5</property>
+		<property name="hibernate.c3p0.max_size">20</property>
+		<property name="hibernate.c3p0.timeout">300</property>
+		<property name="hibernate.c3p0.max_statements">50</property>
+		<property name="hibernate.c3p0.idle_test_period">3000</property>
+
+		<property name="hibernate.connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		<!-- no "connection.pool_size" entry! -->
+
+		<!--
+		  <property name="current_session_context_class">thread</property>
+
+		  <event type="post-insert">
+			  <listener class="org.hibernate.envers.event.AuditEventListener"/>
+		  </event>
+		  <event type="post-update">
+			  <listener class="org.hibernate.envers.event.AuditEventListener"/>
+		  </event>
+		  <event type="post-delete">
+			  <listener class="org.hibernate.envers.event.AuditEventListener"/>
+		  </event>
+		  <event type="pre-collection-update">
+			  <listener class="org.hibernate.envers.event.AuditEventListener"/>
+		  </event>
+		  <event type="pre-collection-remove">
+			  <listener class="org.hibernate.envers.event.AuditEventListener"/>
+		  </event>
+		  <event type="post-collection-recreate">
+			  <listener class="org.hibernate.envers.event.AuditEventListener"/>
+		  </event>
+  -->
+
+	</session-factory>
+</hibernate-configuration>

@@ -5,13 +5,13 @@
 	<session-factory>
 		<!-- for more Database configuration options check: http://tynamo.org/Sample+database+configurations -->
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-		<property name="hibernate.connection.url">jdbc:mysql://${hibernate.connection.url.host}/${hibernate.connection.url.databasename}?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8</property>
+		<property name="hibernate.connection.url">jdbc:mysql://localhost/petstore?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
-		<property name="hibernate.connection.username">${hibernate.connection.username}</property>
-		<property name="hibernate.connection.password">${hibernate.connection.password}</property>
-		<property name="hbm2ddl.auto">update</property> <!-- BE VERY CAREFUL HERE -->
-		<property name="hibernate.show_sql">${hibernate.show_sql}</property>
-		<property name="hibernate.format_sql">${hibernate.format_sql}</property>
+		<property name="hibernate.connection.username">petstore_admin</property>
+		<property name="hibernate.connection.password">petstore_4dm1n</property>
+		<property name="hbm2ddl.auto">validate</property> <!-- BE VERY CAREFUL HERE -->
+		<property name="hibernate.show_sql">false</property>
+		<property name="hibernate.format_sql">false</property>
 
 		<!--
 			C3P0 configuration.

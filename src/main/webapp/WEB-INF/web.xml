@@ -20,7 +20,8 @@
 	<context-param>
 		<param-name>tapestry.development-modules</param-name>
 		<param-value>
-			org.amneris.petstore.services.DevelopmentModule
+			org.amneris.petstore.services.DevelopmentModule,
+			org.amneris.petstore.services.AppModule
 		</param-value>
 	</context-param>
 	<context-param>

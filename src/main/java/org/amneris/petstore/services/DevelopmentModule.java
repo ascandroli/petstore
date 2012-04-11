@@ -1,6 +1,7 @@
 package org.amneris.petstore.services;
 
 import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.hibernate.HibernateSymbols;
 import org.apache.tapestry5.ioc.MappedConfiguration;
 
 /**
@@ -15,11 +16,8 @@ public class DevelopmentModule
 		// overriding to false is a good idea. In addition, this is often overridden
 		// on the command line as -Dtapestry.production-mode=false
 		configuration.add(SymbolConstants.PRODUCTION_MODE, false);
+		configuration.add(SymbolConstants.COMPRESS_WHITESPACE, false);
 
-		// The application version number is incorprated into URLs for some
-		// assets. Web browsers will cache assets because of the far future expires
-		// header. If existing assets are changed, the version number should also
-		// change, to force the browser to download new versions.
-		configuration.add(SymbolConstants.APPLICATION_VERSION, "0.1.0-SNAPSHOT-DEV");
+		configuration.add(HibernateSymbols.EARLY_START_UP, true);
 	}
 }

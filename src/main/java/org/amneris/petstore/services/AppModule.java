@@ -2,26 +2,27 @@ package org.amneris.petstore.services;
 
 import org.amneris.petstore.api.MyDomainObjectResource;
 import org.apache.shiro.realm.Realm;
+import org.apache.tapestry5.SymbolConstants;
+import org.apache.tapestry5.hibernate.HibernateConfigurer;
+import org.apache.tapestry5.hibernate.HibernateSessionSource;
 import org.apache.tapestry5.hibernate.HibernateSymbols;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
-import org.apache.tapestry5.ioc.Configuration;
-import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.MethodAdviceReceiver;
-import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.*;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Match;
+import org.apache.tapestry5.ioc.services.ApplicationDefaults;
+import org.apache.tapestry5.ioc.services.FactoryDefaults;
+import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.services.BeanBlockContribution;
 import org.apache.tapestry5.services.BeanBlockSource;
 import org.apache.tapestry5.services.DisplayBlockContribution;
-import org.tynamo.PageType;
 import org.tynamo.builder.Builder;
 import org.tynamo.security.SecuritySymbols;
 import org.tynamo.security.services.SecurityFilterChainFactory;
 import org.tynamo.security.services.impl.SecurityFilterChain;
 import org.tynamo.shiro.extension.realm.text.ExtendedPropertiesRealm;
 
-import java.io.IOException;
-import java.util.Properties;
+import static org.amneris.petstore.ModuleUtils.loadApplicationDefaultsFromProperties;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to configure and extend
@@ -39,7 +40,9 @@ public class AppModule
 		binder.bind(MyDomainObjectResource.class);
 	}
 
-	public static void contributeApplicationDefaults(MappedConfiguration<String, String> configuration)
+	@Contribute(SymbolProvider.class)
+	@ApplicationDefaults
+	public static void applicationDefaults(MappedConfiguration<String, Object> configuration)
 	{
 		loadApplicationDefaultsFromProperties("/applicationdefaults.properties", configuration);
 
@@ -48,10 +51,27 @@ public class AppModule
 		configuration.add(SecuritySymbols.UNAUTHORIZED_URL, "/unauthorized");
 		configuration.add(SecuritySymbols.SUCCESS_URL, "/home");
 
-		configuration.add(HibernateSymbols.EARLY_START_UP, "false");
+//		configuration.add(HibernateSymbols.EARLY_START_UP, false);
+		configuration.add(HibernateSymbols.DEFAULT_CONFIGURATION, false);
+
+		// Here we're restricting the supported locales. As you add localised message catalogs and other assets,
+		// you can extend this list of locales (it's a comma seperated series of locale names;
+		// the first locale name is the default when there's no reasonable match).
+		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en,es");
 	}
 
-	public static void contributeWebSecurityManager(Configuration<Realm> configuration) 
+	/**
+	 * Contributes factory defaults that may be overridden.
+	 */
+	@Contribute(SymbolProvider.class)
+	@FactoryDefaults
+	public static void factoryDefaults(MappedConfiguration<String, String> configuration)
+	{
+//		configuration.add(Symbols.BUILD_VERSION, getBuildVersion(context));
+	}
+
+
+	public static void contributeWebSecurityManager(Configuration<Realm> configuration)
 	{
 		configuration.add(new ExtendedPropertiesRealm("classpath:shiro-users.properties"));
 	}
@@ -67,11 +87,12 @@ public class AppModule
 		configuration.add(factory.createChain("/add/**").add(factory.perms(), "*:insert").build());
 		configuration.add(factory.createChain("/list/**").add(factory.perms(), "*:select").build());
 	}
+
 	/**
 	 * By default tapestry-hibernate will scan
 	 * InternalConstants.TAPESTRY_APP_PACKAGE_PARAM + ".entities" (witch is equal to "org.amneris.petstore.petstore.entities")
 	 * for annotated entity classes.
-	 *
+	 * <p/>
 	 * Contributes the package "org.amneris.petstore.petstore.model" to the configuration, so that it will be
 	 * scanned for annotated entity classes.
 	 */
@@ -124,23 +145,16 @@ public class AppModule
 		advisor.addTransactionCommitAdvice(receiver);
 	}
 
-	private static void loadApplicationDefaultsFromProperties(String properties, MappedConfiguration<String, String> contributions)
+	@Contribute(HibernateSessionSource.class)
+	public static void configureHibernateSource(OrderedConfiguration<HibernateConfigurer> configurers)
 	{
-		Properties prop = new Properties();
-
-		try
+		configurers.add("PetstoreHibernateConfigurer", new HibernateConfigurer()
 		{
-			prop.load(AppModule.class.getResource(properties).openStream());
-		} catch (IOException ioe)
-		{
-			throw new RuntimeException("Unable to load " + properties, ioe);
-		}
-
-		for (Object key : prop.keySet())
-		{
-			String value = prop.getProperty(key.toString());
-			contributions.add(key.toString(), value);
-		}
+			public void configure(org.hibernate.cfg.Configuration configuration)
+			{
+				configuration.configure("/hibernate.dev.cfg.xml");
+			}
+		});
 	}
-
 }
+
