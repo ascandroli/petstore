@@ -80,8 +80,12 @@ public class AppModule
 	public static void contributeSecurityConfiguration(Configuration<SecurityFilterChain> configuration,
 	                                                   SecurityFilterChainFactory factory)
 	{
+		configuration.add(factory.createChain("/assets/**").add(factory.anon()).build());
+		configuration.add(factory.createChain("/security/login*").add(factory.anon()).build());
+
 		configuration.add(factory.createChain("/signin").add(factory.anon()).build());
 		configuration.add(factory.createChain("/").add(factory.roles(), "admin").build());
+
 		configuration.add(factory.createChain("/edit/**").add(factory.perms(), "*:update").build());
 		configuration.add(factory.createChain("/show/**").add(factory.perms(), "*:select").build());
 		configuration.add(factory.createChain("/add/**").add(factory.perms(), "*:insert").build());
@@ -121,14 +125,17 @@ public class AppModule
 */
 
 	/**
-	 * Contribution to the BeanBlockSource service to tell the BeanEditForm
-	 * component about the editors.
+	 * Contribution to the BeanBlockSource service to tell the BeanEditForm component about the editors.
 	 */
 	@Contribute(BeanBlockSource.class)
 	public static void addCustomBlocks(Configuration<BeanBlockContribution> configuration)
 	{
 		configuration.add(new DisplayBlockContribution("boolean", "blocks/DisplayBlocks", "check"));
+
+		configuration.add(new DisplayBlockContribution("single-valued-association", "blocks/DisplayBlocks", "showPageLink"));
+		configuration.add(new DisplayBlockContribution("many-valued-association", "blocks/DisplayBlocks", "showPageLinks"));
 	}
+
 
 	/**
 	 * Contributions to the RESTeasy main Application, insert all your RESTeasy singletons services here.
