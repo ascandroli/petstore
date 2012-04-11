@@ -34,19 +34,25 @@ dl.t-beandisplay {
 	display: block;
 	padding-top: 10px;
 	padding-bottom: 25px;
+	width: 100%;
+	overflow: hidden;
 }
 
 dl.t-beandisplay dt, dl.t-beandisplay dd {
 	display: block;
-	/*	float: left;
- */
-	margin-top: 15px;
+	float: left;
+ 	margin-top: 15px;
 }
 
 dl.t-beandisplay dt {
 	text-align: left;
 	font-weight: bold;
 	margin-left: 15px;
+	width: 15% !important; /* adjust the width; make sure the total of both is 100% */
+}
+
+dl.t-beandisplay dd {
+	width: 75%; /* adjust the width; make sure the total of both is 100% */
 }
 
 div.t-error, span.error, li.error, div.message {
