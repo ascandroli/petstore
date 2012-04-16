@@ -13,4 +13,3 @@ GRANT ALL ON petstore_dev.* TO petstore_admin@localhost IDENTIFIED BY "petstore_
 GRANT ALL ON petstore_tests.* TO petstore_admin@localhost IDENTIFIED BY "petstore_4dm1n";
 
 FLUSH PRIVILEGES;
-exit

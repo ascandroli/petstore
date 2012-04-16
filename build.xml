@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="dbdeploy" default="default">
+
+    <property name="db.driver" value="com.mysql.jdbc.Driver"/>
+    <property name="db.url" value="${hibernate.connection.url.host}"/>
+    <property name="db.username" value="${hibernate.connection.username}"/>
+    <property name="db.password" value="${hibernate.connection.password}"/>
+
+    <target name="default" depends="update-database-and-apply-as-separate-step"/>
+
+    <target name="update-database-and-apply-as-separate-step" description="generate a sql upgrade script">
+        <mkdir dir="${basedir}/target/db"/>
+
+        <!-- use dbdeploy to generate the change script -->
+        <dbdeploy driver="${db.driver}" url="${db.url}"
+                  userid="${db.username}" password="${db.password}"
+                  dir="${basedir}/src/main/sql/deltas"
+                  outputfile="${basedir}/target/db/all-deltas.sql"
+                  dbms="mysql"
+                  undoOutputfile="${basedir}/target/db/undo-all-deltas.sql"/>
+    </target>
+
+</project>
