@@ -28,6 +28,12 @@ public class Cart
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="customer_id")
+	@NotNull(message = "customer can't be null")
+	private Customer customer;
+
+	
 	@Column(name = "created_on")
 	@PropertyDescriptor(readOnly = true)
 	private Date createdOn = new Date();
@@ -41,6 +47,14 @@ public class Cart
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 	public Date getCreatedOn() {

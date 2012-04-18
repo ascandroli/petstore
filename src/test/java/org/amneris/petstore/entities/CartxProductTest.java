@@ -43,6 +43,7 @@ public class CartxProductTest {
 		Configuration configuration = new Configuration();
 		configuration.configure("hibernate.test.cfg.xml");
 		configuration.addAnnotatedClass(CartxProduct.class);
+		configuration.addAnnotatedClass(Customer.class);
 		configuration.addAnnotatedClass(Cart.class);
 		configuration.addAnnotatedClass(Product.class);
 		configuration.addAnnotatedClass(Category.class);
@@ -68,13 +69,24 @@ public class CartxProductTest {
 	public void simple_save() {
 		Category category = new Category();
 		category.setName("some category");
+		session.save(category);
 		
 		Product product = new Product();
 		product.setName("some product");
 		product.setCategory(category);
+		session.save(product);
+		
+		Customer customer = new Customer();
+		customer.setFirstName("first name");
+		customer.setLastName("last name");
+		customer.setEmail("email");
+		customer.setPassword("password");
+		session.save(customer);
 		
 		Cart cart = new Cart();
-	
+		cart.setCustomer(customer);
+		session.save(cart);
+		
 		CartxProduct cartxProduct = new CartxProduct();
 		cartxProduct.setCart(cart);
 		cartxProduct.setProduct(product);
@@ -87,16 +99,16 @@ public class CartxProductTest {
 	}
 
 	@Test
-	public void save_object_without_name_should_fail() {
+	public void save_object_without_product_should_fail() {
 		CartxProduct cartxProduct = new CartxProduct();
 		try {
 			session.save(cartxProduct);
 			fail();
 		} catch (ConstraintViolationException e) {
-			assertTrue(e.getConstraintViolations().size() == 1);
+			assertTrue(e.getConstraintViolations().size() == 3);
 			ConstraintViolation c = (ConstraintViolation) e
 					.getConstraintViolations().toArray()[0];
-			assertEquals("name can't be null", c.getMessage());
+			assertEquals("product can't be null", c.getMessage());
 		} catch (Exception e) {
 			fail();
 		}
@@ -104,60 +116,129 @@ public class CartxProductTest {
 
 	@Test
 	public void retrieve() {
+		Category category = new Category();
+		category.setName("some category");
+		session.save(category);
+		
+		Product product = new Product();
+		product.setName("some product");
+		product.setCategory(category);
+		session.save(product);
+		
+		Customer customer = new Customer();
+		customer.setFirstName("first name");
+		customer.setLastName("last name");
+		customer.setEmail("email");
+		customer.setPassword("password");
+		session.save(customer);
+		
+		Cart cart = new Cart();
+		cart.setCustomer(customer);
+		session.save(cart);
+		
 		CartxProduct cartxProduct = new CartxProduct();
-		cartxProduct.setName("some name");
-
+		cartxProduct.setCart(cart);
+		cartxProduct.setProduct(product);
+		cartxProduct.setQuantity(2);
+		
 		session.save(cartxProduct);
 
-		assertEquals(cartxProduct.getName(), "some name");
-		assertNotNull(cartxProduct.getId());
+		assertEquals(cartxProduct.getProduct().getName(), "some product");
+		assertNotNull(cartxProduct.getCart());
+		assertNotNull(cartxProduct.getProduct());
 
 		CartxProduct returnedCartxProduct;
 		returnedCartxProduct = (CartxProduct) session.get(CartxProduct.class,
-				cartxProduct.getId());
+				cartxProduct);
 
 		assertEquals(cartxProduct, returnedCartxProduct);
-		assertEquals(cartxProduct.getName(), returnedCartxProduct.getName());
+		assertEquals(cartxProduct.getCart(), returnedCartxProduct.getCart());
 
 	}
 
 	@Test
 	public void update() {
+		Category category = new Category();
+		category.setName("some category");
+		session.save(category);
+		
+		Product product = new Product();
+		product.setName("some product");
+		product.setCategory(category);
+		session.save(product);
+		
+		Customer customer = new Customer();
+		customer.setFirstName("first name");
+		customer.setLastName("last name");
+		customer.setEmail("email");
+		customer.setPassword("password");
+		session.save(customer);
+		
+		Cart cart = new Cart();
+		cart.setCustomer(customer);
+		session.save(cart);
+		
 		CartxProduct cartxProduct = new CartxProduct();
-		cartxProduct.setName("some name");
+		cartxProduct.setCart(cart);
+		cartxProduct.setProduct(product);
+		cartxProduct.setQuantity(2);
 
 		session.save(cartxProduct);
 
-		assertEquals(cartxProduct.getName(), "some name");
-		assertNotNull(cartxProduct.getId());
+		assertEquals(cartxProduct.getProduct().getName(), "some product");
+		assertNotNull(cartxProduct.getProduct());
+		assertNotNull(cartxProduct.getCart());
 
 		CartxProduct returnedCartxProduct;
 		returnedCartxProduct = (CartxProduct) session.get(CartxProduct.class,
-				cartxProduct.getId());
+				cartxProduct);
 
 		assertEquals(cartxProduct, returnedCartxProduct);
-		assertEquals(cartxProduct.getName(), returnedCartxProduct.getName());
+		assertEquals(cartxProduct.getProduct(), returnedCartxProduct.getProduct());
 
-		returnedCartxProduct.setName("some other name");
-		Serializable id = returnedCartxProduct.getId();
+		returnedCartxProduct.setQuantity(4);
+		Serializable id = returnedCartxProduct;
 
 		session.save(returnedCartxProduct);
 
-		assertEquals(id, returnedCartxProduct.getId());
-		assertEquals("some other name", returnedCartxProduct.getName());
+		assertEquals(id, returnedCartxProduct);
+		assertEquals(4, returnedCartxProduct.getQuantity());
 	}
 
 	@Test
 	public void delete() {
+		Category category = new Category();
+		category.setName("some category");
+		session.save(category);
+		
+		Product product = new Product();
+		product.setName("some product");
+		product.setCategory(category);
+		session.save(product);
+		
+		Customer customer = new Customer();
+		customer.setFirstName("first name");
+		customer.setLastName("last name");
+		customer.setEmail("email");
+		customer.setPassword("password");
+		session.save(customer);
+		
+		Cart cart = new Cart();
+		cart.setCustomer(customer);
+		session.save(cart);
+		
 		CartxProduct cartxProduct = new CartxProduct();
-		cartxProduct.setName("some name");
+		cartxProduct.setCart(cart);
+		cartxProduct.setProduct(product);
+		cartxProduct.setQuantity(2);
 
 		session.save(cartxProduct);
 
-		assertEquals(cartxProduct.getName(), "some name");
-		assertNotNull(cartxProduct.getId());
+		assertEquals(cartxProduct.getProduct().getName(), "some product");
+		assertNotNull(cartxProduct.getProduct());
+		assertNotNull(cartxProduct.getCart());
 
-		Serializable id = cartxProduct.getId();
+		Serializable id = cartxProduct;
 
 		session.delete(cartxProduct);
 
@@ -173,13 +254,53 @@ public class CartxProductTest {
 
 	@Test
 	public void get_all_instances() {
+		Category category = new Category();
+		category.setName("some category");
+		session.save(category);
+		
+		Product product = new Product();
+		product.setName("some product");
+		product.setCategory(category);
+		session.save(product);
+		
+		Customer customer = new Customer();
+		customer.setFirstName("first name");
+		customer.setLastName("last name");
+		customer.setEmail("email");
+		customer.setPassword("password");
+		session.save(customer);
+		
+		Cart cart = new Cart();
+		cart.setCustomer(customer);
+		session.save(cart);
+		
 		CartxProduct firstCartxProduct = new CartxProduct();
-		firstCartxProduct.setName("this is the first one");
+		firstCartxProduct.setCart(cart);
+		firstCartxProduct.setProduct(product);
+		firstCartxProduct.setQuantity(2);
 
 		session.save(firstCartxProduct);
 
+		Product secondProduct = new Product();
+		secondProduct.setName("some other product");
+		secondProduct.setCategory(category);
+		session.save(secondProduct);
+
+		Customer secondCustomer = new Customer();
+		secondCustomer.setFirstName("first name");
+		secondCustomer.setLastName("last name");
+		secondCustomer.setEmail("email");
+		secondCustomer.setPassword("password");
+		session.save(secondCustomer);
+		
+		Cart secondCart = new Cart();
+		secondCart.setCustomer(secondCustomer);
+		session.save(secondCart);
+		
 		CartxProduct secondCartxProduct = new CartxProduct();
-		secondCartxProduct.setName("this is the second object");
+		secondCartxProduct.setCart(secondCart);
+		secondCartxProduct.setProduct(secondProduct);
+		secondCartxProduct.setQuantity(4);
 
 		session.save(secondCartxProduct);
 
@@ -198,23 +319,63 @@ public class CartxProductTest {
 		cartxProduct = objectList.get(i);
 
 		assertEquals(firstCartxProduct, cartxProduct);
-		assertEquals(firstCartxProduct.getName(), cartxProduct.getName());
+		assertEquals(firstCartxProduct.getQuantity(), cartxProduct.getQuantity());
 	}
 
 	@Test
 	public void search_by_detached_criteria() {
+		Category category = new Category();
+		category.setName("some category");
+		session.save(category);
+		
+		Product product = new Product();
+		product.setName("some product");
+		product.setCategory(category);
+		session.save(product);
+		
+		Customer customer = new Customer();
+		customer.setFirstName("first name");
+		customer.setLastName("last name");
+		customer.setEmail("email");
+		customer.setPassword("password");
+		session.save(customer);
+		
+		Cart cart = new Cart();
+		cart.setCustomer(customer);
+		session.save(cart);
+		
 		CartxProduct firstCartxProduct = new CartxProduct();
-		firstCartxProduct.setName("this is the first one");
+		firstCartxProduct.setCart(cart);
+		firstCartxProduct.setProduct(product);
+		firstCartxProduct.setQuantity(2);
 
 		session.save(firstCartxProduct);
 
+		Product secondProduct = new Product();
+		secondProduct.setName("some other product");
+		secondProduct.setCategory(category);
+		session.save(secondProduct);
+
+		Customer secondCustomer = new Customer();
+		secondCustomer.setFirstName("first name");
+		secondCustomer.setLastName("last name");
+		secondCustomer.setEmail("email");
+		secondCustomer.setPassword("password");
+		session.save(secondCustomer);
+		
+		Cart secondCart = new Cart();
+		secondCart.setCustomer(secondCustomer);
+		session.save(secondCart);
+		
 		CartxProduct secondCartxProduct = new CartxProduct();
-		secondCartxProduct.setName("this is the second object");
+		secondCartxProduct.setCart(secondCart);
+		secondCartxProduct.setProduct(secondProduct);
+		secondCartxProduct.setQuantity(4);
 
 		session.save(secondCartxProduct);
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(CartxProduct.class);
-		criteria.add(Restrictions.like("name", "first", MatchMode.ANYWHERE));
+		criteria.add(Restrictions.like("product.name", "other", MatchMode.ANYWHERE));
 
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<CartxProduct> objectList = (List<CartxProduct>) criteria
@@ -232,6 +393,6 @@ public class CartxProductTest {
 		cartxProduct = objectList.get(i);
 
 		assertEquals(firstCartxProduct, cartxProduct);
-		assertEquals(firstCartxProduct.getName(), cartxProduct.getName());
+		assertEquals(firstCartxProduct.getQuantity(), cartxProduct.getQuantity());
 	}
 }

@@ -27,7 +27,6 @@ public class Customer
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@NaturalId
 	@NotNull(message = "name can't be null")
 	@Column(name = "first_name")
 	private String firstName;

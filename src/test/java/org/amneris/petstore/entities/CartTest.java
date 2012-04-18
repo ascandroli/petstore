@@ -1,5 +1,6 @@
 package org.amneris.petstore.entities;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -44,7 +45,6 @@ public class CartTest {
 		configuration.configure("hibernate.test.cfg.xml");
 		configuration.addAnnotatedClass(Cart.class);
 		configuration.addAnnotatedClass(Customer.class);
-		configuration.addAnnotatedClass(Currency.class);
 		sessionFactory = configuration.buildSessionFactory();
 	}
 
@@ -63,26 +63,25 @@ public class CartTest {
 
 	@Test
 	public void simple_save() {
-		Currency currency = new Currency();
-		currency.setName("EURO");
-		
+	
 		Customer customer = new Customer();
 		customer.setFirstName("some customer");
 		customer.setLastName("some customer");
+		customer.setEmail("some email");
+		customer.setPassword("some password");
+		session.save(customer);
 		
 		Cart cart = new Cart();
 		cart.setCustomer(customer);
-		cart.setCurrency(currency);
-
+	
 		session.save(cart);
 
 		Assert.assertEquals(cart.getCustomer().getFirstName(), "some customer");
-		Assert.assertEquals(cart.getCurrency().getName(), "EURO");
 		assertNotNull(cart.getId());
 	}
 
 	@Test
-	public void save_object_without_name_should_fail() {
+	public void save_object_customer_should_fail() {
 		Cart cart = new Cart();
 		try {
 			session.save(cart);
@@ -91,7 +90,7 @@ public class CartTest {
 			assertTrue(e.getConstraintViolations().size() == 1);
 			ConstraintViolation c = (ConstraintViolation) e
 					.getConstraintViolations().toArray()[0];
-			assertEquals("name can't be null", c.getMessage());
+			assertEquals("customer can't be null", c.getMessage());
 		} catch (Exception e) {
 			fail();
 		}
@@ -99,17 +98,17 @@ public class CartTest {
 
 	@Test
 	public void retrieve() {
-		Currency currency = new Currency();
-		currency.setName("EURO");
-		
 		Customer customer = new Customer();
 		customer.setFirstName("some customer");
 		customer.setLastName("some customer");
+		customer.setEmail("some email");
+		customer.setPassword("some password");
+		
+		session.save(customer);
 		
 		Cart cart = new Cart();
 		cart.setCustomer(customer);
-		cart.setCurrency(currency);
-
+		
 		session.save(cart);
 
 		assertEquals(cart.getCustomer().getFirstName(), "some customer");
@@ -120,22 +119,22 @@ public class CartTest {
 				cart.getId());
 
 		assertEquals(cart, returnedCart);
-		assertEquals(cart.getCustomer(), returnedCart.getCustomer());
+		assertEquals(cart.getId(), returnedCart.getId());
 	}
 
 	@Test
 	public void update() {
-		Currency currency = new Currency();
-		currency.setName("EURO");
-		
 		Customer customer = new Customer();
 		customer.setFirstName("some customer");
 		customer.setLastName("some customer");
+		customer.setEmail("some email");
+		customer.setPassword("some password");
+		
+		session.save(customer);
 		
 		Cart cart = new Cart();
 		cart.setCustomer(customer);
-		cart.setCurrency(currency);
-
+		
 		session.save(cart);
 
 		assertEquals(cart.getCustomer().getFirstName(), "some customer");
@@ -162,19 +161,19 @@ public class CartTest {
 
 	@Test
 	public void delete() {
-		Currency currency = new Currency();
-		currency.setName("EURO");
-		
 		Customer customer = new Customer();
 		customer.setFirstName("some customer");
 		customer.setLastName("some customer");
+		customer.setEmail("some email");
+		customer.setPassword("some password");
+		
+		session.save(customer);
 		
 		Cart cart = new Cart();
 		cart.setCustomer(customer);
-		cart.setCurrency(currency);
-
+		
 		session.save(cart);
-
+		
 		assertEquals(cart.getCustomer().getFirstName(), "some customer");
 		assertNotNull(cart.getId());
 
@@ -194,27 +193,28 @@ public class CartTest {
 
 	@Test
 	public void get_all_instances() {
-		Currency currency = new Currency();
-		currency.setName("EURO");
+		Customer firstCustomer = new Customer();
+		firstCustomer.setFirstName("some customer");
+		firstCustomer.setLastName("some customer");
+		firstCustomer.setEmail("some email");
+		firstCustomer.setPassword("some password");
 		
-		Customer customer = new Customer();
-		customer.setFirstName("first customer");
-		customer.setLastName("first customer");
+		session.save(firstCustomer);
 		
 		Cart firstCart = new Cart();
-		firstCart.setCustomer(customer);
-		firstCart.setCurrency(currency);
-
+		firstCart.setCustomer(firstCustomer);
 		session.save(firstCart);
 
 		Customer secondCustomer = new Customer();
 		secondCustomer.setFirstName("second customer");
 		secondCustomer.setLastName("second customer");
+		secondCustomer.setEmail("some email");
+		secondCustomer.setPassword("some password");
+		session.save(secondCustomer);
 		
 		Cart secondCart = new Cart();
 		secondCart.setCustomer(secondCustomer);
-		secondCart.setCurrency(currency);
-
+		
 		session.save(secondCart);
 
 		List<Cart> objectList = (List<Cart>) session.createCriteria(
@@ -237,32 +237,31 @@ public class CartTest {
 
 	@Test
 	public void search_by_detached_criteria() {
-		Currency currency = new Currency();
-		currency.setName("EURO");
+		Customer firstCustomer = new Customer();
+		firstCustomer.setFirstName("some customer");
+		firstCustomer.setLastName("some customer");
+		firstCustomer.setEmail("some email");
+		firstCustomer.setPassword("some password");
 		
-		Customer customer = new Customer();
-		customer.setFirstName("first customer");
-		customer.setLastName("first customer");
+		session.save(firstCustomer);
 		
 		Cart firstCart = new Cart();
-		firstCart.setCustomer(customer);
-		firstCart.setCurrency(currency);
-
+		firstCart.setCustomer(firstCustomer);
 		session.save(firstCart);
 
 		Customer secondCustomer = new Customer();
 		secondCustomer.setFirstName("second customer");
 		secondCustomer.setLastName("second customer");
+		secondCustomer.setEmail("some email");
+		secondCustomer.setPassword("some password");
+		session.save(secondCustomer);
 		
 		Cart secondCart = new Cart();
 		secondCart.setCustomer(secondCustomer);
-		secondCart.setCurrency(currency);
-
-
 		session.save(secondCart);
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Cart.class);
-		criteria.add(Restrictions.like("customer", "first", MatchMode.ANYWHERE));
+		criteria.add(Restrictions.like("customer.first_name", "first", MatchMode.ANYWHERE));
 
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<Cart> objectList = (List<Cart>) criteria

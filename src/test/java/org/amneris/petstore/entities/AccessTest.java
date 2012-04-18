@@ -65,10 +65,12 @@ public class AccessTest {
 	public void simple_save() {
 		Tab tab = new Tab();
 		tab.setName("some tab");
-
+		session.save(tab);
+		
 		Profile profile = new Profile();
 		profile.setName("some profile");
-
+		session.save(profile);
+		
 		Access access = new Access();
 		access.setTab(tab);
 		access.setProfile(profile);
@@ -102,14 +104,16 @@ public class AccessTest {
 	public void retrieve() {
 		Tab tab = new Tab();
 		tab.setName("some tab");
-
+		session.save(tab);
+		
 		Profile profile = new Profile();
 		profile.setName("some profile");
+		session.save(profile);
 		
 		Access access = new Access();
-		access.setProfile(profile);
 		access.setTab(tab);
-		
+		access.setProfile(profile);
+
 		session.save(access);
 
 		assertNotNull(access.getProfile());
@@ -119,7 +123,7 @@ public class AccessTest {
 		assertEquals(access.getTab().getName(), "some tab");
 		
 		Access returnedAccess;
-		returnedAccess = (Access) session.get(Access.class, (Serializable) access.getProfile());
+		returnedAccess = (Access) session.get(Access.class, access);
 
 		assertEquals(access, returnedAccess);
 		assertEquals(access.getProfile(), returnedAccess.getProfile());
@@ -130,14 +134,16 @@ public class AccessTest {
 	public void update() {
 		Tab tab = new Tab();
 		tab.setName("some tab");
-
+		session.save(tab);
+		
 		Profile profile = new Profile();
 		profile.setName("some profile");
-
-		Access access = new Access();
-		access.setProfile(profile);
-		access.setTab(tab);
+		session.save(profile);
 		
+		Access access = new Access();
+		access.setTab(tab);
+		access.setProfile(profile);
+
 		session.save(access);
 
 		assertNotNull(access.getProfile());
@@ -147,20 +153,20 @@ public class AccessTest {
 		assertEquals(access.getTab().getName(), "some tab");
 		
 		Access returnedAccess;
-		returnedAccess = (Access) session.get(Access.class, (Serializable) access.getProfile());
+		returnedAccess = (Access) session.get(Access.class, access);
 
 		assertEquals(access, returnedAccess);
 		assertEquals(access.getProfile(), returnedAccess.getProfile());
 
 		Profile otherProfile = new Profile();
-		profile.setName("some other profile");
+		otherProfile.setName("some other profile");
 
 		returnedAccess.setProfile(otherProfile);
-		Serializable id = returnedAccess.getProfile().getId();
+		Serializable id = returnedAccess;
 
 		session.save(returnedAccess);
 
-		assertEquals(id, returnedAccess.getProfile());
+		assertEquals(id, returnedAccess);
 		assertEquals("some other profile", returnedAccess.getProfile().getName());
 	}
 
@@ -168,20 +174,22 @@ public class AccessTest {
 	public void delete() {
 		Tab tab = new Tab();
 		tab.setName("some tab");
-
+		session.save(tab);
+		
 		Profile profile = new Profile();
 		profile.setName("some profile");
-
+		session.save(profile);
+		
 		Access access = new Access();
-		access.setProfile(profile);
 		access.setTab(tab);
+		access.setProfile(profile);
 		
 		session.save(access);
 
 		assertEquals(access.getProfile().getName(), "some profile");
 		assertNotNull(access.getProfile());
 
-		Serializable id = access.getProfile().getId();
+		Serializable id = access;
 
 		session.delete(access);
 
@@ -194,17 +202,35 @@ public class AccessTest {
 
 		assertNull(returnedAccess);
 	}
-/*
+
 	@Test
 	public void get_all_instances() {
+		Tab firstTab = new Tab();
+		firstTab.setName("some tab");
+		session.save(firstTab);
+		
+		Profile firstProfile = new Profile();
+		firstProfile.setName("some profile");
+		session.save(firstProfile);
+		
 		Access firstAccess = new Access();
-		firstAccess.setName("this is the first one");
-
+		firstAccess.setTab(firstTab);
+		firstAccess.setProfile(firstProfile);
+	
 		session.save(firstAccess);
 
+		Tab secondTab = new Tab();
+		secondTab.setName("some other tab");
+		session.save(secondTab);
+		
+		Profile secondProfile = new Profile();
+		secondProfile.setName("some other profile");
+		session.save(secondProfile);
+		
 		Access secondAccess = new Access();
-		secondAccess.setName("this is the second object");
-
+		secondAccess.setTab(secondTab);
+		secondAccess.setProfile(secondProfile);
+		
 		session.save(secondAccess);
 
 		List<Access> objectList = (List<Access>) session.createCriteria(
@@ -222,23 +248,41 @@ public class AccessTest {
 		access = objectList.get(i);
 
 		assertEquals(firstAccess, access);
-		assertEquals(firstAccess.getName(), access.getName());
+		assertEquals(firstAccess.getProfile(), access.getProfile());
 	}
 
 	@Test
 	public void search_by_detached_criteria() {
+		Tab firstTab = new Tab();
+		firstTab.setName("some tab");
+		session.save(firstTab);
+		
+		Profile firstProfile = new Profile();
+		firstProfile.setName("some profile");
+		session.save(firstProfile);
+		
 		Access firstAccess = new Access();
-		firstAccess.setName("this is the first one");
-
+		firstAccess.setTab(firstTab);
+		firstAccess.setProfile(firstProfile);
+	
 		session.save(firstAccess);
 
+		Tab secondTab = new Tab();
+		secondTab.setName("some other tab");
+		session.save(secondTab);
+		
+		Profile secondProfile = new Profile();
+		secondProfile.setName("some other profile");
+		session.save(secondProfile);
+		
 		Access secondAccess = new Access();
-		secondAccess.setName("this is the second object");
-
+		secondAccess.setTab(secondTab);
+		secondAccess.setProfile(secondProfile);
+		
 		session.save(secondAccess);
 
 		DetachedCriteria criteria = DetachedCriteria.forClass(Access.class);
-		criteria.add(Restrictions.like("name", "first", MatchMode.ANYWHERE));
+		criteria.add(Restrictions.like("profile name", "other", MatchMode.ANYWHERE));
 
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		List<Access> objectList = (List<Access>) criteria
@@ -256,6 +300,6 @@ public class AccessTest {
 		access = objectList.get(i);
 
 		assertEquals(firstAccess, access);
-		assertEquals(firstAccess.getName(), access.getName());
-	}*/
+		assertEquals(firstAccess.getProfile(), access.getProfile());
+	}
 }
