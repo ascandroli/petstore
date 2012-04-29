@@ -123,43 +123,55 @@
 				</executions>
 			</plugin>
 
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>hibernate3-maven-plugin</artifactId>
-				<version>2.2</version>
-				<configuration>
-					<componentProperties>
-						<configurationfile>target/classes/hibernate.dev.cfg.xml</configurationfile>
-						<export>false</export>
-						<outputfilename>${project.version}.ddl.sql</outputfilename>
+            <!-- Integration with Flyway for managing database migrations -->
+            <plugin>
+                <groupId>com.googlecode.flyway</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>1.6.1</version>
+                <configuration>
+                    <user>petstore_admin</user>
+                    <password>petstore_4dm1n</password>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://localhost/petstore_dev</url>
+                </configuration>
+            </plugin>
 
-						<scan-classes>true</scan-classes>
-						<scan-test-classes>false</scan-test-classes>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>hibernate3-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <componentProperties>
+                        <configurationfile>target/classes/hibernate.dev.cfg.xml</configurationfile>
+                        <export>false</export>
+                        <outputfilename>${project.version}.ddl.sql</outputfilename>
 
-						<drop>true</drop>
-						<create>true</create>
+                        <scan-classes>true</scan-classes>
+                        <scan-test-classes>false</scan-test-classes>
 
-						<!-- when this is true then failing drops cause a   -->
-						<!-- build failure. this would happen when the      -->
-						<!-- database is empty or if adding a new table.    -->
-						<!-- normally true for postgres, false for hsql.    -->
-						<!-- when adding new tables, etc. just run          -->
-						<!-- mvn hibernate3:hbm2ddl twice to get past the   -->
-						<!-- missing table errors.                          -->
-						<haltonerror>${hbmtool.haltOnError}</haltonerror>
-					</componentProperties>
-				</configuration>
+                        <drop>true</drop>
+                        <create>true</create>
 
-				<dependencies>
-					<dependency>
-						<groupId>mysql</groupId>
-						<artifactId>mysql-connector-java</artifactId>
-						<version>5.1.17</version>
-					</dependency>
-				</dependencies>
-			</plugin>
+                        <!-- when this is true then failing drops cause a   -->
+                        <!-- build failure. this would happen when the      -->
+                        <!-- database is empty or if adding a new table.    -->
+                        <!-- normally true for postgres, false for hsql.    -->
+                        <!-- when adding new tables, etc. just run          -->
+                        <!-- mvn hibernate3:hbm2ddl twice to get past the   -->
+                        <!-- missing table errors.                          -->
+                        <haltonerror>${hbmtool.haltOnError}</haltonerror>
+                    </componentProperties>
+                </configuration>
 
-		</plugins>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.17</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
 	</build>
 
 	<reporting>
@@ -331,107 +343,4 @@
 		</repository>
 
 	</repositories>
-
-	<profiles>
-        <!-- * -P migrate * -->
-        <profile>
-            <id>migrate</id>
-
-            <build>
-                <plugins>
-                    <!-- DB deploy -->
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-antrun-plugin</artifactId>
-                        <executions>
-                            <execution>
-                                <phase>compile</phase>
-                                <configuration>
-                                    <tasks>
-                                        <taskdef name="dbdeploy" classname="com.dbdeploy.AntTarget" />
-                                        <property name="hibernate.connection.url.host" value="jdbc:mysql://localhost/petstore_dev?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8" />
-                                        <property name="hibernate.connection.username" value="petstore_admin" />
-                                        <property name="hibernate.connection.password" value="petstore_4dm1n" />
-                                        <property name="basedir" value="${basedir}" />
-                                        <ant antfile="${basedir}/build.xml">
-                                            <target name="default" />
-                                        </ant>
-                                    </tasks>
-                                </configuration>
-                                <goals>
-                                    <goal>run</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                        <dependencies>
-                            <dependency>
-                                <groupId>com.dbdeploy</groupId>
-                                <artifactId>dbdeploy-core</artifactId>
-                                <version>3.0M3</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>com.dbdeploy</groupId>
-                                <artifactId>dbdeploy-ant</artifactId>
-                                <version>3.0M3</version>
-                            </dependency>
-                            <dependency>
-                                <groupId>mysql</groupId>
-                                <artifactId>mysql-connector-java</artifactId>
-                                <version>5.1.17 </version>
-                            </dependency>
-                            <dependency>
-                                <groupId>org.apache.ant</groupId>
-                                <artifactId>ant-nodeps</artifactId>
-                                <version>1.7.1</version>
-                            </dependency>
-                        </dependencies>
-                    </plugin>
-                    <!-- / DB deploy -->
-                    <plugin>
-                        <groupId>org.codehaus.mojo</groupId>
-                        <artifactId>sql-maven-plugin</artifactId>
-                        <version>1.5</version>
-                        <dependencies>
-                            <dependency>
-                                <groupId>mysql</groupId>
-                                <artifactId>mysql-connector-java</artifactId>
-                                <version>5.1.17</version>
-                            </dependency>
-                        </dependencies>
-                        <!-- common configuration shared by all executions -->
-                        <configuration>
-                            <driver>com.mysql.jdbc.Driver</driver>
-                            <url>
-                                jdbc:mysql://localhost/petstore_dev?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8
-                            </url>
-                            <username>petsore_admin</username>
-                            <password>petstore_4dm1n</password>
-                            <!-- You can comment out username/password configurations and have
-                                       maven to look them up in your settings.xml using ${settingsKey} -->
-                            <settingsKey>sensibleKey</settingsKey>
-                            <!--all executions are ignored if -Dmaven.test.skip=true <skip>${maven.test.skip}</skip> -->
-                        </configuration>
-
-                        <executions>
-                            <execution>
-                                <id>apply-deltas</id>
-                                <phase>compile</phase>
-
-                                <configuration>
-                                    <autocommit>true</autocommit>
-                                    <fileset>
-                                        <basedir>${basedir}</basedir>
-                                        <includes>
-                                            <include>target/db/all-deltas.sql</include>
-                                        </includes>
-                                    </fileset>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-	</profiles>
-
 </project>
