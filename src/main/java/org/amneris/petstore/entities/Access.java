@@ -22,12 +22,16 @@ public class Access implements Serializable
 	@JoinColumn(name="tab_id")
 	private Tab tab;
 	
+	@Column(name = "view_")
 	private int view;
-	
+
+	@Column(name = "add_")
 	private int add;
-	
+
+	@Column(name = "edit_")
 	private int edit;
-	
+
+	@Column(name = "delete_")
 	private int delete;
 
 	public Long getId()
