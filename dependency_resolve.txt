@@ -1,7 +1,7 @@
 [INFO] Scanning for projects...
 [INFO]                                                                         
 [INFO] ------------------------------------------------------------------------
-[INFO] Building petstore - My Tynamo project 0.1.0-SNAPSHOT
+[INFO] Building Tynamo Pet Store 0.2.0-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
 [INFO] 
 [INFO] --- maven-dependency-plugin:2.1:resolve (default-cli) @ petstore ---
@@ -83,11 +83,12 @@
 [INFO]    org.slf4j:slf4j-api:jar:1.6.1:compile
 [INFO]    org.slf4j:slf4j-log4j12:jar:1.6.1:compile
 [INFO]    org.testng:testng:jar:jdk15:5.9:test
+[INFO]    org.tynamo:tapestry-ckeditor:jar:0.0.1:compile
 [INFO]    org.tynamo:tapestry-exceptionpage:jar:0.1.2:compile
-[INFO]    org.tynamo:tapestry-model-annotations:jar:0.3.0-SNAPSHOT:compile
-[INFO]    org.tynamo:tapestry-model-core:jar:0.3.0-SNAPSHOT:compile
-[INFO]    org.tynamo:tapestry-model-hibernate:jar:0.3.0-SNAPSHOT:compile
-[INFO]    org.tynamo:tapestry-model-test:jar:0.3.0-SNAPSHOT:test
+[INFO]    org.tynamo:tapestry-model-annotations:jar:0.3.0:compile
+[INFO]    org.tynamo:tapestry-model-core:jar:0.3.0:compile
+[INFO]    org.tynamo:tapestry-model-hibernate:jar:0.3.0:compile
+[INFO]    org.tynamo:tapestry-model-test:jar:0.3.0:test
 [INFO]    org.tynamo:tapestry-resteasy:jar:0.3.0:compile
 [INFO]    org.tynamo:tapestry-routing:jar:0.0.2:compile
 [INFO]    org.tynamo:tapestry-security:jar:0.4.4:compile
@@ -101,7 +102,7 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 2.074s
-[INFO] Finished at: Sun Apr 01 12:45:23 CEST 2012
-[INFO] Final Memory: 8M/81M
+[INFO] Total time: 1.946s
+[INFO] Finished at: Thu May 10 00:47:04 CEST 2012
+[INFO] Final Memory: 11M/140M
 [INFO] ------------------------------------------------------------------------
