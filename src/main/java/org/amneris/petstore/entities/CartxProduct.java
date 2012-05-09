@@ -1,31 +1,38 @@
 package org.amneris.petstore.entities;
 
+import org.apache.tapestry5.beaneditor.NonVisual;
+
+import javax.persistence.*;
 import java.io.Serializable;
-
-import javax.validation.constraints.NotNull;
-
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 @Entity
 @Table(name="cart_x_products")
 public class CartxProduct implements Serializable
 {
 	@Id
+	@NonVisual
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="cart_id")
 	private Cart cart;
 
-	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="product_id")
 	private Product product;
-	
+
 	private int quantity;
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
 
 	public Cart getCart() {
 		return cart;

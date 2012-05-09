@@ -1,34 +1,23 @@
 package org.amneris.petstore.entities;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import org.apache.tapestry5.beaneditor.NonVisual;
-import org.hibernate.annotations.NaturalId;
-import org.tynamo.descriptor.annotation.PropertyDescriptor;
 
-import javax.validation.constraints.NotNull;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name="accesses")
 public class Access implements Serializable 
 {
 	@Id
+	@NonVisual
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="profile_id")
 	private Profile profile;
 
-	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="tab_id")
 	private Tab tab;
@@ -40,7 +29,17 @@ public class Access implements Serializable
 	private int edit;
 	
 	private int delete;
-	
+
+	public Long getId()
+	{
+		return id;
+	}
+
+	public void setId(Long id)
+	{
+		this.id = id;
+	}
+
 	public Profile getProfile() {
 		return profile;
 	}
