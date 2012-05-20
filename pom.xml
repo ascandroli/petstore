@@ -178,7 +178,22 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-		</plugins>
+            <!-- Run integration tests -->
+            <plugin>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.6</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+        </plugins>
 	</build>
 
 	<reporting>
