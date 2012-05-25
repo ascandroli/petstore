@@ -121,20 +121,20 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-
-            <!-- Integration with Flyway for managing database migrations -->
-            <plugin>
-                <groupId>com.googlecode.flyway</groupId>
-                <artifactId>flyway-maven-plugin</artifactId>
-                <version>1.6.1</version>
-                <configuration>
-                    <user>petstore_admin</user>
-                    <password>petstore_4dm1n</password>
-                    <driver>com.mysql.jdbc.Driver</driver>
-                    <url>jdbc:mysql://localhost/petstore_dev</url>
-                </configuration>
             </plugin>
+
+			<!-- Integration with Flyway for managing database migrations -->
+			<plugin>
+				<groupId>com.googlecode.flyway</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<version>1.6.1</version>
+				<configuration>
+					<user>petstore_admin</user>
+					<password>petstore_4dm1n</password>
+					<driver>com.mysql.jdbc.Driver</driver>
+					<url>jdbc:mysql://localhost/petstore_dev</url>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
