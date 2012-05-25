@@ -1,4 +1,4 @@
-/* USAGE: mysql -u root -p < create_databases.sql */
+/* USAGE: mysql -u root -p < src/main/sql/create_databases.sql */
 
 DROP DATABASE IF EXISTS petstore;
 DROP DATABASE IF EXISTS petstore_dev;
