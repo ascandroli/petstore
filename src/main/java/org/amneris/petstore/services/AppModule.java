@@ -8,6 +8,7 @@ import org.apache.tapestry5.hibernate.HibernateSessionSource;
 import org.apache.tapestry5.hibernate.HibernateSymbols;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
 import org.apache.tapestry5.ioc.*;
+import org.apache.tapestry5.ioc.Configuration;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
@@ -16,6 +17,10 @@ import org.apache.tapestry5.ioc.services.SymbolProvider;
 import org.apache.tapestry5.services.BeanBlockContribution;
 import org.apache.tapestry5.services.BeanBlockSource;
 import org.apache.tapestry5.services.DisplayBlockContribution;
+import org.hibernate.HibernateException;
+import org.hibernate.cfg.*;
+import org.hibernate.dialect.Dialect;
+import org.hibernate.tool.hbm2ddl.SchemaValidator;
 import org.tynamo.builder.Builder;
 import org.tynamo.security.SecuritySymbols;
 import org.tynamo.security.services.SecurityFilterChainFactory;
@@ -155,13 +160,27 @@ public class AppModule
 	@Contribute(HibernateSessionSource.class)
 	public static void configureHibernateSource(OrderedConfiguration<HibernateConfigurer> configurers)
 	{
-		configurers.add("PetstoreHibernateConfigurer", new HibernateConfigurer()
-		{
-			public void configure(org.hibernate.cfg.Configuration configuration)
-			{
-				configuration.configure("/hibernate.dev.cfg.xml");
-			}
-		});
+        HibernateConfigurer hibernateConfigurer = new HibernateConfigurer()
+        {
+            public void configure(org.hibernate.cfg.Configuration configuration)
+            {
+                org.hibernate.cfg.Configuration configuredConfiguration = configuration.configure("/hibernate.dev.cfg.xml");
+                SchemaValidator validator = new SchemaValidator(configuredConfiguration);
+                try
+                {
+                    validator.validate();
+                }
+                catch (HibernateException ex)
+                {
+                    System.out.println("catched!");
+                    ex.printStackTrace();
+                }
+            }
+        };
+        configurers.add("PetstoreHibernateConfigurer", hibernateConfigurer);
+
 	}
+
+
 }
 
