@@ -121,7 +121,7 @@
 						</goals>
 					</execution>
 				</executions>
-            </plugin>
+			</plugin>
 
 			<!-- Integration with Flyway for managing database migrations -->
 			<plugin>
@@ -178,22 +178,22 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-            <!-- Run integration tests -->
-            <plugin>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>2.6</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+			<!-- Run integration tests -->
+			<plugin>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 
-        </plugins>
+		</plugins>
 	</build>
 
 	<reporting>
