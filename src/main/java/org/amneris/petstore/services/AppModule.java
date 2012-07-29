@@ -3,22 +3,20 @@ package org.amneris.petstore.services;
 import org.amneris.petstore.api.MyDomainObjectResource;
 import org.apache.shiro.realm.Realm;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.hibernate.HibernateConfigurer;
-import org.apache.tapestry5.hibernate.HibernateSessionSource;
-import org.apache.tapestry5.hibernate.HibernateSymbols;
-import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
-import org.apache.tapestry5.ioc.*;
+import org.apache.tapestry5.ioc.Configuration;
+import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.ioc.MethodAdviceReceiver;
+import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.FactoryDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
+import org.apache.tapestry5.jpa.JpaTransactionAdvisor;
 import org.apache.tapestry5.services.BeanBlockContribution;
 import org.apache.tapestry5.services.BeanBlockSource;
 import org.apache.tapestry5.services.DisplayBlockContribution;
-import org.hibernate.HibernateException;
-import org.hibernate.tool.hbm2ddl.SchemaValidator;
 import org.tynamo.builder.Builder;
 import org.tynamo.security.SecuritySymbols;
 import org.tynamo.security.services.SecurityFilterChainFactory;
@@ -57,8 +55,7 @@ public class AppModule
 		configuration.add(SecuritySymbols.UNAUTHORIZED_URL, "/unauthorized");
 		configuration.add(SecuritySymbols.SUCCESS_URL, "/home");
 
-//		configuration.add(HibernateSymbols.EARLY_START_UP, false);
-		configuration.add(HibernateSymbols.DEFAULT_CONFIGURATION, false);
+//		configuration.add(JpaSymbols.EARLY_START_UP, false);
 
 		// Here we're restricting the supported locales. As you add localised message catalogs and other assets,
 		// you can extend this list of locales (it's a comma seperated series of locale names;
@@ -155,30 +152,9 @@ public class AppModule
 	}
 
 	@Match("*Resource")
-	public static void adviseTransactions(HibernateTransactionAdvisor advisor, MethodAdviceReceiver receiver)
+	public static void adviseTransactions(JpaTransactionAdvisor advisor, MethodAdviceReceiver receiver)
 	{
 		advisor.addTransactionCommitAdvice(receiver);
 	}
 
-	@Contribute(HibernateSessionSource.class)
-	public static void configureHibernateSource(OrderedConfiguration<HibernateConfigurer> configurers)
-	{
-		HibernateConfigurer hibernateConfigurer = new HibernateConfigurer()
-		{
-			public void configure(org.hibernate.cfg.Configuration configuration)
-			{
-				org.hibernate.cfg.Configuration configuredConfiguration = configuration.configure("/hibernate.dev.cfg.xml");
-				SchemaValidator validator = new SchemaValidator(configuredConfiguration);
-				try
-				{
-					validator.validate();
-				} catch (HibernateException ex)
-				{
-					System.out.println("catched!");
-					ex.printStackTrace();
-				}
-			}
-		};
-		configurers.add("PetstoreHibernateConfigurer", hibernateConfigurer);
-	}
 }
