@@ -27,7 +27,7 @@ public class RoutingHacksModule {
 			public void advise(MethodInvocation methodInvocation) {
 				methodInvocation.proceed();
 				PageRenderRequestParameters parameters = (PageRenderRequestParameters) methodInvocation.getReturnValue();
-				if (parameters.getLogicalPageName().toLowerCase().endsWith("index"))
+				if (parameters != null && parameters.getLogicalPageName().toLowerCase().endsWith("index"))
 					methodInvocation.setReturnValue(null);
 			}
 		});
