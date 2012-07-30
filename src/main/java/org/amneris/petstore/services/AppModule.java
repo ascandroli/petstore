@@ -13,6 +13,7 @@ import org.apache.tapestry5.ioc.annotations.SubModule;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.FactoryDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
+import org.apache.tapestry5.jpa.JpaEntityPackageManager;
 import org.apache.tapestry5.jpa.JpaTransactionAdvisor;
 import org.apache.tapestry5.services.BeanBlockContribution;
 import org.apache.tapestry5.services.BeanBlockSource;
@@ -105,7 +106,8 @@ public class AppModule
 	 * Contributes the package "org.amneris.petstore.petstore.model" to the configuration, so that it will be
 	 * scanned for annotated entity classes.
 	 */
-	public static void contributeHibernateEntityPackageManager(Configuration<String> configuration)
+	@Contribute(JpaEntityPackageManager.class)
+	public static void providePackages(Configuration<String> configuration)
 	{
 //		If you want to scan other packages add them here:
 //		configuration.add("org.amneris.petstore.petstore.model");
