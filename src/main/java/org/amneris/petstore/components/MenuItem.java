@@ -15,9 +15,7 @@ import java.util.regex.Pattern;
 public class MenuItem extends AbstractLink
 {
 
-    private static final String CONTEXT = "context";
-
-    private static final String SELECTED = "selected";
+    private static final String ACTIVE = "active";
 
     private static final String CLASS = "class";
 
@@ -45,7 +43,7 @@ public class MenuItem extends AbstractLink
     {
         final Link link;
 
-        if (resources.isBound(CONTEXT))
+        if (resources.isBound("context"))
         {
             link = linkSource.createPageRenderLinkWithContext(page, context);
         } else
@@ -55,8 +53,8 @@ public class MenuItem extends AbstractLink
 
         if (isSelected())
         {
-            writer.element(LI, CLASS, SELECTED);
-            writeLink(writer, link, CLASS, SELECTED);
+            writer.element(LI, CLASS, ACTIVE);
+            writeLink(writer, link, CLASS, ACTIVE);
         } else
         {
             writer.element(LI);

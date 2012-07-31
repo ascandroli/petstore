@@ -1,8 +1,8 @@
 <t:container xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
-<ul id="main-menu-tab-main">
+
     <t:menuitem page="Home">Home</t:menuitem>
     <t:menuitem page="List" context="myDomainObjectClass" expression="/(list|show|add|edit)/myDomainObject(/.*)?">
     Title 1
     </t:menuitem>
-</ul>
+
 </t:container>

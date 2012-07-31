@@ -1,18 +1,25 @@
 package org.amneris.petstore.components;
 
+import com.trsvax.bootstrap.annotations.Exclude;
+import org.amneris.petstore.entities.MyDomainObject;
 import org.apache.tapestry5.BindingConstants;
 import org.apache.tapestry5.Block;
+import org.apache.tapestry5.ComponentResources;
 import org.apache.tapestry5.annotations.Import;
 import org.apache.tapestry5.annotations.Parameter;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Environment;
-import org.apache.tapestry5.ComponentResources;
-import org.amneris.petstore.entities.MyDomainObject;
 
-
-@Import(stylesheet = {"context:themes/rm/theme.css"})
+@Import(stylesheet = {
+			"classpath:/com/trsvax/bootstrap/assets/bootstrap/css/bootstrap.css",
+			"classpath:/com/trsvax/bootstrap/assets/bootstrap/css/bootstrap-responsive.css"
+		}, library = {
+			"classpath:/com/trsvax/bootstrap/assets/bootstrap/js/bootstrap.js"
+		}
+)
+@Exclude(stylesheet = {"core"})  //If you do not want Tapestry CSS
 public class Layout
 {
 

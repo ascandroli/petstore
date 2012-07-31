@@ -18,10 +18,10 @@
 			<br/>
 
 			<div class="t-beaneditor-row">
-				<t:submit event="continue" class="button" value="${message:org.tynamo.i18n.apply}"/>
-				<t:submit event="return" class="button" value="${message:org.tynamo.i18n.applyAndReturn}"/>
+				<t:submit event="continue" class="btn" value="${message:org.tynamo.i18n.apply}"/>
+				<t:submit event="return" class="btn btn-primary" value="${message:org.tynamo.i18n.applyAndReturn}"/>
 				&nbsp; or &nbsp;
-				<t:eventlink class="button" style="color:red; font-weight:bold;" t:id="cancel">
+				<t:eventlink class="btn btn-danger" t:id="cancel">
 					${message:org.tynamo.i18n.cancel}
 				</t:eventlink>
 			</div>

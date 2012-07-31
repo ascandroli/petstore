@@ -14,53 +14,107 @@
         <t:delegate to="head"/>
     </t:if>
 
+	<style type="text/css">
+		body {
+			position: relative;
+			background-color: #fff;
+			background-image: url(http://twitter.github.com/bootstrap/assets/img/grid-18px-masked.png);
+			background-repeat: repeat-x;
+			background-position: 0 40px;
+			padding-top: 60px;
+			padding-bottom: 40px;
+		}
+		.sidebar-nav {
+			padding: 9px 0;
+		}
+	</style>
+
 </head>
 
 <body id="${bodyId}">
 
-<div id="wrapper">
-    <div id="top-menu">
-        <div style="text-align:right;"><t:security.loginlink /></div>
-    </div>
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container-fluid">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</a>
+			<a class="brand" href="#">Tynamo Pet Store</a>
+			<div class="btn-group pull-right">
+				<t:security.loginlink/>
+<!--
+				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+					<i class="icon-user"></i> Username <span class="caret"></span>
+				</a>
+				<ul class="dropdown-menu">
+					<li><a href="#">Profile</a></li>
+					<li class="divider"></li>
+					<li><a href="#">Sign Out</a></li>
+					<li><t:security.loginlink /></li>
+				</ul>
+-->
+			</div>
+			<div class="nav-collapse">
+				<ul class="nav">
+					<t:mainmenu/>
+				</ul>
+			</div><!--/.nav-collapse -->
+		</div>
+	</div>
+</div>
 
-    <div id="header">
+<div class="container-fluid">
 
-        <h1>Welcome!</h1>
-
-        <div id="quick-search">
-        </div>
-
-        <div id="main-menu">
-            <t:if test="tabsBound">
-                <t:delegate to="tabs"/>
-                <p:else>
-                    <li>
-                        <t:mainmenu/>
-                    </li>
-                </p:else>
-            </t:if>
-        </div>
-    </div>
-
-    <div class="${mainCssClass}" id="main">
-        <div id="sidebar">
-            <t:if test="sidebarBound">
-                <t:delegate to="sidebar"/>
-            </t:if>
-        </div>
-
-        <div id="content">
-            <t:body/>
-        </div>
-
-    </div>
+	<div class="row-fluid">
+		<div class="span3">
+			<div class="well sidebar-nav">
+				<ul class="nav nav-list">
+					<li class="nav-header">Sidebar</li>
+					<li><a href="#">Link</a></li>
+					<t:if test="sidebarBound">
+						<t:delegate to="sidebar"/>
+					</t:if>
+					<li class="nav-header">Sidebar</li>
+					<li class="active"><a href="#">Link</a></li>
+				</ul>
+				<t:tynamo.ListPageLinkList listPageName="List"/>
+			</div><!--/.well -->
+		</div><!--/span-->
+		<div class="span9">
+			<t:if test="tabsBound">
+				<t:delegate to="tabs"/>
+				<p:else>
+					<header class="jumbotron subhead" id="overview">
+						<h1>Base CSS</h1>
+						<p class="lead">On top of the scaffolding, basic HTML elements are styled and enhanced with extensible classes to provide a fresh, consistent look and feel.</p>
+						<div class="subnav">
+							<ul class="nav nav-pills">
+								<li><a href="#typography">Typography</a></li>
+								<li><a href="#code">Code</a></li>
+								<li><a href="#tables">Tables</a></li>
+								<li><a href="#forms">Forms</a></li>
+								<li><a href="#buttons">Buttons</a></li>
+								<li><a href="#icons">Icons by Glyphicons</a></li>
+							</ul>
+						</div>
+					</header>
+				</p:else>
+			</t:if>
+			<t:body/>
+		</div><!--/span-->
+	</div><!--/row-->
 
     <div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+	<hr/>
 
-    <div id="footer">
-        Powered by Tynamo. Developed by Amneris
-    </div>
-</div>
+	<footer>
+		<p>Powered by Tynamo. Developed by Amneris Labs</p>
+	</footer>
+
+	</div><!--/.fluid-container-->
+
 </body>
 
 </html>
