@@ -8,7 +8,8 @@
 [INFO] 
 [INFO] The following files have been resolved:
 [INFO]    antlr:antlr:jar:2.7.6:compile
-[INFO]    c3p0:c3p0:jar:0.9.1:compile
+[INFO]    asm:asm:jar:3.1:compile
+[INFO]    cglib:cglib:jar:2.2:compile
 [INFO]    com.h2database:h2:jar:1.2.125:compile
 [INFO]    com.sun.xml.bind:jaxb-impl:jar:2.2.4:compile
 [INFO]    com.sun.xml.stream:sjsxp:jar:1.0.1:compile
@@ -21,10 +22,11 @@
 [INFO]    commons-lang:commons-lang:jar:2.6:compile
 [INFO]    commons-logging:commons-logging:jar:1.1.1:compile
 [INFO]    dom4j:dom4j:jar:1.6.1:compile
-[INFO]    javassist:javassist:jar:3.12.1.GA:compile
+[INFO]    javassist:javassist:jar:3.12.0.GA:compile
 [INFO]    javax.activation:activation:jar:1.1:compile
 [INFO]    javax.annotation:jsr250-api:jar:1.0:compile
 [INFO]    javax.inject:javax.inject:jar:1:compile
+[INFO]    javax.mail:mail:jar:1.4.1:compile
 [INFO]    javax.servlet:servlet-api:jar:2.5:provided
 [INFO]    javax.transaction:jta:jar:1.1:compile
 [INFO]    javax.validation:validation-api:jar:1.0.0.GA:compile
@@ -38,8 +40,10 @@
 [INFO]    net.sourceforge.htmlunit:htmlunit:jar:2.9:test
 [INFO]    net.sourceforge.htmlunit:htmlunit-core-js:jar:2.9:test
 [INFO]    net.sourceforge.nekohtml:nekohtml:jar:1.9.15:test
+[INFO]    org.activiti:activiti-engine:jar:5.9:compile
 [INFO]    org.antlr:antlr-runtime:jar:3.3:compile
 [INFO]    org.antlr:stringtemplate:jar:3.2.1:compile
+[INFO]    org.apache.commons:commons-email:jar:1.2:compile
 [INFO]    org.apache.geronimo.specs:geronimo-jpa_2.0_spec:jar:1.1:compile
 [INFO]    org.apache.httpcomponents:httpclient:jar:4.1.2:compile
 [INFO]    org.apache.httpcomponents:httpcore:jar:4.1.2:compile
@@ -69,19 +73,22 @@
 [INFO]    org.eclipse.jetty:jetty-util:jar:7.0.0.v20091005:test
 [INFO]    org.eclipse.jetty:jetty-webapp:jar:7.0.0.v20091005:test
 [INFO]    org.eclipse.jetty:jetty-xml:jar:7.0.0.v20091005:test
-[INFO]    org.hibernate:hibernate-c3p0:jar:3.6.0.Final:compile
 [INFO]    org.hibernate:hibernate-commons-annotations:jar:3.2.0.Final:compile
 [INFO]    org.hibernate:hibernate-core:jar:3.6.0.Final:compile
+[INFO]    org.hibernate:hibernate-entitymanager:jar:3.6.0.Final:compile
 [INFO]    org.hibernate:hibernate-validator:jar:4.0.0.GA:compile
 [INFO]    org.hibernate.javax.persistence:hibernate-jpa-2.0-api:jar:1.0.0.Final:compile
 [INFO]    org.jboss.resteasy:jaxrs-api:jar:2.3.0.GA:compile
 [INFO]    org.jboss.resteasy:resteasy-jackson-provider:jar:2.3.0.GA:compile
 [INFO]    org.jboss.resteasy:resteasy-jaxb-provider:jar:2.3.0.GA:compile
 [INFO]    org.jboss.resteasy:resteasy-jaxrs:jar:2.3.0.GA:compile
+[INFO]    org.livetribe:livetribe-jsr223:jar:2.0.6:compile
+[INFO]    org.mybatis:mybatis:jar:3.0.6:compile
 [INFO]    org.scannotation:scannotation:jar:1.0.3:compile
 [INFO]    org.slf4j:slf4j-api:jar:1.6.1:compile
 [INFO]    org.slf4j:slf4j-log4j12:jar:1.6.1:compile
 [INFO]    org.testng:testng:jar:jdk15:5.9:test
+[INFO]    org.tynamo:tapestry-activiti:jar:0.1.0-SNAPSHOT:compile
 [INFO]    org.tynamo:tapestry-ckeditor:jar:0.0.1:compile
 [INFO]    org.tynamo:tapestry-exceptionpage:jar:0.1.2:compile
 [INFO]    org.tynamo:tapestry-model-annotations:jar:0.3.0:compile
@@ -101,7 +108,7 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 1.900s
-[INFO] Finished at: Mon Jul 30 00:16:40 CEST 2012
-[INFO] Final Memory: 12M/141M
+[INFO] Total time: 2.027s
+[INFO] Finished at: Tue Jul 31 23:42:44 CEST 2012
+[INFO] Final Memory: 14M/229M
 [INFO] ------------------------------------------------------------------------

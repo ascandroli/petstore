@@ -1,15 +1,14 @@
 package org.amneris.petstore.services;
 
+import org.activiti.engine.ProcessEngine;
 import org.amneris.petstore.api.MyDomainObjectResource;
 import org.apache.shiro.realm.Realm;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.ioc.Configuration;
-import org.apache.tapestry5.ioc.MappedConfiguration;
-import org.apache.tapestry5.ioc.MethodAdviceReceiver;
-import org.apache.tapestry5.ioc.ServiceBinder;
+import org.apache.tapestry5.ioc.*;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.annotations.SubModule;
+import org.apache.tapestry5.ioc.internal.util.ClasspathResource;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.FactoryDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
@@ -157,6 +156,16 @@ public class AppModule
 	public static void adviseTransactions(JpaTransactionAdvisor advisor, MethodAdviceReceiver receiver)
 	{
 		advisor.addTransactionCommitAdvice(receiver);
+	}
+
+	@Contribute(ProcessEngine.class)
+	public void deployResources(Configuration<Resource> deploymentResources)
+	{
+		/**
+		 * Remember: the name of the resource must end with "bpmn20.xml".
+		 * @see: BpmnDeployer.BPMN_RESOURCE_SUFFIX
+		 */
+		deploymentResources.add(new ClasspathResource("SimpleTest.bpmn20.xml"));
 	}
 
 }
