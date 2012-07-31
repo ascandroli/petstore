@@ -94,15 +94,13 @@
 [INFO] |  +- org.apache.tapestry:tapestry5-annotations:jar:5.3.4:compile
 [INFO] |  +- javassist:javassist:jar:3.12.1.GA:compile
 [INFO] |  \- org.apache.tapestry:plastic:jar:5.3.4:compile
-[INFO] +- org.apache.tapestry:tapestry-upload:jar:5.3.4:compile
-[INFO] |  +- commons-io:commons-io:jar:2.0.1:compile
-[INFO] |  \- commons-fileupload:commons-fileupload:jar:1.2.2:compile
-[INFO] \- org.apache.tapestry:tapestry-jpa:jar:5.3.4:compile
-[INFO]    \- org.apache.geronimo.specs:geronimo-jpa_2.0_spec:jar:1.1:compile
+[INFO] \- org.apache.tapestry:tapestry-upload:jar:5.3.4:compile
+[INFO]    +- commons-io:commons-io:jar:2.0.1:compile
+[INFO]    \- commons-fileupload:commons-fileupload:jar:1.2.2:compile
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 2.716s
-[INFO] Finished at: Mon Jul 30 20:03:15 CEST 2012
-[INFO] Final Memory: 13M/225M
+[INFO] Total time: 2.916s
+[INFO] Finished at: Tue Jul 31 12:01:47 CEST 2012
+[INFO] Final Memory: 13M/228M
 [INFO] ------------------------------------------------------------------------

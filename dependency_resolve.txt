@@ -41,7 +41,6 @@
 [INFO]    net.sourceforge.nekohtml:nekohtml:jar:1.9.15:test
 [INFO]    org.antlr:antlr-runtime:jar:3.3:compile
 [INFO]    org.antlr:stringtemplate:jar:3.2.1:compile
-[INFO]    org.apache.geronimo.specs:geronimo-jpa_2.0_spec:jar:1.1:compile
 [INFO]    org.apache.httpcomponents:httpclient:jar:4.1.2:compile
 [INFO]    org.apache.httpcomponents:httpcore:jar:4.1.2:compile
 [INFO]    org.apache.httpcomponents:httpmime:jar:4.1.2:test
@@ -55,7 +54,6 @@
 [INFO]    org.apache.tapestry:tapestry-hibernate-core:jar:5.3.2:compile
 [INFO]    org.apache.tapestry:tapestry-ioc:jar:5.3.4:compile
 [INFO]    org.apache.tapestry:tapestry-javadoc:jar:5.3.4:provided
-[INFO]    org.apache.tapestry:tapestry-jpa:jar:5.3.4:compile
 [INFO]    org.apache.tapestry:tapestry-json:jar:5.3.4:compile
 [INFO]    org.apache.tapestry:tapestry-upload:jar:5.3.4:compile
 [INFO]    org.apache.tapestry:tapestry5-annotations:jar:5.3.4:compile
@@ -104,7 +102,7 @@
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 1.957s
-[INFO] Finished at: Mon Jul 30 20:03:36 CEST 2012
-[INFO] Final Memory: 14M/141M
+[INFO] Total time: 1.927s
+[INFO] Finished at: Tue Jul 31 12:02:08 CEST 2012
+[INFO] Final Memory: 11M/141M
 [INFO] ------------------------------------------------------------------------
