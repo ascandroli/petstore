@@ -1,6 +1,6 @@
 package org.amneris.petstore.services;
 
-import org.activiti.engine.ProcessEngine;
+import org.activiti.engine.repository.Deployment;
 import org.amneris.petstore.api.MyDomainObjectResource;
 import org.apache.shiro.realm.Realm;
 import org.apache.tapestry5.SymbolConstants;
@@ -158,7 +158,7 @@ public class AppModule
 		advisor.addTransactionCommitAdvice(receiver);
 	}
 
-	@Contribute(ProcessEngine.class)
+	@Contribute(Deployment.class)
 	public void deployResources(Configuration<Resource> deploymentResources)
 	{
 		/**
