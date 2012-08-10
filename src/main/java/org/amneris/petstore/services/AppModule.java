@@ -8,10 +8,12 @@ import org.apache.tapestry5.ioc.*;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.annotations.SubModule;
+import org.apache.tapestry5.ioc.internal.services.ClasspathResourceSymbolProvider;
 import org.apache.tapestry5.ioc.internal.util.ClasspathResource;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.FactoryDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
+import org.apache.tapestry5.ioc.services.SymbolSource;
 import org.apache.tapestry5.jpa.JpaEntityPackageManager;
 import org.apache.tapestry5.jpa.JpaTransactionAdvisor;
 import org.apache.tapestry5.services.BeanBlockContribution;
@@ -22,8 +24,6 @@ import org.tynamo.security.SecuritySymbols;
 import org.tynamo.security.services.SecurityFilterChainFactory;
 import org.tynamo.security.services.impl.SecurityFilterChain;
 import org.tynamo.shiro.extension.realm.text.ExtendedPropertiesRealm;
-
-import static org.amneris.petstore.ModuleUtils.loadApplicationDefaultsFromProperties;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to configure and extend
@@ -48,8 +48,6 @@ public class AppModule
 	@ApplicationDefaults
 	public static void applicationDefaults(MappedConfiguration<String, Object> configuration)
 	{
-		loadApplicationDefaultsFromProperties("/applicationdefaults.properties", configuration);
-
 		// Tynamo's tapestry-security (Shiro) module configuration
 		configuration.add(SecuritySymbols.LOGIN_URL, "/signin");
 		configuration.add(SecuritySymbols.UNAUTHORIZED_URL, "/unauthorized");
@@ -63,6 +61,12 @@ public class AppModule
 		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en,es");
 	}
 
+	@Contribute(SymbolSource.class)
+	public static void setupStandardSymbolProviders(OrderedConfiguration<SymbolProvider> configuration)
+	{
+		configuration.add("PetstoreProperties", new ClasspathResourceSymbolProvider("petstore.properties"));
+	}
+
 	/**
 	 * Contributes factory defaults that may be overridden.
 	 */
@@ -70,7 +74,7 @@ public class AppModule
 	@FactoryDefaults
 	public static void factoryDefaults(MappedConfiguration<String, String> configuration)
 	{
-//		configuration.add(Symbols.BUILD_VERSION, getBuildVersion(context));
+
 	}
 
 
