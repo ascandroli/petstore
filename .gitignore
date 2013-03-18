@@ -4,3 +4,6 @@ target
 petstore.iml
 petstore.ipr
 petstore.iws
+src/main/webapp/huraga
+data
+*.db
