@@ -9,7 +9,8 @@
 	<url>https://github.com/ascandroli/petstore</url>
 
 	<properties>
-		<tynamo-version>0.3.0</tynamo-version>
+		<tynamo-version>0.5.0</tynamo-version>
+		<tapestry-version>5.3.6</tapestry-version>
 		<tapestry.app-package>org.amneris.petstore</tapestry.app-package>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -256,13 +257,13 @@
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-security</artifactId>
-			<version>0.4.4</version>
+			<version>0.5.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-routing</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.4</version>
 		</dependency>
 
 		<dependency>
@@ -301,44 +302,50 @@
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-javadoc</artifactId>
-			<version>5.3.4</version>
+			<version>${tapestry-version}</version>
 			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-beanvalidator</artifactId>
-			<version>5.3.4</version>
+			<version>${tapestry-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-core</artifactId>
-			<version>5.3.4</version>
+			<version>${tapestry-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-ioc</artifactId>
-			<version>5.3.4</version>
+			<version>${tapestry-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-upload</artifactId>
-			<version>5.3.4</version>
+			<version>${tapestry-version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>com.trsvax.bootstrap</groupId>
+			<groupId>com.trsvax</groupId>
 			<artifactId>tapestry-bootstrap</artifactId>
-			<version>2.0-SNAPSHOT</version>
+			<version>2.1.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.tapestry</groupId>
+			<artifactId>tapestry-yuicompressor</artifactId>
+			<version>${tapestry-version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.tapestry</groupId>
 			<artifactId>tapestry-jpa</artifactId>
-			<version>5.3.4</version>
+			<version>${tapestry-version}</version>
 		</dependency>
 
 		<dependency>
@@ -381,6 +388,15 @@
 			</snapshots>
 		</repository>
 
+		<repository>
+			<id>devlab722-repo</id>
+			<url>http://nexus.devlab722.net/nexus/content/repositories/releases
+			</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+
 		<!--
 			little hack to disable java.net repositories because they are not working
 			and they corrupt your local repo.
@@ -395,6 +411,7 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
+
 		<repository>
 			<id>java.net</id>
 			<url>https://maven-repository.dev.java.net/nonav/repository</url>
