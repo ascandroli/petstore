@@ -7,7 +7,6 @@
 
 * $ git clone --progress git@github.com:ascandroli/petstore.git
 * $ cd petstore
-* $ mysql -u root -p < src/main/sql/create_databases.sql
 * $ mvn jetty:run
 
 * enjoy!

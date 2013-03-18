@@ -56,6 +56,7 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>7.6.5.v20120716</version>
 				<configuration>
+					<classesDirectory>${basedir}/src/main/resources/;${basedir}/target/classes/</classesDirectory>
 					<systemProperties>
 						<systemProperty>
 							<name>javax.xml.stream.XMLInputFactory</name>
