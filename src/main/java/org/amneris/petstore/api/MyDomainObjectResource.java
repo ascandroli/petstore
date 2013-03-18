@@ -1,7 +1,7 @@
 package org.amneris.petstore.api;
 
 import org.amneris.petstore.entities.MyDomainObject;
-import org.apache.tapestry5.hibernate.annotations.CommitAfter;
+import org.apache.tapestry5.jpa.annotations.CommitAfter;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;

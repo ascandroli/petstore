@@ -1,31 +1,29 @@
 package org.amneris.petstore.services;
 
+import org.activiti.engine.repository.Deployment;
 import org.amneris.petstore.api.MyDomainObjectResource;
 import org.apache.shiro.realm.Realm;
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.hibernate.HibernateConfigurer;
-import org.apache.tapestry5.hibernate.HibernateSessionSource;
-import org.apache.tapestry5.hibernate.HibernateSymbols;
-import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
 import org.apache.tapestry5.ioc.*;
 import org.apache.tapestry5.ioc.annotations.Contribute;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.ioc.annotations.SubModule;
+import org.apache.tapestry5.ioc.internal.services.ClasspathResourceSymbolProvider;
+import org.apache.tapestry5.ioc.internal.util.ClasspathResource;
 import org.apache.tapestry5.ioc.services.ApplicationDefaults;
 import org.apache.tapestry5.ioc.services.FactoryDefaults;
 import org.apache.tapestry5.ioc.services.SymbolProvider;
+import org.apache.tapestry5.ioc.services.SymbolSource;
+import org.apache.tapestry5.jpa.JpaEntityPackageManager;
+import org.apache.tapestry5.jpa.JpaTransactionAdvisor;
 import org.apache.tapestry5.services.BeanBlockContribution;
 import org.apache.tapestry5.services.BeanBlockSource;
 import org.apache.tapestry5.services.DisplayBlockContribution;
-import org.hibernate.HibernateException;
-import org.hibernate.tool.hbm2ddl.SchemaValidator;
 import org.tynamo.builder.Builder;
 import org.tynamo.security.SecuritySymbols;
 import org.tynamo.security.services.SecurityFilterChainFactory;
 import org.tynamo.security.services.impl.SecurityFilterChain;
 import org.tynamo.shiro.extension.realm.text.ExtendedPropertiesRealm;
-
-import static org.amneris.petstore.ModuleUtils.loadApplicationDefaultsFromProperties;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry, it's a good place to configure and extend
@@ -50,20 +48,23 @@ public class AppModule
 	@ApplicationDefaults
 	public static void applicationDefaults(MappedConfiguration<String, Object> configuration)
 	{
-		loadApplicationDefaultsFromProperties("/applicationdefaults.properties", configuration);
-
 		// Tynamo's tapestry-security (Shiro) module configuration
 		configuration.add(SecuritySymbols.LOGIN_URL, "/signin");
 		configuration.add(SecuritySymbols.UNAUTHORIZED_URL, "/unauthorized");
 		configuration.add(SecuritySymbols.SUCCESS_URL, "/home");
 
-//		configuration.add(HibernateSymbols.EARLY_START_UP, false);
-		configuration.add(HibernateSymbols.DEFAULT_CONFIGURATION, false);
+//		configuration.add(JpaSymbols.EARLY_START_UP, false);
 
 		// Here we're restricting the supported locales. As you add localised message catalogs and other assets,
 		// you can extend this list of locales (it's a comma seperated series of locale names;
 		// the first locale name is the default when there's no reasonable match).
 		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en,es");
+	}
+
+	@Contribute(SymbolSource.class)
+	public static void setupStandardSymbolProviders(OrderedConfiguration<SymbolProvider> configuration)
+	{
+		configuration.add("PetstoreProperties", new ClasspathResourceSymbolProvider("petstore.properties"));
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class AppModule
 	@FactoryDefaults
 	public static void factoryDefaults(MappedConfiguration<String, String> configuration)
 	{
-//		configuration.add(Symbols.BUILD_VERSION, getBuildVersion(context));
+
 	}
 
 
@@ -108,7 +109,8 @@ public class AppModule
 	 * Contributes the package "org.amneris.petstore.petstore.model" to the configuration, so that it will be
 	 * scanned for annotated entity classes.
 	 */
-	public static void contributeHibernateEntityPackageManager(Configuration<String> configuration)
+	@Contribute(JpaEntityPackageManager.class)
+	public static void providePackages(Configuration<String> configuration)
 	{
 //		If you want to scan other packages add them here:
 //		configuration.add("org.amneris.petstore.petstore.model");
@@ -155,30 +157,19 @@ public class AppModule
 	}
 
 	@Match("*Resource")
-	public static void adviseTransactions(HibernateTransactionAdvisor advisor, MethodAdviceReceiver receiver)
+	public static void adviseTransactions(JpaTransactionAdvisor advisor, MethodAdviceReceiver receiver)
 	{
 		advisor.addTransactionCommitAdvice(receiver);
 	}
 
-	@Contribute(HibernateSessionSource.class)
-	public static void configureHibernateSource(OrderedConfiguration<HibernateConfigurer> configurers)
+	@Contribute(Deployment.class)
+	public void deployResources(Configuration<Resource> deploymentResources)
 	{
-		HibernateConfigurer hibernateConfigurer = new HibernateConfigurer()
-		{
-			public void configure(org.hibernate.cfg.Configuration configuration)
-			{
-				org.hibernate.cfg.Configuration configuredConfiguration = configuration.configure("/hibernate.dev.cfg.xml");
-				SchemaValidator validator = new SchemaValidator(configuredConfiguration);
-				try
-				{
-					validator.validate();
-				} catch (HibernateException ex)
-				{
-					System.out.println("catched!");
-					ex.printStackTrace();
-				}
-			}
-		};
-		configurers.add("PetstoreHibernateConfigurer", hibernateConfigurer);
+		/**
+		 * Remember: the name of the resource must end with "bpmn20.xml".
+		 * @see: BpmnDeployer.BPMN_RESOURCE_SUFFIX
+		 */
+		deploymentResources.add(new ClasspathResource("SimpleTest.bpmn20.xml"));
 	}
+
 }

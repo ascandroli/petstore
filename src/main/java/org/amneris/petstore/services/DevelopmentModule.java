@@ -1,8 +1,8 @@
 package org.amneris.petstore.services;
 
 import org.apache.tapestry5.SymbolConstants;
-import org.apache.tapestry5.hibernate.HibernateSymbols;
 import org.apache.tapestry5.ioc.MappedConfiguration;
+import org.apache.tapestry5.jpa.JpaSymbols;
 
 /**
  * This module is automatically included as part of the Tapestry IoC Registry if <em>tapestry.execution-mode</em>
@@ -18,6 +18,6 @@ public class DevelopmentModule
 		configuration.add(SymbolConstants.PRODUCTION_MODE, false);
 		configuration.add(SymbolConstants.COMPRESS_WHITESPACE, false);
 
-		configuration.add(HibernateSymbols.EARLY_START_UP, true);
+		configuration.add(JpaSymbols.EARLY_START_UP, true);
 	}
 }

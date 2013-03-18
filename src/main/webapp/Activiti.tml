@@ -1,0 +1,38 @@
+<html t:type="layout" title="literal:About petstore"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
+
+	<div class="contextual">
+		<a href="#">nada</a>
+	</div>
+
+	<h2>Activiti</h2>
+	<br/>
+
+	<h3>Process Definitions</h3>
+	<t:grid source="processDefinitions" row="processDefinitionIterator" class="m-data-grid"
+	        add="start"
+	        include="id,name,key,version,category,revision,suspended">
+		<p:startcell>
+			<t:eventlink event="start" context="processDefinitionIterator.key">start</t:eventlink>
+		</p:startcell>
+	</t:grid>
+
+	<hr/>
+
+	<h3>Process Instances</h3>
+	<t:grid source="processInstances" class="m-data-grid" include="id,activityId,active,ended,suspended,scope,processDefinitionId">
+	</t:grid>
+
+	<hr/>
+
+	<h3>Tasks</h3>
+	<t:grid source="tasks" row="taskIterator" class="m-data-grid"
+	        add="complete"
+	        include="id,name,description,dueDate,createTime,assignee,priority,owner,deleted">
+		<p:completecell>
+			<t:eventlink event="complete" context="taskIterator.id">done!</t:eventlink>
+		</p:completecell>
+	</t:grid>
+
+</html>
