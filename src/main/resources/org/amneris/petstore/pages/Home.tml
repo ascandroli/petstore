@@ -3,14 +3,13 @@
 
 	<p:tabs></p:tabs>
 
-	<div class="hero-unit">
+	<!-- Page header -->
+	<article class="page-header">
 		<h1>Welcome to Tynamo Pet Store!</h1>
-		<br/>
-		<h3>Tynamo is model-driven, full-stack web framework based on Apache Tapestry 5.</h3>
-		<br/>
 		<p>Tynamo's mission is to provide implementations for different aspects of a full web application stack that offer reasonable out-of-the-box functionality and are easy to customize. We are intent on proving that web applications based on Java can simultaneously be high performing, easy to implement and fun to develop. We leverage existing technologies where possible and provide integrations with proven, clean and compact libraries rather than limit ourselves only to standard Java (JSRs). Tynamo is both comprehensive and modular so you are free to choose the parts you like from our full stack. And finally, we like Tapestry and our modules use Tapestry IoC extensively.</p>
+		<br/>
 		<p><a class="btn btn-primary btn-large" href="http://tynamo.org/">Learn more &raquo;</a></p>
-	</div>
+	</article>
 
 	<div class="row-fluid">
 		<div class="span4">

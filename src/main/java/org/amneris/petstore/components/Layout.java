@@ -12,6 +12,7 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.Context;
 import org.apache.tapestry5.services.Environment;
 
+/*
 @Import(stylesheet = {
 			"classpath:/com/trsvax/bootstrap/assets/bootstrap/css/bootstrap.css",
 			"classpath:/com/trsvax/bootstrap/assets/bootstrap/css/bootstrap-responsive.css"
@@ -19,6 +20,7 @@ import org.apache.tapestry5.services.Environment;
 			"classpath:/com/trsvax/bootstrap/assets/bootstrap/js/bootstrap.js"
 		}
 )
+*/
 @Exclude(stylesheet = {"core"})  //If you do not want Tapestry CSS
 public class Layout
 {
