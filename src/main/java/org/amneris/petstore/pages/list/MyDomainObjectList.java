@@ -3,19 +3,20 @@ package org.amneris.petstore.pages.list;
 import org.amneris.petstore.entities.MyDomainObject;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.grid.GridDataSource;
-import org.apache.tapestry5.hibernate.HibernateGridDataSource;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.hibernate.Session;
+import org.apache.tapestry5.jpa.JpaGridDataSource;
 import org.tynamo.routing.annotations.At;
 import org.tynamo.util.TynamoMessages;
+
+import javax.persistence.EntityManager;
 
 @At(value = "/mydomainobject", order = "before:list")
 public class MyDomainObjectList
 {
 
 	@Inject
-	private Session session;
+	private EntityManager em;
 
 	@Inject
 	private Messages messages;
@@ -32,7 +33,7 @@ public class MyDomainObjectList
 	 */
 	public GridDataSource getSource()
 	{
-		return new HibernateGridDataSource(session, beanType);
+		return new JpaGridDataSource(em, beanType);
 	}
 
 	public Object[] getShowPageContext()
