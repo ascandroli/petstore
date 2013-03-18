@@ -1,26 +1,5 @@
 package org.amneris.petstore.entities;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.criterion.CriteriaSpecification;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.MatchMode;
-import org.hibernate.criterion.Restrictions;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import java.io.Serializable;
-import java.util.List;
-
-import static org.testng.Assert.*;
-
 /**
  * Class for MyDomainObject tests.
  * <p/>
@@ -33,7 +12,7 @@ import static org.testng.Assert.*;
  * http://www.theserverside.com/tt/articles/article.tss?l=PersistentDomain
  */
 public class MyDomainObjectTest {
-
+/*
 	private Session session;
 	private Transaction transaction;
 	private static SessionFactory sessionFactory;
@@ -149,9 +128,9 @@ public class MyDomainObjectTest {
 		myReturnedDomainObject = (MyDomainObject) session.get(
 				MyDomainObject.class, id);
 
-		/*
+		*//*
 		 * try { } catch (HibernateObjectRetrievalFailureException e) { }
-		 */
+		 *//*
 
 		assertNull(myReturnedDomainObject);
 	}
@@ -223,4 +202,5 @@ public class MyDomainObjectTest {
 		assertEquals(firstDomainObject.getName(),
 				myReturnedDomainObject.getName());
 	}
+*/
 }
