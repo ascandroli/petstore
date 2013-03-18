@@ -128,32 +128,9 @@
 				<li class="current"><a href="index.html" class="no-submenu"><span class="awe-home"></span>Dashboard</a></li>
 				<li><a href="forms.html" class="no-submenu"><span class="awe-tasks"></span>Forms</a></li>
 				<li><a href="charts.html" class="no-submenu"><span class="awe-signal"></span>Charts <span class="badge">7</span></a></li>
-				<li><a href="tables.html" class="no-submenu"><span class="awe-table"></span>Tables <span class="badge">23</span></a></li>
 				<li>
-					<a href="#"><span class="awe-picture"></span>Gallery</a>
-					<ul>
-						<li><a href="gallery.html">Car Gallery</a></li>
-						<li><a href="gallery.html">Food Gallery</a></li>
-						<li><a href="gallery.html">Art Gallery</a></li>
-						<li><a href="gallery.html">Animal Gallery</a></li>
-						<li><a href="gallery.html">Super long name to see how it collapse</a></li>
-					</ul>
-				</li>
-				<li><a href="file-explorer.html" class="no-submenu"><span class="awe-file"></span>File explorer</a></li>
-				<li><a href="calendar.html" class="no-submenu"><span class="awe-calendar"></span>Calendar</a></li>
-				<li><a href="ui-buttons.html" class="no-submenu"><span class="awe-magic"></span>UI &amp; Buttons</a></li>
-				<li><a href="typo.html" class="no-submenu"><span class="awe-font"></span>Typography</a></li>
-				<li><a href="grid.html" class="no-submenu"><span class="awe-th"></span>Grid</a></li>
-				<li>
-					<a href="#"><span class="awe-heart"></span>Goodies</a>
-					<ul>
-						<li><a href="goodies.html">Goodies</a></li>
-						<li><a href="401.html">Error 401</a></li>
-						<li><a href="403.html">Error 403</a></li>
-						<li><a href="404.html">Error 404</a></li>
-						<li><a href="500.html">Error 500</a></li>
-						<li><a href="503.html">Error 503</a></li>
-					</ul>
+					<a href="#"><span class="awe-table"></span>Other Entities <span class="badge">2</span></a>
+					<t:tynamo.ListPageLinkList listPageName="List"/>
 				</li>
 			</ul>
 		</nav>
@@ -188,7 +165,14 @@
 		<a href="#top" class="btn btn-primary btn-flat pull-right">Top &uarr;</a>
 	</footer>
 
-	<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+	<!-- Scripts -->
+	<script src="${context:/huraga/js/navigation.js}"></script>
+	<script src="${context:/huraga/js/bootstrap/bootstrap-affix.js}"></script>
+	<script src="${context:/huraga/js/bootstrap/bootstrap-tooltip.js}"></script>
+	<script src="${context:/huraga/js/bootstrap/bootstrap-collapse.js}"></script>
+	<script src="${context:/huraga/js/bootstrap/bootstrap-dropdown.js}"></script>
+
+<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
 
 </body>
 

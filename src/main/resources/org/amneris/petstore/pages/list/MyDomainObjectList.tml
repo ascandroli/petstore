@@ -1,32 +1,69 @@
 <t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
 
-	<div class="contextual">
-		<t:pagelink class="icon icon-add" page="Add" context="beanType">${newlinkMessage}</t:pagelink>
+	<article class="page-header">
+		<h1>CUSTOM ${title}</h1>
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam blandit, dolor mollis adipiscing elementum, ipsum turpis euismod tellus, vitae mollis velit leo id nisi. Morbi non lectus turpis, eu interdum orci. In at rutrum nisi. Donec sit amet urna purus, at eleifend ipsum. Sed magna enim, tempor eu tincidunt vitae, dictum tristique arcu.</p>
+	</article>
+
+	<!-- Grid row -->
+	<div class="row">
+
+		<!-- Data block -->
+		<article class="span12 data-block">
+			<div class="data-container">
+				<header>
+					<h2>Tables</h2>
+					<ul class="data-header-actions">
+						<li class="demoTabs">
+							<t:pagelink class="btn btn-alt btn-inverse" page="Add"
+							            context="beanType">${newlinkMessage}</t:pagelink>
+						</li>
+					</ul>
+				</header>
+				<section class="tab-content">
+
+					<!-- Tab #static -->
+					<div class="tab-pane active" id="static">
+
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed placerat, diam sit amet iaculis
+							auctor, risus arcu vehicula arcu, in posuere magna massa non quam. Integer aliquam justo sit
+							amet neque adipiscing consectetur. Duis volutpat neque ut est gravida lacinia. Ut laoreet
+							tempus lacus nec pellentesque. Integer ante tortor, ornare et semper at, suscipit in sapien.
+							Suspendisse turpis magna, suscipit non interdum et, semper eu neque.</p>
+
+						<h3>Styled table</h3>
+
+						<t:grid t:id="grid" source="source" row="bean" inPlace="true" add="__id__" reorder="__id__"
+						        t:mixins="tynamo/BeanModelAdvisor"
+						        class="table table-striped table-hover">
+							<p:__id__header>
+							</p:__id__header>
+							<p:__id__cell>
+								<t:pagelink t:page="Show" context="showPageContext">
+									<t:tynamo.identifier object="bean"/>
+								</t:pagelink>
+							</p:__id__cell>
+							<p:empty>
+								<p>
+									There are no XX to display; you can
+									<t:pagelink page="Add" context="beanType">add some</t:pagelink>
+									.
+								</p>
+							</p:empty>
+						</t:grid>
+
+					</div>
+				</section>
+			</div>
+		</article>
 	</div>
-
-	<h2>CUSTOM ${title}</h2>
-	<br/>
-
-
-	<t:grid t:id="grid" source="source" row="bean" inPlace="true" add="__id__" reorder="__id__" t:mixins="tynamo/BeanModelAdvisor"
-	        class="m-data-grid">
-		<p:__id__header>
-		</p:__id__header>
-		<p:__id__cell>
-			<t:pagelink t:page="Show" context="showPageContext"><t:tynamo.identifier object="bean"/></t:pagelink>
-		</p:__id__cell>
-		<p:empty>
-			<p>
-				There are no XX to display; you can <t:pagelink page="Add" context="beanType">add some</t:pagelink>.
-			</p>
-		</p:empty>
-	</t:grid>
 
 	<p:sidebar>
 		<h3>Menu</h3>
 		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
 		   context="beanType">All</a>
 		<br/>
+
 		<h3>Other Options...</h3>
 	</p:sidebar>
 
