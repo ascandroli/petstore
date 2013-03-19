@@ -59,6 +59,18 @@ public class AppModule
 		// you can extend this list of locales (it's a comma seperated series of locale names;
 		// the first locale name is the default when there's no reasonable match).
 		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en,es");
+
+		/**
+		 * HMAC_PASSPHRASE is used to configure hash-based message authentication of Tapestry data stored in forms, or
+		 * in the URL. Your application is less secure, and more vulnerable to denial-of-service attacks, when this
+		 * symbol is not configured.
+		 *
+		 * If you need help getting your random string use this link:
+		 *
+		 * http://www.random.org/strings/?num=1&len=16&digits=on&upperalpha=on&loweralpha=on&unique=on&format=plain&rnd=new
+		 *
+		 */
+		configuration.add(SymbolConstants.HMAC_PASSPHRASE, "VbRdop9fJ6zJl3uh");
 	}
 
 	@Contribute(SymbolSource.class)
