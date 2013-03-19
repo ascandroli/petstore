@@ -5,7 +5,9 @@ import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
+import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.PersistenceConstants;
+import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
@@ -24,13 +26,13 @@ public class Signin extends Login
 	private Logger logger;
 
 	@Property
-	private String jsecLogin;
+	private String username;
 
 	@Property
-	private String jsecPassword;
+	private String password;
 
 	@Property
-	private boolean jsecRememberMe;
+	private boolean rememberMe;
 
 	@Persist(PersistenceConstants.FLASH)
 	private String loginMessage;
@@ -47,9 +49,9 @@ public class Signin extends Login
 	@Inject
 	private PageService pageService;
 
-	public Object onActionFromJsecLoginForm()
+	@OnEvent(EventConstants.SUCCESS)
+	public Object submit()
 	{
-
 		Subject currentUser = securityService.getSubject();
 
 		if (currentUser == null)
@@ -57,8 +59,8 @@ public class Signin extends Login
 			throw new IllegalStateException("Subject can`t be null");
 		}
 
-		UsernamePasswordToken token = new UsernamePasswordToken(jsecLogin, jsecPassword);
-		token.setRememberMe(jsecRememberMe);
+		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+		token.setRememberMe(rememberMe);
 
 		try
 		{
