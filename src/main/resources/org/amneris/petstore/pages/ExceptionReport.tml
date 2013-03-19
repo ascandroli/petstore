@@ -1,35 +1,58 @@
-<t:layout title="message:error-title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
-          xmlns:p="tapestry:parameter">
-	<p:tabs>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 
-	</p:tabs>
+<head>
+	<!--[if IE 7]>    <html class="no-js ie7 ie" lang="en"> <![endif]-->
+	<!--[if IE 8]>    <html class="no-js ie8 ie" lang="en"> <![endif]-->
+	<!--[if IE 9]>    <html class="no-js ie9 ie" lang="en"> <![endif]-->
+	<!--[if gt IE 9]><!--> <html class="no-js" lang="en"/> <!--<![endif]-->
 
-	<div class="contextual">
-		<t:pageLink page="Home">${message:back-index}</t:pageLink>
-	</div>
+	<title>Error 500 <t:if test="rootException"> | ${rootException.localizedMessage}</t:if></title>
 
-	<h2>${message:error-title}</h2>
+	<meta name="description" content=""/>
+	<meta name="author" content="Amneris Labs | www.amneris.eu"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+	<!-- jQuery Visualize Styles -->
+	<link rel='stylesheet' type='text/css' href='${context:huraga/css/plugins/jquery.visualize.css}'/>
+
+	<!-- CSS styles -->
+	<link rel='stylesheet' type='text/css' href='${context:huraga/css/huraga-dark.css}'/>
+
+	<script src="${context:huraga/js/libs/modernizr.js}" type="text/javascript"></script>
+	<script src="${context:huraga/js/libs/selectivizr.js}" type="text/javascript"></script>
+
+</head>
+
+<body class="error-page">
+
+<!-- Error page container -->
+<section class="error-container">
+
+	<h1>500</h1>
+	<p class="description">Oops! Server error...</p>
+	<p>Sorry, it appears there has been an internal server error with the page you've requested If the problem persists, please contact our support at <a href="example@domain.com">example@domain.com</a>.</p>
+	<a href="index.html" class="btn btn-alt btn-primary btn-large" title="Back to Homepage">Back to Homepage</a>
+
+</section>
+
+<br></br>
+
+<section class="container" role="main">
 
 	<t:if test="rootException">
-		<div class="error-message">
-			${rootException.localizedMessage}
-			<br/>
-			<a href="#" onclick="Effect.toggle('trace', 'appear');return false;">
-				${message:more-info-label}
-			</a>
-		</div>
-
-		<div id="trace" style="display: none;">
+		<div id="trace">
 			<t:exceptiondisplay exception="rootException"/>
 		</div>
 	</t:if>
 
-	<div>
-		<form action="POST" name="feedbakform">
-		</form>
-	</div>
+</section>
+<!-- /Error page container -->
 
-	<div style="margin: 35px 0;">
-		<t:pageLink page="Home"><span style="font-size: 18px;">←</span> ${message:back-index}</t:pageLink>
-	</div>
-</t:layout>
+<!-- Bootstrap scripts -->
+<!--
+<script src="js/bootstrap/bootstrap-tooltip.js"></script>
+-->
+
+</body>
+</html>
