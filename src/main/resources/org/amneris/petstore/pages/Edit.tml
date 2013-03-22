@@ -1,36 +1,60 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+<t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 
-	<h2>${title}</h2>
+	<!-- Grid row -->
+	<div class="row">
 
-	<br/>
+		<!-- Data block -->
+		<article class="span12 data-block">
+			<div class="data-container">
+				<header>
+					<h2>${title}</h2>
+					<ul class="data-header-actions">
+						<li class="demoTabs active"><a href="#basic" class="btn">Basic</a></li>
+						<li class="demoTabs"><a href="#advanced" class="btn">Advanced</a></li>
+					</ul>
+				</header>
+				<section class="tab-content">
+					<!-- Tab #basic -->
+					<div class="tab-pane active" id="basic">
 
-	<t:alerts/>
+						<!-- Example vertical forms -->
+						<div class="row-fluid">
+							<div class="span8">
 
-	<t:form clientValidation="true" validate="bean" class="form-horizontal">
-		<t:errors/>
+								<t:alerts fwtype="alert" dismissText="x"/>
 
-			<t:beaneditor object="mb:bean" t:mixins="tynamo/BeanModelAdvisor"/>
-			<br/>
+								<t:form clientValidation="false" validate="bean" fwtype="form-horizontal">
+									<t:errors/>
 
-			<div>
-				<t:submit t:id="save" id="save" t:event="apply" class="btn"
-				          value="${message:org.tynamo.i18n.apply}"/>
-				<t:submit t:id="saveAndReturnButton" id="saveAndReturnButton" class="btn btn-primary"
-				          value="${message:org.tynamo.i18n.applyAndReturn}"/>
-				&nbsp; or &nbsp;
-				<t:eventlink class="btn btn-danger" t:id="cancel">
-					${message:org.tynamo.i18n.cancel}
-				</t:eventlink>
+									<t:beaneditor object="mb:bean" t:mixins="tynamo/BeanModelAdvisor"/>
+
+									<div class="form-actions">
+										<t:submit event="continue" class="btn btn-alt btn-large" value="${message:org.tynamo.i18n.apply}"/>
+										<t:submit event="return" class="btn btn-alt btn-primary btn-large"
+										          value="${message:org.tynamo.i18n.applyAndReturn}"/>
+										&nbsp; or &nbsp;
+										<t:eventlink class="btn btn-alt btn-large btn-danger" t:id="cancel">
+											${message:org.tynamo.i18n.cancel}
+										</t:eventlink>
+									</div>
+								</t:form>
+							</div>
+							<div class="span4">
+								<h3>Vertical form</h3>
+								<p>Lorem ipsum dolor sit amet, adipiscing elit. Phasellus vitae  ac ligula eleifend commodo id quis risus. Donec consequat lorem et metus vitae dapibus felis fermentum.</p>
+								<p>Aenean imperdiet nibh vitae sem condimentum pharetra. Mauris molestie molestie faucibus. Aenean sit amet sem orci, at adipiscing dolor. Fusce feugiat odio vitae erat commodo sed accumsan ante sollicitudin. Integer mollis, tellus vel feugiat varius, risus quam lacinia erat, eu ultricies urna dolor ac metus.</p>
+
+								<h3>Menu</h3>
+								<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
+								   context="beanType">${listAllLinkMessage}</a>
+							</div>
+						</div>
+					</div>
+				</section>
 			</div>
-
-	</t:form>
-
-	<p:sidebar>
-		<h3>Menu</h3>
-		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
-		   context="beanType">${listAllLinkMessage}</a>
-	</p:sidebar>
+		</article>
+	</div>
 
 </t:layout>
