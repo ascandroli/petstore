@@ -2,26 +2,56 @@
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
 
-	<div class="contextual">
-		<t:security.hasRole role="admin">
-			<t:pagelink class="icon icon-edit" t:page="Edit" context="editPageContext">${editlinkMessage}</t:pagelink>
-			<t:if test="deleteAllowed">
-				<t:eventlink class="deletelink" t:id="delete" onclick="return confirm('Are you sure ?');">${message:org.tynamo.i18n.remove}</t:eventlink>
-			</t:if>
+	<!-- Grid row -->
+	<div class="row">
 
-		</t:security.hasRole>
+		<!-- Data block -->
+		<article class="span12 data-block">
+			<div class="data-container">
+				<header>
+					<h2>${title}</h2>
+					<ul class="data-header-actions">
+						<li class="demoTabs">
+							<t:security.hasRole role="admin">
+								<t:pagelink class="btn btn-alt btn-inverse" t:page="Edit" context="editPageContext">
+									<span class="awe-edit"></span> ${editlinkMessage}</t:pagelink>
+							</t:security.hasRole>
+						</li>
+					</ul>
+				</header>
+				<section class="tab-content">
+					<!-- Tab #basic -->
+					<div class="tab-pane active" id="basic">
+
+						<!-- Example vertical forms -->
+						<div class="row-fluid">
+							<div class="span8">
+
+								<t:alerts fwtype="alert" dismissText="x"/>
+
+								<t:beandisplay object="bean" lean="true" t:mixins="tynamo/BeanModelAdvisor" fwtype="dl-horizontal"/>
+
+								<div style="float: right;">
+									<t:security.hasRole role="admin">
+										<t:eventlink class="btn btn-alt btn-large btn-danger" t:id="delete"
+										             onclick="return confirm('Are you sure ?');"><span
+												class="awe-trash"></span> ${message:org.tynamo.i18n.remove}
+										</t:eventlink>
+									</t:security.hasRole>
+								</div>
+								<br/>
+								<br/>
+							</div>
+							<div class="span4">
+								<h3>Vertical form</h3>
+								<p>Lorem ipsum dolor sit amet, adipiscing elit. Phasellus vitae  ac ligula eleifend commodo id quis risus. Donec consequat lorem et metus vitae dapibus felis fermentum.</p>
+								<p>Aenean imperdiet nibh vitae sem condimentum pharetra. Mauris molestie molestie faucibus. Aenean sit amet sem orci, at adipiscing dolor. Fusce feugiat odio vitae erat commodo sed accumsan ante sollicitudin. Integer mollis, tellus vel feugiat varius, risus quam lacinia erat, eu ultricies urna dolor ac metus.</p>
+							</div>
+						</div>
+					</div>
+				</section>
+			</div>
+		</article>
 	</div>
-
-	<h2>${title}</h2>
-
-	<t:alerts/>
-
-	<t:beandisplay object="bean" lean="true" t:mixins="tynamo/BeanModelAdvisor"/>
-
-	<p:sidebar>
-		<h3>Menu</h3>
-		<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List" context="beanType">${listAllLinkMessage}</a>
-	</p:sidebar>
-
 
 </t:layout>
