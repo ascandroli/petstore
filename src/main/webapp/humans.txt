@@ -1,0 +1,17 @@
+/* humanstxt.org */
+/* the humans responsible & colophon */
+
+/* TEAM */
+
+  Developer: Alejandro Scandroli
+  Twitter: @a_scandroli
+  Location: Barcelona, Spain
+  From: Tandil, Argentina
+
+/* SITE */
+
+/*Last update: YYYY/MM/DD*/
+  Standards: HTML5, CSS3
+  Components: Modernizr, jQuery
+  Software: IntelliJ IDEA
+
