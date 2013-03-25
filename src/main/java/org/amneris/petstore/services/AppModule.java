@@ -19,6 +19,7 @@ import org.apache.tapestry5.jpa.JpaTransactionAdvisor;
 import org.apache.tapestry5.services.BeanBlockContribution;
 import org.apache.tapestry5.services.BeanBlockSource;
 import org.apache.tapestry5.services.DisplayBlockContribution;
+import org.tynamo.activiti.ActivitiSymbols;
 import org.tynamo.builder.Builder;
 import org.tynamo.security.SecuritySymbols;
 import org.tynamo.security.services.SecurityFilterChainFactory;
@@ -71,6 +72,9 @@ public class AppModule
 		 *
 		 */
 		configuration.add(SymbolConstants.HMAC_PASSPHRASE, "VbRdop9fJ6zJl3uh");
+
+		configuration.add(ActivitiSymbols.JOB_EXECUTOR_ACTIVATE, "false");
+
 	}
 
 	@Contribute(SymbolSource.class)
@@ -173,6 +177,7 @@ public class AppModule
 	{
 		advisor.addTransactionCommitAdvice(receiver);
 	}
+
 
 	@Contribute(Deployment.class)
 	public void deployResources(Configuration<Resource> deploymentResources)

@@ -7,6 +7,7 @@ import org.apache.tapestry5.jpa.EntityManagerSource;
 import org.apache.tapestry5.jpa.JpaSymbols;
 import org.apache.tapestry5.jpa.PersistenceUnitConfigurer;
 import org.apache.tapestry5.jpa.TapestryPersistenceUnitInfo;
+import org.tynamo.activiti.ActivitiSymbols;
 
 import javax.persistence.spi.PersistenceUnitTransactionType;
 
@@ -25,6 +26,9 @@ public class DevelopmentModule
 		configuration.add(SymbolConstants.COMPRESS_WHITESPACE, false);
 
 		configuration.add(JpaSymbols.EARLY_START_UP, true);
+
+		configuration.add(ActivitiSymbols.DATABASE_SCHEMA_UPDATE, "create-drop"); // use create-drop for testing only!
+
 	}
 
 	@Contribute(EntityManagerSource.class)

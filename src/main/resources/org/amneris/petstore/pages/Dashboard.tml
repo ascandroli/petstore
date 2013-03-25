@@ -1,0 +1,190 @@
+<html t:type="layout" title="literal:About petstore"
+      xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+      xmlns:p="tapestry:parameter">
+
+<!-- Right (content) side -->
+<div class="content-block" role="main">
+
+<!-- Page header -->
+<article class="page-header no-margin">
+	<h1>Dashboard</h1>
+</article>
+<!-- /Page header -->
+
+<div class="row-fluid">
+	<div class="span3">
+		<section class="balance">
+			<h2>Process Definitions</h2>
+			<strong>${pDef}</strong>
+			<p><t:eventlink t:id="start" class="btn btn-alt btn-large btn-primary"><span class="awe-plane"></span> Let's go</t:eventlink></p>
+		</section>
+	</div>
+	<div class="span3">
+		<section class="balance">
+			<h2>Running Process Instances</h2>
+			<strong>${runningProcessInstances}</strong>
+		</section>
+	</div>
+	<div class="span3">
+		<section class="balance">
+			<h2>Tasks</h2>
+			<strong>${tasks}</strong>
+		</section>
+	</div>
+	<div class="span3">
+		<section class="balance">
+			<h2>Account balance</h2>
+			<strong>$ 7,936.23</strong>
+		</section>
+	</div>
+</div>
+
+<div class="alert alert-inverse">
+	<button class="close" type="button" data-dismiss="alert">×</button>
+	<strong>Black alert box!</strong> Come to the dark side, we have cookies.
+</div>
+
+	<!-- Grid row -->
+<div class="row">
+
+	<!-- Data block -->
+	<article class="span4 data-block todo-block">
+		<div class="data-container">
+			<header>
+				<h2><span class="awe-edit"></span> My TODO list</h2>
+			</header>
+			<section>
+				<form>
+					<table class="table">
+						<tbody>
+						<tr class="done">
+							<td><input type="checkbox" value="done" /></td>
+							<td>
+								<p>doItNow(); does not work as expected</p>
+								<span>completed <time>Apr 12</time></span>
+							</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" value="done"/></td>
+							<td>
+								<p>buy some more socks</p>
+								<span>due <time>Apr 12</time></span>
+							</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" value="done"/></td>
+							<td>
+								<p><span class="label label-important">Important</span> meeting at 10:30 am</p>
+								<span>due <time>Apr 12</time></span>
+							</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" value="done"/></td>
+							<td>
+								<p>take out the trash</p>
+								<span>due <time>Apr 17</time></span>
+							</td>
+						</tr>
+						<tr>
+							<td><input type="checkbox" value="done"/></td>
+							<td>
+								<p><span class="label label-success">Party</span> Erick birthday</p>
+								<span>due <time>Apr 22</time></span>
+							</td>
+						</tr>
+						<t:loop source="tasksSource" value="taskIterator">
+							<tr>
+								<td><input type="checkbox" value="done"/></td>
+								<td>
+									<p><span class="label label-success">Party</span> ${taskIterator.name} <t:eventlink t:id="show" context="taskIterator.id" zone="taskDetails"> show</t:eventlink></p>
+									<span><t:if test="${taskIterator.dueDate}">due <time>${taskIterator.dueDate}</time></t:if></span>
+								</td>
+							</tr>
+						</t:loop>
+						</tbody>
+					</table>
+				</form>
+			</section>
+		</div>
+	</article>
+	<!-- /Data block -->
+
+	<!-- Data block -->
+	<article class="span4 data-block decent">
+		<div class="data-container">
+			<section>
+				<table class="chart" data-chart="pie">
+					<caption>Employee Sales by Department</caption>
+					<thead>
+					<tr>
+						<td></td>
+						<th scope="col">food</th>
+						<th scope="col">auto</th>
+						<th scope="col">household</th>
+						<th scope="col">furniture</th>
+						<th scope="col">kitchen</th>
+						<th scope="col">bath</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr>
+						<th scope="row">Mary</th>
+						<td>190</td>
+						<td>160</td>
+						<td>40</td>
+						<td>120</td>
+						<td>30</td>
+						<td>70</td>
+					</tr>
+					<tr>
+						<th scope="row">Tom</th>
+						<td>3</td>
+						<td>40</td>
+						<td>30</td>
+						<td>45</td>
+						<td>35</td>
+						<td>49</td>
+					</tr>
+					<tr>
+						<th scope="row">John</th>
+						<td>30</td>
+						<td>140</td>
+						<td>320</td>
+						<td>45</td>
+						<td>50</td>
+						<td>90</td>
+					</tr>
+					</tbody>
+				</table>
+			</section>
+		</div>
+	</article>
+	<!-- /Data block -->
+
+	<!-- Data block -->
+	<article class="span4 data-block decent">
+		<t:zone t:id="taskDetails" id="taskDetails">
+			<t:if test="task">
+				<div class="data-container">
+					<header>
+						<h2>${task.name}</h2>
+					</header>
+					<section>
+						<t:beandisplay object="task" fwtype="dl"/>
+						<p>
+							<t:eventlink t:id="complete" context="task.id" class="btn btn-alt btn-large btn-primary"><span class="awe-plane"></span> Complete </t:eventlink>
+						</p>
+					</section>
+				</div>
+			</t:if>
+		</t:zone>
+	</article>
+	<!-- /Data block -->
+
+</div>
+<!-- /Grid row -->
+
+</div>
+<!-- /Right (content) side -->
+
+</html>
