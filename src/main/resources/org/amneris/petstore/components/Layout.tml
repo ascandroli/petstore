@@ -21,6 +21,7 @@
 
 	<meta name="description" content=""/>
 	<meta name="author" content="Amneris Labs | www.amneris.eu"/>
+	<link rel="author" href="humans.txt" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 	<!-- jQuery Visualize Styles -->
@@ -28,6 +29,7 @@
 
 	<!-- CSS styles -->
 	<link rel='stylesheet' type='text/css' href='${context:huraga/css/huraga-dark.css}'/>
+	<link rel='stylesheet' type='text/css' href='${context:huraga-t5patches.css}'/>
 
 	<!-- Fav and touch icons -->
 <!--
@@ -125,11 +127,12 @@
 		<!-- Main navigation -->
 		<nav class="main-navigation" role="navigation">
 			<ul>
-				<li class="current"><a href="index.html" class="no-submenu"><span class="awe-home"></span>Dashboard</a></li>
+				<li t:type="any" t:mixins="nav" nav.page="dashboard" nav.class="current"><t:pagelink class="no-submenu" page="dashboard"><span class="awe-home"></span>Dashboard</t:pagelink></li>
 				<li><a href="forms.html" class="no-submenu"><span class="awe-tasks"></span>Forms</a></li>
 				<li><a href="charts.html" class="no-submenu"><span class="awe-signal"></span>Charts <span class="badge">7</span></a></li>
-				<li>
-					<a href="#"><span class="awe-table"></span>Other Entities <span class="badge">2</span></a>
+				<li t:type="any" t:mixins="nav" nav.expression="/((list|show|add|edit)/)?(mydomainobject|user)(/.*)?" nav.class="current">
+					<a href="#">
+						<span class="awe-table"></span>Other Entities <span class="badge">2</span></a>
 					<t:tynamo.ListPageLinkList listPageName="List"/>
 				</li>
 			</ul>
@@ -172,7 +175,7 @@
 	<script src="${context:/huraga/js/bootstrap/bootstrap-collapse.js}"></script>
 	<script src="${context:/huraga/js/bootstrap/bootstrap-dropdown.js}"></script>
 
-<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+<div id="ajax-indicator" style="display:none;" class="loading" data-original-title="Loading, please wait…">Loading...</div>
 
 </body>
 

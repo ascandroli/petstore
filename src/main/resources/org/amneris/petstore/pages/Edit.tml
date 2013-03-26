@@ -9,7 +9,7 @@
 		<article class="span12 data-block">
 			<div class="data-container">
 				<header>
-					<h2>${title}</h2>
+					<h2>Edit details about <a href="${back()}">${title}</a></h2>
 					<ul class="data-header-actions">
 						<li class="demoTabs active"><a href="#basic" class="btn">Basic</a></li>
 						<li class="demoTabs"><a href="#advanced" class="btn">Advanced</a></li>
@@ -31,9 +31,7 @@
 									<t:beaneditor object="mb:bean" t:mixins="tynamo/BeanModelAdvisor"/>
 
 									<div class="form-actions">
-										<t:submit event="continue" class="btn btn-alt btn-large" value="${message:org.tynamo.i18n.apply}"/>
-										<t:submit event="return" class="btn btn-alt btn-primary btn-large"
-										          value="${message:org.tynamo.i18n.applyAndReturn}"/>
+										<t:submit event="return" class="btn btn-alt btn-primary btn-large" value="prop:applyAndReturnMessage"/>
 										&nbsp; or &nbsp;
 										<t:eventlink class="btn btn-alt btn-large btn-danger" t:id="cancel">
 											${message:org.tynamo.i18n.cancel}
@@ -45,10 +43,6 @@
 								<h3>Vertical form</h3>
 								<p>Lorem ipsum dolor sit amet, adipiscing elit. Phasellus vitae  ac ligula eleifend commodo id quis risus. Donec consequat lorem et metus vitae dapibus felis fermentum.</p>
 								<p>Aenean imperdiet nibh vitae sem condimentum pharetra. Mauris molestie molestie faucibus. Aenean sit amet sem orci, at adipiscing dolor. Fusce feugiat odio vitae erat commodo sed accumsan ante sollicitudin. Integer mollis, tellus vel feugiat varius, risus quam lacinia erat, eu ultricies urna dolor ac metus.</p>
-
-								<h3>Menu</h3>
-								<a style="font-weight:bolder;margin-left:10px" t:type="PageLink" page="List"
-								   context="beanType">${listAllLinkMessage}</a>
 							</div>
 						</div>
 					</div>

@@ -51,7 +51,7 @@
 						</div>
 					</div>
 					<div class="form-actions">
-						<button class="btn btn-large btn-inverse btn-alt" type="submit" tabindex="4"><span class="awe-signin"></span>${message:login}</button>
+						<button class="btn btn-large btn-inverse btn-alt" type="submit" tabindex="4"><span class="awe-signin"></span> ${message:login} </button>
 					</div>
 				</fieldset>
 			</t:form>

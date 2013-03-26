@@ -12,9 +12,10 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.jpa.annotations.CommitAfter;
 import org.apache.tapestry5.services.ContextValueEncoder;
 import org.apache.tapestry5.services.PageRenderLinkSource;
-import org.tynamo.util.TynamoMessages;
 import org.tynamo.routing.annotations.At;
 import org.tynamo.services.PersistenceService;
+import org.tynamo.util.DisplayNameUtils;
+import org.tynamo.util.TynamoMessages;
 import org.tynamo.util.Utils;
 
 /**
@@ -81,7 +82,7 @@ public class Edit
 	}
 
 	@OnEvent("cancel")
-	Link back()
+	public Link back()
 	{
 		return pageRenderLinkSource.createPageRenderLinkWithContext(Show.class, beanType, bean);
 	}
@@ -93,7 +94,12 @@ public class Edit
 
 	public String getTitle()
 	{
-		return TynamoMessages.edit(messages, beanType);
+		return bean.toString();
+	}
+
+	public String getApplyAndReturnMessage()
+	{
+		return messages.format(Utils.APPLY_AND_RETURN_MESSAGE, DisplayNameUtils.getDisplayName(beanType, messages));
 	}
 
 }

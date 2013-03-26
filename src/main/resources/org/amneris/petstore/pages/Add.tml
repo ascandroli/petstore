@@ -32,8 +32,7 @@
 
 							<div class="form-actions">
 								<t:submit event="continue" class="btn btn-alt btn-large" value="${message:org.tynamo.i18n.apply}"/>
-								<t:submit event="return" class="btn btn-alt btn-primary btn-large"
-								          value="${message:org.tynamo.i18n.applyAndReturn}"/>
+								<t:submit event="return" class="btn btn-alt btn-primary btn-large" value="${title}"/>
 								&nbsp; or &nbsp;
 								<t:eventlink class="btn btn-alt btn-large btn-danger" t:id="cancel">
 									${message:org.tynamo.i18n.cancel}
