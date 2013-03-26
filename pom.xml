@@ -383,39 +383,6 @@
 	repository manager to proxy these repositories instead.
 	-->
 	<repositories>
-		<!-- Don't use snapshots unless absolutely necessary -->
-		<repository>
-			<id>codehaus-nexus-snapshots</id>
-			<name>Codehaus Nexus Snapshots</name>
-			<url>https://nexus.codehaus.org/content/groups/snapshots-group/</url>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-		</repository>
-
-		<repository>
-			<id>repository.jboss.org</id>
-			<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
-			<releases>
-				<enabled>true</enabled>
-			</releases>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
-		<repository>
-			<id>devlab722-repo</id>
-			<url>http://nexus.devlab722.net/nexus/content/repositories/releases
-			</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-
 		<!--
 			little hack to disable java.net repositories because they are not working
 			and they corrupt your local repo.
@@ -441,6 +408,54 @@
 				<enabled>false</enabled>
 			</snapshots>
 		</repository>
-
 	</repositories>
+
+	<profiles>
+		<profile>
+			<id>repositories</id>
+			<repositories>
+
+				<!-- Don't use snapshots unless absolutely necessary -->
+				<repository>
+					<id>codehaus-nexus-snapshots</id>
+					<name>Codehaus Nexus Snapshots</name>
+					<url>https://nexus.codehaus.org/content/groups/snapshots-group/</url>
+					<snapshots>
+						<enabled>true</enabled>
+					</snapshots>
+					<releases>
+						<enabled>false</enabled>
+					</releases>
+				</repository>
+
+				<repository>
+					<id>repository.jboss.org</id>
+					<url>https://repository.jboss.org/nexus/content/repositories/releases</url>
+					<releases>
+						<enabled>true</enabled>
+					</releases>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+
+				<repository>
+					<id>devlab722-repo</id>
+					<url>http://nexus.devlab722.net/nexus/content/repositories/releases</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+
+				<repository>
+					<id>EclipseLink Repo</id>
+					<url>http://download.eclipse.org/rt/eclipselink/maven.repo</url>
+					<snapshots>
+						<enabled>false</enabled>
+					</snapshots>
+				</repository>
+			</repositories>
+		</profile>
+	</profiles>
+
 </project>
