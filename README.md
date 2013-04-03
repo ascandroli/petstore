@@ -7,6 +7,8 @@
 
 * $ git clone --progress git@github.com:ascandroli/petstore.git
 * $ cd petstore
+* $ mvn jetty:run -P repositories
+* $ find ~/.m2/repository/  -name _maven.repositories | xargs rm
 * $ mvn jetty:run
 
 * enjoy!
