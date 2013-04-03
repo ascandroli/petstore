@@ -104,12 +104,14 @@ public class AppModule
 	                                                   SecurityFilterChainFactory factory)
 	{
 		configuration.add(factory.createChain("/assets/**").add(factory.anon()).build());
-		configuration.add(factory.createChain("/security/login*").add(factory.anon()).build());
 
-		configuration.add(factory.createChain("/signin").add(factory.anon()).build());
+		configuration.add(factory.createChain("/signin/**").add(factory.anon()).build());
+		configuration.add(factory.createChain("/signin:*/**").add(factory.anon()).build()); // for event links
+		configuration.add(factory.createChain("/signin.*/**").add(factory.anon()).build()); // for forms
+
+		configuration.add(factory.createChain("/**").add(factory.user()).build());
+
 /*
-		configuration.add(factory.createChain("/").add(factory.roles(), "admin").build());
-
 		configuration.add(factory.createChain("/edit/**").add(factory.perms(), "*:update").build());
 		configuration.add(factory.createChain("/show/**").add(factory.perms(), "*:select").build());
 		configuration.add(factory.createChain("/add/**").add(factory.perms(), "*:insert").build());
