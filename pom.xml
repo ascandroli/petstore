@@ -9,8 +9,8 @@
 	<url>https://github.com/ascandroli/petstore</url>
 
 	<properties>
-		<tynamo-version>0.5.0</tynamo-version>
-		<tapestry-version>5.3.6</tapestry-version>
+		<tynamo-version>0.5.1</tynamo-version>
+		<tapestry-version>5.3.7</tapestry-version>
 		<tapestry.app-package>org.amneris.petstore</tapestry.app-package>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -249,8 +249,8 @@
 
 		<dependency>
 			<groupId>org.tynamo</groupId>
-			<artifactId>tapestry-model-test</artifactId>
-			<version>${tynamo-version}</version>
+			<artifactId>tynamo-test</artifactId>
+			<version>0.0.1</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -276,7 +276,7 @@
 		<dependency>
 			<groupId>org.tynamo</groupId>
 			<artifactId>tapestry-routing</artifactId>
-			<version>0.0.4</version>
+			<version>0.0.7</version>
 		</dependency>
 
 		<dependency>
