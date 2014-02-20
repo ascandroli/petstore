@@ -2,23 +2,21 @@ package org.amneris.petstore.pages;
 
 import org.apache.shiro.authc.*;
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.util.SavedRequest;
 import org.apache.shiro.web.util.WebUtils;
 import org.apache.tapestry5.EventConstants;
-import org.apache.tapestry5.PersistenceConstants;
+import org.apache.tapestry5.alerts.AlertManager;
 import org.apache.tapestry5.annotations.OnEvent;
-import org.apache.tapestry5.annotations.Persist;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.services.RequestGlobals;
 import org.apache.tapestry5.services.Response;
+import org.slf4j.Logger;
 import org.tynamo.security.pages.Login;
 import org.tynamo.security.services.PageService;
 import org.tynamo.security.services.SecurityService;
 
 import java.io.IOException;
-import org.slf4j.Logger;
 
 public class Signin extends Login
 {
@@ -34,9 +32,6 @@ public class Signin extends Login
 	@Property
 	private boolean rememberMe;
 
-	@Persist(PersistenceConstants.FLASH)
-	private String loginMessage;
-
 	@Inject
 	private Response response;
 
@@ -48,6 +43,9 @@ public class Signin extends Login
 
 	@Inject
 	private PageService pageService;
+
+	@Inject
+	private AlertManager alertManager;
 
 	@OnEvent(EventConstants.SUCCESS)
 	public Object submit()
@@ -67,19 +65,19 @@ public class Signin extends Login
 			currentUser.login(token);
 		} catch (UnknownAccountException e)
 		{
-			loginMessage = "Account not exists";
+			alertManager.error("Account not exists");
 			return null;
 		} catch (IncorrectCredentialsException e)
 		{
-			loginMessage = "Wrong password";
+			alertManager.error("Wrong password");
 			return null;
 		} catch (LockedAccountException e)
 		{
-			loginMessage = "Account locked";
+			alertManager.error("Account locked");
 			return null;
 		} catch (AuthenticationException e)
 		{
-			loginMessage = "Authentication Error";
+			alertManager.error("Authentication Error");
 			return null;
 		}
 
@@ -102,21 +100,5 @@ public class Signin extends Login
 			return pageService.getSuccessPage();
 		}
 
-	}
-
-	public String getLoginMessage()
-	{
-		if (hasLoginMessage())
-		{
-			return loginMessage;
-		} else
-		{
-			return " ";
-		}
-	}
-
-	public boolean hasLoginMessage()
-	{
-		return StringUtils.hasText(loginMessage);
 	}
 }

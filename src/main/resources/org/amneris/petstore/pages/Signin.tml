@@ -1,47 +1,92 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
-
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
 <head>
+	<meta charset="utf-8"/>
+	<title>SignIn</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content=""/>
+	<meta name="author" content=""/>
 
+	<!-- Le styles -->
+	<style type="text/css">
+		body {
+			padding-top: 60px;
+			padding-bottom: 40px;
+		}
+
+		div.palette {
+			display:block !important;
+		}
+
+		.form-signin {
+			max-width: 330px;
+			padding: 15px;
+			margin: 0 auto;
+		}
+		.form-signin .form-signin-heading,
+		.form-signin .checkbox {
+			margin-bottom: 10px;
+		}
+		.form-signin .checkbox {
+			font-weight: normal;
+		}
+		.form-signin .form-control {
+			position: relative;
+			height: auto;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			padding: 10px;
+			font-size: 16px;
+		}
+		.form-signin .form-control:focus {
+			z-index: 2;
+		}
+		.form-signin input[type="text"] {
+			margin-bottom: -1px;
+			border-bottom-right-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+		.form-signin input[type="password"] {
+			margin-bottom: 10px;
+			border-top-left-radius: 0;
+			border-top-right-radius: 0;
+		}
+	</style>
+
+	<!-- HTML5 Shim and Respond.js IE6-8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
+
+	<!-- Fav and touch icons -->
+	<link rel="shortcut icon" href="${asset:context:/favicon.ico}"/>
 </head>
 
 <body>
 
-	<!-- Main page container -->
-	<section class="container login" role="main">
+<div class="container">
 
-		<h1>Tynamo PetStore</h1>
-		<div class="data-block">
-			<t:form>
-				<t:if test="hasLoginMessage()">
-					<div id="errorMessages">${loginMessage}</div>
-				</t:if>
+	<h1>Tynamo PetStore</h1>
 
-				<fieldset>
-					<div class="control-group">
-						<t:label class="control-label" for="username">${message:username}</t:label>
-						<div class="controls">
-							<t:textfield t:id="username" validate="required" size="40" tabindex="1" placeholder="Your username"/>
-						</div>
-					</div>
-					<div class="control-group">
-						<t:label class="control-label" for="password">${message:password}</t:label>
-						<div class="controls">
-							<t:passwordfield t:id="password" validate="required" size="40" tabindex="2" placeholder="Your password"/>
-							<label class="checkbox">
-								<t:checkbox t:id="rememberMe" tabindex="3" />${message:remember.me}
-							</label>
-						</div>
-					</div>
-					<div class="form-actions">
-						<button class="btn btn-large btn-inverse btn-alt" type="submit" tabindex="4"><span class="awe-signin"></span> ${message:login} </button>
-					</div>
-				</fieldset>
-			</t:form>
-		</div>
-		<p><a href="#" class="pull-right"><small>${message:forgot.password}</small></a></p>
 
-	</section>
+	<t:form class="form-signin" role="form" autofocus="true">
+		<t:alerts/>
+		<t:errors/>
 
+		<h2 class="form-signin-heading">Please sign in</h2>
+		<t:textfield t:id="username" validate="required" tabindex="1" placeholder="${message:username}" required="true" autofocus="true"/>
+		<t:passwordfield t:id="password" validate="required" tabindex="2" placeholder="${message:password}" required="true"/>
+		<label class="checkbox">
+			<t:checkbox t:id="rememberMe" tabindex="3" />${message:remember.me}
+		</label>
+		<button class="btn btn-lg btn-primary btn-block" type="submit">${message:login}</button>
+	</t:form>
+
+</div> <!-- /container -->
 </body>
 </html>
