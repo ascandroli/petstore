@@ -1,57 +1,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
+<t:layout title="title" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd" xmlns:p="tapestry:parameter">
 
-	<!-- Grid row -->
-	<div class="row">
+	<h1>${title}</h1>
 
-		<!-- Data block -->
-		<article class="span12 data-block">
-			<div class="data-container">
-				<header>
-					<h2>${title}</h2>
-					<ul class="data-header-actions">
-						<li class="demoTabs">
-							<t:security.hasRole role="admin">
-								<t:pagelink class="btn btn-alt btn-inverse" t:page="Edit" context="editPageContext">
-									<span class="awe-edit"></span> ${editlinkMessage}</t:pagelink>
-							</t:security.hasRole>
-						</li>
-					</ul>
-				</header>
-				<section class="tab-content">
-					<!-- Tab #basic -->
-					<div class="tab-pane active" id="basic">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container-fluid" style="margin-right:20px">
+			<ul class="nav navbar-nav navbar-right">
+				<li>
+					<t:pageLink page="List" context="beanType">
+						<i class="fa fa-table"></i>
+						${listAllLinkMessage}</t:pageLink>
+				</li>
+				<li>
+					<t:pagelink t:page="Edit" context="editPageContext">
+						<i class="fa fa-edit"></i>
+						${editlinkMessage}</t:pagelink>
+				</li>
+				<li>
+				</li>
+				<t:if test="deleteAllowed">
+					<style>
+						.delete a:hover {
+							color:red !important;
+						}
+					</style>
+					<li class="delete">
+						<t:eventlink t:id="delete" onclick="return confirm('Are you sure ?');">
+							<i class="fa fa-trash-o"></i>
+							${message:org.tynamo.i18n.remove}</t:eventlink>
+					</li>
+				</t:if>
+			</ul>
+		</div>
+	</nav>
 
-						<!-- Example vertical forms -->
-						<div class="row-fluid">
-							<div class="span8">
+	<br/>
 
-								<t:alerts fwtype="alert" dismissText="x"/>
-
-								<t:beandisplay object="bean" lean="true" t:mixins="tynamo/BeanModelAdvisor" fwtype="dl-horizontal"/>
-
-								<div style="float: right;">
-									<t:security.hasRole role="admin">
-										<t:eventlink class="btn btn-alt btn-large btn-danger" t:id="delete"
-										             onclick="return confirm('Are you sure ?');"><span
-												class="awe-trash"></span> ${message:org.tynamo.i18n.remove}
-										</t:eventlink>
-									</t:security.hasRole>
-								</div>
-								<br/>
-								<br/>
-							</div>
-							<div class="span4">
-								<h3>Vertical form</h3>
-								<p>Lorem ipsum dolor sit amet, adipiscing elit. Phasellus vitae  ac ligula eleifend commodo id quis risus. Donec consequat lorem et metus vitae dapibus felis fermentum.</p>
-								<p>Aenean imperdiet nibh vitae sem condimentum pharetra. Mauris molestie molestie faucibus. Aenean sit amet sem orci, at adipiscing dolor. Fusce feugiat odio vitae erat commodo sed accumsan ante sollicitudin. Integer mollis, tellus vel feugiat varius, risus quam lacinia erat, eu ultricies urna dolor ac metus.</p>
-							</div>
-						</div>
-					</div>
-				</section>
-			</div>
-		</article>
-	</div>
+	<t:beandisplay object="bean" lean="true" t:mixins="tynamo/BeanModelAdvisor"/>
 
 </t:layout>

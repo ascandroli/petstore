@@ -12,14 +12,18 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.jpa.annotations.CommitAfter;
 import org.apache.tapestry5.services.ContextValueEncoder;
 import org.apache.tapestry5.services.PageRenderLinkSource;
-import org.tynamo.routing.annotations.At;
-import org.tynamo.services.PersistenceService;
 import org.tynamo.util.DisplayNameUtils;
 import org.tynamo.util.TynamoMessages;
+import org.tynamo.routing.annotations.At;
+import org.tynamo.services.PersistenceService;
 import org.tynamo.util.Utils;
 
 /**
  * Page for editing and updating objects.
+ *
+ * @note:
+ * When extending this page for customization purposes, it's better to copy & paste code than trying to use inheritance.
+ *
  */
 @At("/{0}/{1}/edit")
 public class Edit
@@ -31,7 +35,7 @@ public class Edit
 	private Messages messages;
 
 	@Inject
-	private PersistenceService persitenceService;
+	private PersistenceService persistenceService;
 
 	@Inject
 	private PageRenderLinkSource pageRenderLinkSource;
@@ -41,6 +45,8 @@ public class Edit
 
 	@Property
 	private Object bean;
+
+	private boolean continueEditing;
 
 	@OnEvent(EventConstants.ACTIVATE)
 	Object activate(Class clazz, String id)
@@ -72,17 +78,27 @@ public class Edit
 		return new Object[]{beanType, bean};
 	}
 
+	@OnEvent(value = "return")
+	void onSaveAndReturn() {
+		this.continueEditing = false;
+	}
+
+	@OnEvent(value = "stay")
+	void onSaveAndContinue() {
+		this.continueEditing = true;
+	}
+
 	@Log
 	@CommitAfter
 	@OnEvent(EventConstants.SUCCESS)
 	Link success()
 	{
-		persitenceService.save(bean);
-		return back();
+		persistenceService.save(bean);
+		return !continueEditing ? back() : null;
 	}
 
 	@OnEvent("cancel")
-	public Link back()
+	Link back()
 	{
 		return pageRenderLinkSource.createPageRenderLinkWithContext(Show.class, beanType, bean);
 	}
@@ -94,7 +110,7 @@ public class Edit
 
 	public String getTitle()
 	{
-		return bean.toString();
+		return TynamoMessages.edit(messages, beanType);
 	}
 
 	public String getApplyAndReturnMessage()

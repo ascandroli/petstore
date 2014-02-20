@@ -1,16 +1,15 @@
 [INFO] Scanning for projects...
 [INFO]                                                                         
 [INFO] ------------------------------------------------------------------------
-[INFO] Building Tynamo Pet Store 0.2.0-SNAPSHOT
+[INFO] Building Tynamo Pet Store 0.4.0-SNAPSHOT
 [INFO] ------------------------------------------------------------------------
 [INFO] 
-[INFO] --- maven-dependency-plugin:2.1:tree (default-cli) @ petstore ---
-[INFO] org.amneris:petstore:war:0.2.0-SNAPSHOT
-[INFO] +- org.tynamo:tapestry-model-jpa:jar:0.5.0:compile
-[INFO] |  +- org.tynamo:tapestry-model-core:jar:0.5.0:compile
-[INFO] |  |  +- org.tynamo:tapestry-model-annotations:jar:0.5.0:compile
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ petstore ---
+[INFO] org.amneris:petstore:war:0.4.0-SNAPSHOT
+[INFO] +- org.tynamo:tapestry-model-jpa:jar:0.6.0-SNAPSHOT:compile
+[INFO] |  +- org.tynamo:tapestry-model-core:jar:0.6.0-SNAPSHOT:compile
+[INFO] |  |  +- org.tynamo:tapestry-model-annotations:jar:0.6.0-SNAPSHOT:compile
 [INFO] |  |  +- commons-beanutils:commons-beanutils:jar:1.8.3:compile
-[INFO] |  |  |  \- commons-logging:commons-logging:jar:1.1.1:compile
 [INFO] |  |  +- commons-lang:commons-lang:jar:2.6:compile
 [INFO] |  |  +- commons-collections:commons-collections:jar:3.2.1:compile
 [INFO] |  |  \- org.tynamo:tapestry-ckeditor:jar:0.0.1:compile
@@ -20,103 +19,100 @@
 [INFO] |     +- org.apache.lucene:lucene-queries:jar:3.6.1:compile
 [INFO] |     +- org.apache.lucene:lucene-memory:jar:3.6.1:compile
 [INFO] |     \- org.apache.lucene:lucene-highlighter:jar:3.6.1:compile
-[INFO] +- org.tynamo:tapestry-model-test:jar:0.5.0:test
-[INFO] |  +- org.eclipse.jetty:jetty-webapp:jar:7.0.0.v20091005:test
-[INFO] |  |  +- org.eclipse.jetty:jetty-xml:jar:7.0.0.v20091005:test
-[INFO] |  |  |  \- org.eclipse.jetty:jetty-util:jar:7.0.0.v20091005:test
-[INFO] |  |  \- org.eclipse.jetty:jetty-servlet:jar:7.0.0.v20091005:test
-[INFO] |  |     \- org.eclipse.jetty:jetty-security:jar:7.0.0.v20091005:test
-[INFO] |  |        \- org.eclipse.jetty:jetty-server:jar:7.0.0.v20091005:test
-[INFO] |  |           +- org.eclipse.jetty:jetty-continuation:jar:7.0.0.v20091005:test
-[INFO] |  |           \- org.eclipse.jetty:jetty-http:jar:7.0.0.v20091005:test
-[INFO] |  |              \- org.eclipse.jetty:jetty-io:jar:7.0.0.v20091005:test
+[INFO] +- org.tynamo:tynamo-test:jar:0.0.1:test
+[INFO] |  +- org.eclipse.jetty:jetty-webapp:jar:8.1.8.v20121106:test
+[INFO] |  |  +- org.eclipse.jetty:jetty-xml:jar:8.1.8.v20121106:test
+[INFO] |  |  |  \- org.eclipse.jetty:jetty-util:jar:8.1.8.v20121106:test
+[INFO] |  |  \- org.eclipse.jetty:jetty-servlet:jar:8.1.8.v20121106:test
+[INFO] |  |     \- org.eclipse.jetty:jetty-security:jar:8.1.8.v20121106:test
+[INFO] |  |        \- org.eclipse.jetty:jetty-server:jar:8.1.8.v20121106:test
+[INFO] |  |           +- org.eclipse.jetty.orbit:javax.servlet:jar:3.0.0.v201112011016:test
+[INFO] |  |           \- org.eclipse.jetty:jetty-continuation:jar:8.1.8.v20121106:test
 [INFO] |  +- org.testng:testng:jar:5.14.10:test
 [INFO] |  |  +- junit:junit:jar:3.8.1:test
 [INFO] |  |  +- org.beanshell:bsh:jar:2.0b4:test
 [INFO] |  |  +- com.beust:jcommander:jar:1.12:test
 [INFO] |  |  \- org.yaml:snakeyaml:jar:1.6:test
-[INFO] |  \- net.sourceforge.htmlunit:htmlunit:jar:2.10:test
+[INFO] |  \- net.sourceforge.htmlunit:htmlunit:jar:2.11:test
 [INFO] |     +- xalan:xalan:jar:2.7.1:test
 [INFO] |     |  \- xalan:serializer:jar:2.7.1:test
 [INFO] |     +- org.apache.commons:commons-lang3:jar:3.1:test
-[INFO] |     +- org.apache.httpcomponents:httpmime:jar:4.2.1:test
-[INFO] |     +- net.sourceforge.htmlunit:htmlunit-core-js:jar:2.10:test
-[INFO] |     +- xerces:xercesImpl:jar:2.9.1:test
-[INFO] |     |  \- xml-apis:xml-apis:jar:1.3.04:test
-[INFO] |     +- net.sourceforge.nekohtml:nekohtml:jar:1.9.16:test
-[INFO] |     \- net.sourceforge.cssparser:cssparser:jar:0.9.7:test
-[INFO] |        \- org.w3c.css:sac:jar:1.3:test
-[INFO] +- org.tynamo:tapestry-resteasy:jar:0.3.0:compile
-[INFO] |  +- org.jboss.resteasy:resteasy-jaxrs:jar:2.3.0.GA:compile
-[INFO] |  |  +- org.jboss.resteasy:jaxrs-api:jar:2.3.0.GA:compile
+[INFO] |     +- org.apache.httpcomponents:httpclient:jar:4.2.2:compile
+[INFO] |     |  \- org.apache.httpcomponents:httpcore:jar:4.2.2:compile
+[INFO] |     +- org.apache.httpcomponents:httpmime:jar:4.2.2:test
+[INFO] |     +- net.sourceforge.htmlunit:htmlunit-core-js:jar:2.11:test
+[INFO] |     +- xerces:xercesImpl:jar:2.10.0:test
+[INFO] |     |  \- xml-apis:xml-apis:jar:1.4.01:test
+[INFO] |     +- net.sourceforge.nekohtml:nekohtml:jar:1.9.17:test
+[INFO] |     +- net.sourceforge.cssparser:cssparser:jar:0.9.8:test
+[INFO] |     |  \- org.w3c.css:sac:jar:1.3:test
+[INFO] |     +- commons-logging:commons-logging:jar:1.1.1:compile
+[INFO] |     \- org.eclipse.jetty:jetty-websocket:jar:8.1.7.v20120910:test
+[INFO] |        +- org.eclipse.jetty:jetty-io:jar:8.1.7.v20120910:test
+[INFO] |        \- org.eclipse.jetty:jetty-http:jar:8.1.7.v20120910:test
+[INFO] +- org.tynamo:tapestry-resteasy:jar:0.4.0-SNAPSHOT:compile
+[INFO] |  +- org.jboss.resteasy:resteasy-jaxrs:jar:3.0.5.Final:compile
+[INFO] |  |  +- org.jboss.resteasy:jaxrs-api:jar:3.0.5.Final:compile
 [INFO] |  |  +- org.scannotation:scannotation:jar:1.0.3:compile
-[INFO] |  |  +- javax.annotation:jsr250-api:jar:1.0:compile
+[INFO] |  |  |  \- javassist:javassist:jar:3.12.1.GA:compile
+[INFO] |  |  +- org.jboss.spec.javax.annotation:jboss-annotations-api_1.1_spec:jar:1.0.1.Final:compile
 [INFO] |  |  +- javax.activation:activation:jar:1.1:compile
-[INFO] |  |  +- commons-httpclient:commons-httpclient:jar:3.1:compile
-[INFO] |  |  +- org.apache.httpcomponents:httpclient:jar:4.2.1:compile
-[INFO] |  |  |  \- org.apache.httpcomponents:httpcore:jar:4.1.2:compile
 [INFO] |  |  \- net.jcip:jcip-annotations:jar:1.0:compile
-[INFO] |  \- org.jboss.resteasy:resteasy-jaxb-provider:jar:2.3.0.GA:compile
-[INFO] |     +- com.sun.xml.bind:jaxb-impl:jar:2.2.4:compile
-[INFO] |     \- com.sun.xml.stream:sjsxp:jar:1.0.1:compile
-[INFO] |        \- javax.xml.stream:stax-api:jar:1.0:compile
-[INFO] +- org.jboss.resteasy:resteasy-jackson-provider:jar:2.3.0.GA:compile
-[INFO] |  +- org.codehaus.jackson:jackson-core-asl:jar:1.8.5:compile
-[INFO] |  +- org.codehaus.jackson:jackson-mapper-asl:jar:1.8.5:compile
-[INFO] |  +- org.codehaus.jackson:jackson-jaxrs:jar:1.8.5:compile
-[INFO] |  \- org.codehaus.jackson:jackson-xc:jar:1.8.5:compile
-[INFO] +- org.tynamo:tapestry-security:jar:0.5.0:compile
-[INFO] |  +- org.apache.shiro:shiro-web:jar:1.2.0:compile
-[INFO] |  |  \- org.apache.shiro:shiro-core:jar:1.2.0:compile
+[INFO] |  +- org.jboss.resteasy:resteasy-jaxb-provider:jar:3.0.5.Final:compile
+[INFO] |  |  \- com.sun.xml.bind:jaxb-impl:jar:2.2.7:compile
+[INFO] |  |     +- com.sun.xml.bind:jaxb-core:jar:2.2.7:compile
+[INFO] |  |     |  \- com.sun.istack:istack-commons-runtime:jar:2.16:compile
+[INFO] |  |     \- com.sun.xml.fastinfoset:FastInfoset:jar:1.2.12:compile
+[INFO] |  |        \- javax.xml.bind:jsr173_api:jar:1.0:compile
+[INFO] |  \- org.jboss.resteasy:resteasy-jsapi:jar:3.0.5.Final:compile
+[INFO] +- org.jboss.resteasy:resteasy-jackson-provider:jar:3.0.6.Final:compile
+[INFO] |  +- org.codehaus.jackson:jackson-core-asl:jar:1.9.12:compile
+[INFO] |  +- org.codehaus.jackson:jackson-mapper-asl:jar:1.9.12:compile
+[INFO] |  +- org.codehaus.jackson:jackson-jaxrs:jar:1.9.12:compile
+[INFO] |  \- org.codehaus.jackson:jackson-xc:jar:1.9.12:compile
+[INFO] +- org.tynamo:tapestry-security:jar:0.6.0-SNAPSHOT:compile
+[INFO] |  +- org.apache.shiro:shiro-web:jar:1.2.2:compile
+[INFO] |  |  \- org.apache.shiro:shiro-core:jar:1.2.2:compile
 [INFO] |  \- org.tynamo:tynamo-common:jar:0.0.3:compile
-[INFO] +- org.tynamo:tapestry-routing:jar:0.0.4:compile
-[INFO] +- org.tynamo:tapestry-exceptionpage:jar:0.1.2:compile
-[INFO] +- com.h2database:h2:jar:1.3.168:compile
-[INFO] +- mysql:mysql-connector-java:jar:5.1.17:compile
-[INFO] +- org.eclipse.persistence:eclipselink:jar:2.4.1:compile
-[INFO] |  +- org.eclipse.persistence:javax.persistence:jar:2.0.4.v201112161009:compile
-[INFO] |  \- commonj.sdo:commonj.sdo:jar:2.1.1.v201112051852:compile
+[INFO] +- org.tynamo:tapestry-routing:jar:0.0.8-SNAPSHOT:compile
+[INFO] +- com.h2database:h2:jar:1.3.175:compile
+[INFO] +- mysql:mysql-connector-java:jar:5.1.18:compile
+[INFO] +- org.eclipse.persistence:eclipselink:jar:2.5.1:compile
+[INFO] |  +- org.eclipse.persistence:javax.persistence:jar:2.1.0:compile
+[INFO] |  \- org.eclipse.persistence:commonj.sdo:jar:2.1.1:compile
 [INFO] +- javax.validation:validation-api:jar:1.0.0.GA:compile
 [INFO] +- javax.servlet:servlet-api:jar:2.5:provided
-[INFO] +- org.apache.tapestry:tapestry-javadoc:jar:5.3.6:provided
-[INFO] +- org.apache.tapestry:tapestry-beanvalidator:jar:5.3.6:compile
+[INFO] +- org.apache.tapestry:tapestry-beanvalidator:jar:5.4-beta-2:compile
 [INFO] |  \- org.hibernate:hibernate-validator:jar:4.0.0.GA:compile
 [INFO] |     \- javax.xml.bind:jaxb-api:jar:2.1:compile
-[INFO] +- org.apache.tapestry:tapestry-core:jar:5.3.6:compile
-[INFO] |  +- org.apache.tapestry:tapestry-json:jar:5.3.6:compile
+[INFO] |        \- javax.xml.stream:stax-api:jar:1.0-2:compile
+[INFO] +- org.apache.tapestry:tapestry-core:jar:5.4-beta-2:compile
 [INFO] |  +- org.antlr:antlr-runtime:jar:3.3:compile
-[INFO] |  |  \- org.antlr:stringtemplate:jar:3.2.1:compile
-[INFO] |  |     \- antlr:antlr:jar:2.7.7:compile
-[INFO] |  \- commons-codec:commons-codec:jar:1.5:compile
-[INFO] +- org.apache.tapestry:tapestry-ioc:jar:5.3.6:compile
-[INFO] |  +- org.apache.tapestry:tapestry5-annotations:jar:5.3.6:compile
-[INFO] |  +- org.slf4j:slf4j-api:jar:1.6.1:compile
-[INFO] |  +- org.apache.tapestry:tapestry-func:jar:5.3.6:compile
-[INFO] |  +- org.slf4j:slf4j-log4j12:jar:1.6.1:compile
+[INFO] |  +- commons-codec:commons-codec:jar:1.5:compile
+[INFO] |  \- org.apache.tapestry:tapestry-json:jar:5.4-beta-2:compile
+[INFO] +- org.apache.tapestry:tapestry-ioc:jar:5.4-beta-2:compile
+[INFO] |  +- org.apache.tapestry:plastic:jar:5.4-beta-2:compile
 [INFO] |  +- javax.inject:javax.inject:jar:1:compile
-[INFO] |  +- org.apache.tapestry:plastic:jar:5.3.6:compile
-[INFO] |  +- log4j:log4j:jar:1.2.14:compile
-[INFO] |  \- javassist:javassist:jar:3.12.1.GA:compile
-[INFO] +- org.apache.tapestry:tapestry-upload:jar:5.3.6:compile
+[INFO] |  +- org.slf4j:slf4j-api:jar:1.7.2:compile
+[INFO] |  +- org.apache.tapestry:tapestry-func:jar:5.4-beta-2:compile
+[INFO] |  \- org.apache.tapestry:tapestry5-annotations:jar:5.4-beta-2:compile
+[INFO] +- org.apache.tapestry:tapestry-upload:jar:5.4-beta-2:compile
 [INFO] |  +- commons-io:commons-io:jar:2.0.1:compile
 [INFO] |  \- commons-fileupload:commons-fileupload:jar:1.2.2:compile
-[INFO] +- com.trsvax:tapestry-bootstrap:jar:2.1.3:compile
-[INFO] |  \- org.got5:tapestry5-jquery:jar:3.2.1:compile
-[INFO] +- org.apache.tapestry:tapestry-yuicompressor:jar:5.3.6:compile
-[INFO] |  \- com.yahoo.platform.yui:yuicompressor:jar:2.4.7:compile
-[INFO] |     \- rhino:js:jar:1.6R7:compile
-[INFO] +- org.apache.tapestry:tapestry-jpa:jar:5.3.6:compile
+[INFO] +- org.apache.tapestry:tapestry-jpa:jar:5.4-beta-2:compile
 [INFO] |  \- org.apache.geronimo.specs:geronimo-jpa_2.0_spec:jar:1.1:compile
-[INFO] \- org.tynamo:tapestry-activiti:jar:0.1.0-SNAPSHOT:compile
-[INFO]    \- org.activiti:activiti-engine:jar:5.10:compile
-[INFO]       +- org.apache.commons:commons-email:jar:1.2:compile
-[INFO]       |  \- javax.mail:mail:jar:1.4.1:compile
-[INFO]       +- org.livetribe:livetribe-jsr223:jar:2.0.6:compile
-[INFO]       \- org.mybatis:mybatis:jar:3.1.1:compile
+[INFO] +- org.tynamo:tapestry-activiti:jar:0.1.0-SNAPSHOT:compile
+[INFO] |  \- org.activiti:activiti-engine:jar:5.10:compile
+[INFO] |     +- org.apache.commons:commons-email:jar:1.2:compile
+[INFO] |     |  \- javax.mail:mail:jar:1.4.1:compile
+[INFO] |     +- org.livetribe:livetribe-jsr223:jar:2.0.6:compile
+[INFO] |     \- org.mybatis:mybatis:jar:3.1.1:compile
+[INFO] \- org.slf4j:slf4j-log4j12:jar:1.7.2:compile
+[INFO]    \- log4j:log4j:jar:1.2.17:compile
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time: 3.437s
-[INFO] Finished at: Mon Mar 18 12:59:11 CET 2013
-[INFO] Final Memory: 16M/220M
+[INFO] Total time: 3.378s
+[INFO] Finished at: Thu Feb 20 01:02:03 CET 2014
+[INFO] Final Memory: 17M/181M
 [INFO] ------------------------------------------------------------------------

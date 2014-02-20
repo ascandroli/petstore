@@ -11,16 +11,20 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.jpa.annotations.CommitAfter;
 import org.apache.tapestry5.services.ContextValueEncoder;
 import org.apache.tapestry5.services.PageRenderLinkSource;
+import org.tynamo.util.TynamoMessages;
 import org.tynamo.routing.annotations.At;
 import org.tynamo.services.DescriptorService;
 import org.tynamo.services.PersistenceService;
-import org.tynamo.util.TynamoMessages;
 import org.tynamo.util.Utils;
 
 /**
  * Page for displayig the properties of an object.
+ *
+ * @note:
+ * When extending this page for customization purposes, it's better to copy & paste code than trying to use inheritance.
+ *
  */
-@At("/{0}/{1}")
+@At(value = "/{0}/{1}", order = "after:Add")
 public class Show
 {
 
@@ -31,7 +35,7 @@ public class Show
 	private Messages messages;
 
 	@Inject
-	private PersistenceService persitenceService;
+	private PersistenceService persistenceService;
 
 	@Inject
 	private DescriptorService descriptorService;
@@ -94,7 +98,7 @@ public class Show
 	@OnEvent("delete")
 	Link delete()
 	{
-		persitenceService.remove(bean);
+		persistenceService.remove(bean);
 		return pageRenderLinkSource.createPageRenderLinkWithContext(List.class, beanType);
 	}
 

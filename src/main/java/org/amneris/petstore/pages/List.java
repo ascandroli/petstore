@@ -1,29 +1,35 @@
 package org.amneris.petstore.pages;
 
+import org.apache.tapestry5.Block;
 import org.apache.tapestry5.EventConstants;
 import org.apache.tapestry5.annotations.Component;
+import org.apache.tapestry5.annotations.InjectComponent;
 import org.apache.tapestry5.annotations.OnEvent;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.annotations.SetupRender;
 import org.apache.tapestry5.corelib.components.Grid;
-import org.apache.tapestry5.grid.GridDataSource;
 import org.apache.tapestry5.ioc.Messages;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.tynamo.TynamoGridDataSource;
-import org.tynamo.util.TynamoMessages;
+import org.apache.tapestry5.services.Request;
+import org.tynamo.components.ModelSearch;
 import org.tynamo.routing.annotations.At;
 import org.tynamo.services.PersistenceService;
+import org.tynamo.util.TynamoMessages;
 import org.tynamo.util.Utils;
 
 /**
  * Page for listing elements of a given type.
+ *
+ * @note:
+ * When extending this page for customization purposes, it's better to copy & paste code than trying to use inheritance.
+ *
  */
 @At("/{0}")
 public class List
 {
 
 	@Inject
-	private PersistenceService persitenceService;
+	private PersistenceService persistenceService;
 
 	@Inject
 	private Messages messages;
@@ -34,8 +40,16 @@ public class List
 	@Property
 	private Object bean;
 
-	@Component
+	@Inject
+	@Property
+	private Block resultcountBlock;
+
+	@InjectComponent
 	private Grid grid;
+
+	@Component(parameters = "beanType=beanType")
+	@Property(write = false)
+	private ModelSearch modelSearch;
 
 	@OnEvent(EventConstants.ACTIVATE)
 	Object onActivate(Class clazz)
@@ -63,15 +77,6 @@ public class List
 		grid.reset();
 	}
 
-	/**
-	 * The source of data for the Grid to display.
-	 * This will usually be a List or array but can also be an explicit GridDataSource
-	 */
-	public GridDataSource getSource()
-	{
-		return new TynamoGridDataSource(persitenceService, beanType);
-	}
-
 	public Object[] getShowPageContext()
 	{
 		return new Object[]{beanType, bean};
@@ -85,6 +90,23 @@ public class List
 	public String getNewLinkMessage()
 	{
 		return TynamoMessages.add(messages, beanType);
+	}
+
+	void onActionFromResetSearchCriteria() {
+		modelSearch.resetSearchCriteria();
+	}
+
+	@Inject
+	private Request request;
+
+	void onSearchTermsChanged() {
+		String searchTerms = request.getParameter("param");
+		if (searchTerms != null) modelSearch.setSearchTerms(searchTerms);
+		// return request.isXHR() ? termZone.getBody() : null;
+	}
+
+	public int getBeanCount() {
+		return persistenceService.count(beanType);
 	}
 
 }

@@ -17,7 +17,7 @@ import org.tynamo.services.DescriptorService;
 import org.tynamo.util.TynamoMessages;
 import org.tynamo.util.Utils;
 
-@At("/{0}/{1}/{2}")
+@At(value = "/{0}/{1}/{2}", order = "after:Edit")
 public class ListC
 {
 

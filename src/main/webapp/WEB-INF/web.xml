@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE web-app
-		PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-		"http://java.sun.com/dtd/web-app_2_3.dtd">
-<web-app>
+
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
 
 	<display-name>petstore</display-name>
 
@@ -20,8 +20,7 @@
 	<context-param>
 		<param-name>tapestry.development-modules</param-name>
 		<param-value>
-			org.amneris.petstore.services.DevelopmentModule,
-			org.amneris.petstore.services.AppModule
+			org.amneris.petstore.services.DevelopmentModule
 		</param-value>
 	</context-param>
 	<context-param>
@@ -30,6 +29,8 @@
 			org.amneris.petstore.services.QaModule
 		</param-value>
 	</context-param>
+
+	<!-- Filter configuration -->
 	<filter>
 		<filter-name>app</filter-name>
 		<filter-class>org.apache.tapestry5.TapestryFilter</filter-class>
@@ -38,10 +39,17 @@
 	<filter-mapping>
 		<filter-name>app</filter-name>
 		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 
+	<error-page>
+		<error-code>404</error-code>
+		<location>/error404</location>
+	</error-page>
+
 	<welcome-file-list>
-		<welcome-file>index</welcome-file>
+		<welcome-file>home</welcome-file>
 	</welcome-file-list>
 
 </web-app>

@@ -1,182 +1,69 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd" xmlns:p="tapestry:parameter">
-
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd">
 <head>
-    <title>${title}</title>
-    <t:if test="heading">
-        <meta name="heading" content="${heading}"/>
-    </t:if>
-    <t:if test="menu">
-        <meta name="menu" content="${menu}"/>
-    </t:if>
-    <t:if test="headBound">
-        <t:delegate to="head"/>
-    </t:if>
-
-<!--[if IE 7]>    <html class="no-js ie7 ie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 ie" lang="en"> <![endif]-->
-<!--[if IE 9]>    <html class="no-js ie9 ie" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js" lang="en"/> <!--<![endif]-->
-
-	<meta name="description" content=""/>
-	<meta name="author" content="Amneris Labs | www.amneris.eu"/>
-	<link rel="author" href="humans.txt" />
+	<meta charset="utf-8"/>
+	<title>${title}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<meta name="description" content=""/>
+	<meta name="author" content=""/>
 
-	<!-- jQuery Visualize Styles -->
-	<link rel='stylesheet' type='text/css' href='${context:huraga/css/plugins/jquery.visualize.css}'/>
+	<!-- Le styles -->
+	<style type="text/css">
+		body {
+			padding-top: 60px;
+			padding-bottom: 40px;
+		}
 
-	<!-- CSS styles -->
-	<link rel='stylesheet' type='text/css' href='${context:huraga/css/huraga-dark.css}'/>
-	<link rel='stylesheet' type='text/css' href='${context:huraga-t5patches.css}'/>
+		div.palette {
+			display:block !important;
+		}
+	</style>
+
+	<!-- HTML5 Shim and Respond.js IE6-8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+		<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet"/>
 
 	<!-- Fav and touch icons -->
-<!--
-	<link rel="shortcut icon" href="${context:huraga/img/icons/favicon.ico}"/>
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="${context:huraga/img/icons/apple-touch-icon-114-precomposed.png}"/>
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="${context:huraga/img/icons/apple-touch-icon-72-precomposed.png}"/>
-	<link rel="apple-touch-icon-precomposed" href="${context:huraga/img/icons/apple-touch-icon-57-precomposed.png}"/>
--->
-
-	<script src="${context:huraga/js/libs/modernizr.js}" type="text/javascript"></script>
-	<script src="${context:huraga/js/libs/selectivizr.js}" type="text/javascript"></script>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-
-			// Tooltips
-			$('[title]').tooltip({
-				placement: 'top'
-			});
-
-		});
-	</script>
-
+	<link rel="shortcut icon" href="${asset:context:/favicon.ico}"/>
 </head>
 
-<body id="${bodyId}">
-
-<header class="container">
-
-	<!-- Main page logo -->
-	<h1><a href="/" class="_brand" style="margin-left:-4px">Tynamo Pet Store</a></h1>
-
-	<!-- Main page headline -->
-	<p>Tynamo is model-driven, full-stack web framework based on Apache Tapestry 5</p>
-
-	<!-- Alternative navigation -->
-	<nav>
-		<ul>
-			<li>
-				<form class="nav-search">
-					<input type="text" placeholder="Search&hellip;"/>
-				</form>
-			</li>
-			<li>
-				<div class="btn-group">
-					<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-						Configuration
-						<span class="caret"></span>
-					</a>
-					<ul class="dropdown-menu">
-						<li><a href="401.html"><span class="awe-flag"></span> Error page 401</a></li>
-						<li><a href="403.html"><span class="awe-flag"></span> Error page 403</a></li>
-						<li><a href="404.html"><span class="awe-flag"></span> Error page 404</a></li>
-						<li><a href="500.html"><span class="awe-flag"></span> Error page 500</a></li>
-						<li><a href="503.html"><span class="awe-flag"></span> Error page 503</a></li>
-					</ul>
-				</div>
-			</li>
-			<li><t:security.loginlink/></li>
-		</ul>
-	</nav>
-	<!-- /Alternative navigation -->
-
-</header>
-
-
-<!-- Main page container -->
-<section class="container" role="main">
-
-	<!-- Left (navigation) side -->
-	<div class="navigation-block">
-
-		<!-- User profile -->
-		<section class="user-profile">
-			<figure class="clearfix">
-				<img alt="John Pixel avatar" src="http://placekitten.com/60/60"/>
-				<figcaption>
-					<strong><a href="#" class="">John Pixel</a></strong>
-					<em>marketing manager</em>
-					<ul>
-						<li><a class="btn btn-primary btn-flat" href="#" title="Account settings">settings</a></li>
-						<li><a class="btn btn-primary btn-flat" href="#" title="Message inbox">inbox</a></li>
-					</ul>
-				</figcaption>
-			</figure>
-		</section>
-		<!-- /User profile -->
-
-		<!-- Sample left search bar -->
-		<form class="side-search">
-			<input type="text" class="rounded" placeholder="To search type and hit enter"/>
-		</form>
-		<!-- /Sample left search bar -->
-
-		<!-- Main navigation -->
-		<nav class="main-navigation" role="navigation">
-			<ul>
-				<li t:type="any" t:mixins="nav" nav.page="dashboard" nav.class="current"><t:pagelink class="no-submenu" page="dashboard"><span class="awe-home"></span>Dashboard</t:pagelink></li>
-				<li><a href="forms.html" class="no-submenu"><span class="awe-tasks"></span>Forms</a></li>
-				<li><a href="charts.html" class="no-submenu"><span class="awe-signal"></span>Charts <span class="badge">7</span></a></li>
-				<li t:type="any" t:mixins="nav" nav.expression="/((list|show|add|edit)/)?(mydomainobject|user)(/.*)?" nav.class="current">
-					<a href="#">
-						<span class="awe-table"></span>Other Entities <span class="badge">2</span></a>
-					<t:tynamo.ListPageLinkList listPageName="List"/>
-				</li>
-			</ul>
-		</nav>
-		<!-- /Main navigation -->
-
-		<!-- Sample side note -->
-		<section class="side-note">
-			<div class="side-note-container">
-				<h2>Sample Side Note</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus quis erat dui, quis purus.</p>
+<body>
+	<div class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<ul class="nav navbar-nav">
+					<li>
+						<t:pagelink page="Home" class="navbar-brand">${message:org.tynamo.navbar-brand}</t:pagelink>
+					</li>
+					<li class="divider-vertical"/>
+					<li class="${getClassForPageName('Home')}">
+						<t:pagelink page="Home">Home</t:pagelink>
+					</li>
+				</ul>
 			</div>
-			<div class="side-note-bottom"></div>
-		</section>
-		<!-- /Sample side note -->
-
+			<ul class="nav navbar-nav navbar-right">
+				<li><t:security.loginlink/></li>
+			</ul>
+		</div>
 	</div>
-	<!-- Left (navigation) side -->
 
-	<!-- Right (content) side -->
-	<div class="content-block" role="main">
+	<div class="container">
+		<t:alerts/>
+
 		<t:body/>
-	</div>
 
-</section>
-<!-- /Main page container -->
-
-	<!-- Main page footer -->
-	<footer class="container">
-		<p>Powered by <a href="http://tynamo.org/">Tynamo</a>. Developed by <a href="http://www.amneris.eu/">Amneris Labs</a></p>
-		<ul>
-		</ul>
-		<a href="#top" class="btn btn-primary btn-flat pull-right">Top &uarr;</a>
-	</footer>
-
-	<!-- Scripts -->
-	<script src="${context:/huraga/js/navigation.js}"></script>
-	<script src="${context:/huraga/js/bootstrap/bootstrap-affix.js}"></script>
-	<script src="${context:/huraga/js/bootstrap/bootstrap-tooltip.js}"></script>
-	<script src="${context:/huraga/js/bootstrap/bootstrap-collapse.js}"></script>
-	<script src="${context:/huraga/js/bootstrap/bootstrap-dropdown.js}"></script>
-
-<div id="ajax-indicator" style="display:none;" class="loading" data-original-title="Loading, please wait…">Loading...</div>
-
+		<hr/>
+		<footer>
+			<span class="left">Powered by Tynamo &copy; 2014</span>
+			<span style="margin-right: 10px;float:right;">
+				<a href="http://tynamo.org/">tynamo.org</a>
+			</span>
+		</footer>
+	</div> <!-- /container -->
 </body>
-
 </html>

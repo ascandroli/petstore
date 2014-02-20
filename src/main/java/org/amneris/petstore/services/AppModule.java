@@ -61,6 +61,10 @@ public class AppModule
 		// the first locale name is the default when there's no reasonable match).
 		configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en,es");
 
+		configuration.add(SymbolConstants.JAVASCRIPT_INFRASTRUCTURE_PROVIDER, "jquery");
+//		configuration.add(SymbolConstants.BOOTSTRAP_ROOT, "context:mybootstrap");
+		configuration.add(SymbolConstants.MINIFICATION_ENABLED, true);
+
 		/**
 		 * HMAC_PASSPHRASE is used to configure hash-based message authentication of Tapestry data stored in forms, or
 		 * in the URL. Your application is less secure, and more vulnerable to denial-of-service attacks, when this

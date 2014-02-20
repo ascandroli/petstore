@@ -1,24 +1,8 @@
-<t:layout title="literal:Tynamo!" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd"
+<t:layout title="literal:Tynamo!" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_3.xsd"
           xmlns:p="tapestry:parameter">
 
-	<p:tabs></p:tabs>
+	<h1>${message:org.tynamo.welcome}</h1>
 
-	<!-- Page header -->
-	<article class="page-header">
-		<div class="hero-unit">
-			<h1>Welcome to Tynamo Pet Store!</h1>
-			<p>Tynamo's mission is to provide implementations for different aspects of a full web application stack that offer reasonable out-of-the-box functionality and are easy to customize. We are intent on proving that web applications based on Java can simultaneously be high performing, easy to implement and fun to develop. We leverage existing technologies where possible and provide integrations with proven, clean and compact libraries rather than limit ourselves only to standard Java (JSRs). Tynamo is both comprehensive and modular so you are free to choose the parts you like from our full stack. And finally, we like Tapestry and our modules use Tapestry IoC extensively.</p>
-			<br/>
-			<p><a class="btn btn-alt btn-info btn-large" href="http://tynamo.org/">visit tynamo.org</a></p>
-		</div>
-	</article>
-
-	<div class="row-fluid">
-		<div class="span4">
-			<h2>Heading</h2>
-			<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-			<p><a class="btn" href="#">View details &raquo;</a></p>
-		</div><!--/span-->
-	</div><!--/row-->
+	<t:tynamo.ListPageLinkList listPageName="List"/>
 
 </t:layout>

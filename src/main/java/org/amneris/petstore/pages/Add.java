@@ -13,13 +13,17 @@ import org.apache.tapestry5.ioc.annotations.Inject;
 import org.apache.tapestry5.jpa.annotations.CommitAfter;
 import org.apache.tapestry5.services.PageRenderLinkSource;
 import org.tynamo.builder.BuilderDirector;
-import org.tynamo.util.TynamoMessages;
 import org.tynamo.routing.annotations.At;
 import org.tynamo.services.PersistenceService;
+import org.tynamo.util.TynamoMessages;
 import org.tynamo.util.Utils;
 
 /**
  * Page for creating and adding objects to the DB.
+ *
+ * @note:
+ * When extending this page for customization purposes, it's better to copy & paste code than trying to use inheritance.
+ *
  */
 @At("/{0}/new")
 public class Add
@@ -32,7 +36,7 @@ public class Add
 	private Messages messages;
 
 	@Inject
-	private PersistenceService persitenceService;
+	private PersistenceService persistenceService;
 
 	@Inject
 	private PageRenderLinkSource pageRenderLinkSource;
@@ -78,7 +82,7 @@ public class Add
 		this.continueAdding = false;
 	}
 
-	@OnEvent(value = "continue")
+	@OnEvent(value = "stay")
 	void onSaveAndContinue() {
 		this.continueAdding = true;
 	}
@@ -88,7 +92,7 @@ public class Add
 	@OnEvent(EventConstants.SUCCESS)
 	Link success()
 	{
-		persitenceService.save(bean);
+		persistenceService.save(bean);
 		alertManager.info(messages.getFormatter(Utils.ADDED_MESSAGE).format(bean));
 		return !continueAdding ? pageRenderLinkSource.createPageRenderLinkWithContext(Show.class, beanType, bean) : null;
 	}
