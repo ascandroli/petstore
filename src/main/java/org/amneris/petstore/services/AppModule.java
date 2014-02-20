@@ -108,6 +108,7 @@ public class AppModule
 	                                                   SecurityFilterChainFactory factory)
 	{
 		configuration.add(factory.createChain("/assets/**").add(factory.anon()).build());
+		configuration.add(factory.createChain("/modules.gz/**").add(factory.anon()).build());
 
 		configuration.add(factory.createChain("/signin/**").add(factory.anon()).build());
 		configuration.add(factory.createChain("/signin:*/**").add(factory.anon()).build()); // for event links
